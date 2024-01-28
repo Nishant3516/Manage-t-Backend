@@ -1,0 +1,84 @@
+<div>
+  <h2 id="page-heading" data-cy="TenantHeading">
+    <span jhiTranslate="manageitApp.tenant.home.title">Tenants</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.tenant.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tenant"
+        [routerLink]="['/tenant/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.tenant.home.createLabel"> Create a new Tenant </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tenants?.length === 0">
+    <span jhiTranslate="manageitApp.tenant.home.notFound">No tenants found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="tenants && tenants.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.tenant.tenantName">Tenant Name</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.tenant.tenantLogo">Tenant Logo</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.tenant.createDate">Create Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.tenant.lastModified">Last Modified</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.tenant.cancelDate">Cancel Date</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tenant of tenants; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/tenant', tenant.id, 'view']">{{ tenant.id }}</a>
+          </td>
+          <td>{{ tenant.tenantName }}</td>
+          <td>
+            <a
+              *ngIf="tenant.tenantLogo"
+              (click)="openFile(tenant.tenantLogo, tenant.tenantLogoContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="tenant.tenantLogo">{{ tenant.tenantLogoContentType }}, {{ byteSize(tenant.tenantLogo) }}</span>
+          </td>
+          <td>{{ tenant.createDate | formatMediumDate }}</td>
+          <td>{{ tenant.lastModified | formatMediumDate }}</td>
+          <td>{{ tenant.cancelDate | formatMediumDate }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/tenant', tenant.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/tenant', tenant.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(tenant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

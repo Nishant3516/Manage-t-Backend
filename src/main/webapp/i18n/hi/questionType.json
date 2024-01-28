@@ -1,0 +1,30 @@
+{
+  "manageitApp": {
+    "questionType": {
+      "home": {
+        "title": "QuestionTypes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Question Type बनाएँ",
+        "createOrEditLabel": "Question Type बनाएँ या संपादित करें",
+        "notFound": "No Question Types found"
+      },
+      "created": "एक नया Question Type [identifier: {{ param }}] तैयार है",
+      "updated": "एक Question Type [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Question Type [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Question Type [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Question Type"
+      },
+      "id": "ID",
+      "questionType": "Question Type",
+      "marks": "Marks",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "question": "Question",
+      "tenant": "Tenant"
+    }
+  }
+}

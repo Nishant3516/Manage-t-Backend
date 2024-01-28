@@ -1,0 +1,112 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="questionPaper">
+      <h2 data-cy="questionPaperDetailsHeading"><span jhiTranslate="manageitApp.questionPaper.detail.title">Question Paper</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ questionPaper.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.tenatLogo">Tenat Logo</span></dt>
+        <dd>
+          <div *ngIf="questionPaper.tenatLogo">
+            <a (click)="openFile(questionPaper.tenatLogo, questionPaper.tenatLogoContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ questionPaper.tenatLogoContentType }}, {{ byteSize(questionPaper.tenatLogo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.questionPaperFile">Question Paper File</span></dt>
+        <dd>
+          <div *ngIf="questionPaper.questionPaperFile">
+            <a
+              (click)="openFile(questionPaper.questionPaperFile, questionPaper.questionPaperFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ questionPaper.questionPaperFileContentType }}, {{ byteSize(questionPaper.questionPaperFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.questionPaperName">Question Paper Name</span></dt>
+        <dd>
+          <span>{{ questionPaper.questionPaperName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.mainTitle">Main Title</span></dt>
+        <dd>
+          <span>{{ questionPaper.mainTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.subTitle">Sub Title</span></dt>
+        <dd>
+          <span>{{ questionPaper.subTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.leftSubHeading1">Left Sub Heading 1</span></dt>
+        <dd>
+          <span>{{ questionPaper.leftSubHeading1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.leftSubHeading2">Left Sub Heading 2</span></dt>
+        <dd>
+          <span>{{ questionPaper.leftSubHeading2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.rightSubHeading1">Right Sub Heading 1</span></dt>
+        <dd>
+          <span>{{ questionPaper.rightSubHeading1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.rightSubHeading2">Right Sub Heading 2</span></dt>
+        <dd>
+          <span>{{ questionPaper.rightSubHeading2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.instructions">Instructions</span></dt>
+        <dd>
+          <span>{{ questionPaper.instructions }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.footerText">Footer Text</span></dt>
+        <dd>
+          <span>{{ questionPaper.footerText }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.totalMarks">Total Marks</span></dt>
+        <dd>
+          <span>{{ questionPaper.totalMarks }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.question">Question</span></dt>
+        <dd>
+          <span *ngFor="let question of questionPaper.questions; let last = last">
+            <a [routerLink]="['/question', question?.id, 'view']">{{ question.questionText }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.tag">Tag</span></dt>
+        <dd>
+          <span *ngFor="let tag of questionPaper.tags; let last = last">
+            <a [routerLink]="['/tag', tag?.id, 'view']">{{ tag.tagText }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.schoolClass">School Class</span></dt>
+        <dd>
+          <div *ngIf="questionPaper.schoolClass">
+            <a [routerLink]="['/school-class', questionPaper.schoolClass?.id, 'view']">{{ questionPaper.schoolClass?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionPaper.classSubject">Class Subject</span></dt>
+        <dd>
+          <div *ngIf="questionPaper.classSubject">
+            <a [routerLink]="['/class-subject', questionPaper.classSubject?.id, 'view']">{{ questionPaper.classSubject?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/question-paper', questionPaper.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

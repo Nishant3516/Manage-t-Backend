@@ -1,0 +1,155 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-tenant-heading" data-cy="TenantCreateUpdateHeading" jhiTranslate="manageitApp.tenant.home.createOrEditLabel">
+        Create or edit a Tenant
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.tenant.tenantName" for="field_tenantName">Tenant Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tenantName"
+            id="field_tenantName"
+            data-cy="tenantName"
+            formControlName="tenantName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.tenant.tenantLogo" for="field_tenantLogo">Tenant Logo</label>
+          <div>
+            <div *ngIf="editForm.get('tenantLogo')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('tenantLogo')!.value, editForm.get('tenantLogoContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('tenantLogoContentType')!.value }}, {{ byteSize(editForm.get('tenantLogo')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ tenantLogo: null }); editForm.patchValue({ tenantLogoContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_tenantLogo"
+              data-cy="tenantLogo"
+              (change)="setFileData($event, 'tenantLogo', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="tenantLogo"
+            id="field_tenantLogo"
+            data-cy="tenantLogo"
+            formControlName="tenantLogo"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="tenantLogoContentType"
+            id="field_tenantLogoContentType"
+            formControlName="tenantLogoContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.tenant.createDate" for="field_createDate">Create Date</label>
+          <div class="input-group">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="text"
+              class="form-control"
+              name="createDate"
+              ngbDatepicker
+              #createDateDp="ngbDatepicker"
+              formControlName="createDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.tenant.lastModified" for="field_lastModified">Last Modified</label>
+          <div class="input-group">
+            <input
+              id="field_lastModified"
+              data-cy="lastModified"
+              type="text"
+              class="form-control"
+              name="lastModified"
+              ngbDatepicker
+              #lastModifiedDp="ngbDatepicker"
+              formControlName="lastModified"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.tenant.cancelDate" for="field_cancelDate">Cancel Date</label>
+          <div class="input-group">
+            <input
+              id="field_cancelDate"
+              data-cy="cancelDate"
+              type="text"
+              class="form-control"
+              name="cancelDate"
+              ngbDatepicker
+              #cancelDateDp="ngbDatepicker"
+              formControlName="cancelDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

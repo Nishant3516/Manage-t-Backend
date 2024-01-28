@@ -1,0 +1,45 @@
+{
+  "manageitApp": {
+    "studentChargesSummary": {
+      "home": {
+        "title": "Student Dues",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Student Charges Summary",
+        "createOrEditLabel": "Create or edit a Student Charges Summary",
+        "notFound": "No Student Charges Summaries found"
+      },
+      "created": "A new Student Charges Summary is created with identifier {{ param }}",
+      "updated": "A Student Charges Summary is updated with identifier {{ param }}",
+      "deleted": "A Student Charges Summary is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Student Charges Summary {{ id }}?"
+      },
+      "detail": {
+        "title": "Student Dues"
+      },
+      "id": "ID",
+      "summaryType": "Type",
+      "feeYear": "Sessionr",
+      "dueDate": "Due Date",
+      "aprSummary": "Apr",
+      "maySummary": "May",
+      "junSummary": "Jun",
+      "julSummary": "Jul",
+      "augSummary": "Aug",
+      "sepSummary": "Sep",
+      "octSummary": "Oct",
+      "novSummary": "Nov",
+      "decSummary": "Dec",
+      "janSummary": "Jan",
+      "febSummary": "Feb",
+      "marSummary": "Mar",
+      "additionalInfo1": "Receipts",
+      "additionalInfo2": "Additional Info 2",
+      "createDate": "Payment Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolLedgerHead": "Ledger Head",
+      "classStudent": "Student"
+    }
+  }
+}

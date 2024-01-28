@@ -1,0 +1,236 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <h2
+      id="jhi-student-payments-heading"
+      data-cy="StudentPaymentsCreateUpdateHeading"
+      jhiTranslate="manageitApp.studentPayments.home.createOrEditLabel"
+    >
+      Create or edit a Student Payments 
+    </h2>
+    <h3>{{selectedStudentId}}</h3>
+    <label class="form-control-label">Student Id {{selectedStudentId}}</label>
+    <input type="text" name="noteNumbers" class="form-control-label" id="field_studentId" [(ngModel)]="selectedStudentId" />
+
+    <button class="btn btn-info mr-2" (click)="loadAStudent()" [disabled]="isLoading">Load</button>
+
+    <!-- This is to fetch all classes for a school and then to fetch all students in that class , this will be modularised later, JS is modular, for UI there is some issue -->
+    <div class="d-flex flex-row">
+      <select
+        class="form-control-filter"
+        id="field_studentClass_filter"
+        data-cy="studentClass_filter"
+        [(ngModel)]="selectedClassId"
+        (change)="loadAllStudentsForAClass()"
+        name="schoolClassFilter"
+      >
+        <option [ngValue]="undefined" hidden>Select Class</option>
+        <option *ngFor="let studentClassOption of schoolClasses; trackBy: trackFilterClassById" [ngValue]="studentClassOption.id">
+           {{ studentClassOption.className }}
+        </option>
+      </select>
+    </div>
+    <!-- School class and class student filter ends here -->
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentPayments.classStudent" for="field_classStudent"
+            >Class Student</label
+          >
+          <select
+            class="form-control"
+            id="field_classStudent"
+            data-cy="classStudent"
+            (change)="loadAllFinancialSummariesForAStudent()"
+            name="classStudent"
+            formControlName="classStudent"
+          >
+            <option [ngValue]="undefined" hidden>Select Student</option>
+            <option
+              [ngValue]="
+                classStudentOption.id === editForm.get('classStudent')!.value?.id ? editForm.get('classStudent')!.value : classStudentOption
+              "
+              *ngFor="let classStudentOption of classStudentsSharedCollection; trackBy: trackClassStudentById"
+            >
+              {{ classStudentOption.studentId }} -- {{ classStudentOption.firstName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentPayments.amountPaid" for="field_amountPaid">Amount Paid</label>
+          <input
+            type="number"
+            class="form-control"
+            name="amountPaid"
+            id="field_amountPaid"
+            data-cy="amountPaid"
+            formControlName="amountPaid"
+          />
+          <div *ngIf="editForm.get('amountPaid')!.invalid && (editForm.get('amountPaid')!.dirty || editForm.get('amountPaid')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountPaid')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountPaid')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentPayments.noteNumbers" for="field_noteNumbers"
+            >Note Numbers</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="noteNumbers"
+            id="field_noteNumbers"
+            data-cy="noteNumbers"
+            formControlName="noteNumbers"
+          />
+        </div>
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentPayments.paymentDate" for="field_paymentDate"
+            >Payment Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_paymentDate"
+              data-cy="paymentDate"
+              type="text"
+              class="form-control"
+              name="paymentDate"
+              ngbDatepicker
+              #paymentDateDp="ngbDatepicker"
+              formControlName="paymentDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="paymentDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="table-responsive" id="entities" *ngIf="studentChargesSummaries && studentChargesSummaries.length > 0">
+ 
+  
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort>
+          <th scope="col" jhiSortBy="classStudent.id">
+            <span jhiTranslate="manageitApp.studentChargesSummary.classStudent">Class Student</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="summaryType">
+            <span jhiTranslate="manageitApp.studentChargesSummary.summaryType">Summary Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="aprSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.aprSummary">Apr Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="maySummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.maySummary">May Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="junSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.junSummary">Jun Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="julSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.julSummary">Jul Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="augSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.augSummary">Aug Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sepSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.sepSummary">Sep Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="octSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.octSummary">Oct Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="novSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.novSummary">Nov Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="decSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.decSummary">Dec Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="janSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.janSummary">Jan Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="febSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.febSummary">Feb Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="marSummary">
+            <span jhiTranslate="manageitApp.studentChargesSummary.marSummary">Mar Summary</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="additionalInfo1">
+            <span jhiTranslate="manageitApp.studentChargesSummary.additionalInfo1">Additional Info 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="manageitApp.studentChargesSummary.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let studentChargesSummary of studentChargesSummaries; trackBy: trackId"
+          data-cy="entityTable"
+        >
+          <td>
+            <div *ngIf="studentChargesSummary.classStudent">
+              <a [routerLink]="['/class-student', studentChargesSummary.classStudent?.id, 'view']">
+                {{ studentChargesSummary.classStudent.schoolClass?.className }} -- {{ studentChargesSummary.classStudent?.studentId }} --
+                {{ studentChargesSummary.classStudent?.firstName }}</a
+              >
+            </div>
+          </td>
+          <td [ngClass]=" {'table-danger': studentChargesSummary.summaryType?.startsWith('Discount') ,'table-success': studentChargesSummary.summaryType?.startsWith('ClassFee') ,'table-warning': studentChargesSummary.summaryType?.startsWith('Monthly Payments') }">{{ studentChargesSummary.summaryType }}</td>
+          <td>{{ studentChargesSummary.aprSummary }}</td>
+          <td>{{ studentChargesSummary.maySummary }}</td>
+          <td>{{ studentChargesSummary.junSummary }}</td>
+          <td>{{ studentChargesSummary.julSummary }}</td>
+          <td>{{ studentChargesSummary.augSummary }}</td>
+          <td>{{ studentChargesSummary.sepSummary }}</td>
+          <td>{{ studentChargesSummary.octSummary }}</td>
+          <td>{{ studentChargesSummary.novSummary }}</td>
+          <td>{{ studentChargesSummary.decSummary }}</td>
+          <td>{{ studentChargesSummary.janSummary }}</td>
+          <td>{{ studentChargesSummary.febSummary }}</td>
+          <td>{{ studentChargesSummary.marSummary }}</td>
+          <td>{{ studentChargesSummary.additionalInfo1 }}</td>
+          <td>{{ studentChargesSummary.createDate | formatMediumDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

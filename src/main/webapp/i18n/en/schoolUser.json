@@ -1,0 +1,35 @@
+{
+  "manageitApp": {
+    "schoolUser": {
+      "home": {
+        "title": "School Users",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School User",
+        "createOrEditLabel": "Create or edit a School User",
+        "notFound": "No School Users found"
+      },
+      "created": "A new School User is created with identifier {{ param }}",
+      "updated": "A School User is updated with identifier {{ param }}",
+      "deleted": "A School User is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School User {{ id }}?"
+      },
+      "detail": {
+        "title": "School User"
+      },
+      "id": "ID",
+      "loginName": "Login Name",
+      "password": "Password",
+      "userEmail": "User Email",
+      "extraInfo": "Extra Info",
+      "activated": "Activated",
+      "userType": "User Type",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "auditLog": "Audit Log",
+      "schoolClass": "School Class",
+      "classSubject": "Class Subject"
+    }
+  }
+}

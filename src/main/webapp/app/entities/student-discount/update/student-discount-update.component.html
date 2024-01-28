@@ -1,0 +1,287 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <!-- This is to fetch all classes for a school and then to fetch all students in that class , this will be modularised later, JS is modular, for UI there is some issue -->
+    <div class="d-flex flex-row">
+      <select
+        class="form-control-filter"
+        id="field_studentClass_filter"
+        data-cy="studentClass_filter"
+        [(ngModel)]="selectedClassId"
+        (change)="loadAllStudentsForAClass()"
+        name="schoolClassFilter"
+      >
+        <option [ngValue]="undefined" hidden>Select Class</option>
+        <option *ngFor="let studentClassOption of schoolClasses; trackBy: trackFilterClassById" [ngValue]="studentClassOption.id">
+          {{ studentClassOption.id }} -- {{ studentClassOption.className }}
+        </option>
+      </select>
+    </div>
+    <!-- School class and class student filter ends here -->
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-student-discount-heading"
+        data-cy="StudentDiscountCreateUpdateHeading"
+        jhiTranslate="manageitApp.studentDiscount.home.createOrEditLabel"
+      >
+        Create or edit a Student Discount
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.classStudent" for="field_classStudent"
+            >Class Student</label
+          >
+          <select class="form-control" id="field_classStudent" data-cy="classStudent" name="classStudent" formControlName="classStudent">
+            <option [ngValue]="undefined" hidden>Select Student</option>
+            <option
+              [ngValue]="
+                classStudentOption.id === editForm.get('classStudent')!.value?.id ? editForm.get('classStudent')!.value : classStudentOption
+              "
+              *ngFor="let classStudentOption of classStudentsSharedCollection; trackBy: trackClassStudentById"
+            >
+              {{ classStudentOption.studentId }} -- {{ classStudentOption.firstName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.feeYear" for="field_feeYear">Fee Year</label>
+          <select class="form-control" name="feeYear" formControlName="feeYear" id="field_feeYear" data-cy="feeYear">
+            <option [ngValue]="undefined" hidden>Select Session</option>
+<!--             <option value="YEAR_2021">{{ 'manageitApp.FeeYear.YEAR_2021' | translate }}</option> -->
+            <option value="YEAR_2023">{{ 'manageitApp.FeeYear.YEAR_2023' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('feeYear')!.invalid && (editForm.get('feeYear')!.dirty || editForm.get('feeYear')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('feeYear')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.dueDate" for="field_dueDate">Due Date</label>
+          <input type="number" class="form-control" name="dueDate" id="field_dueDate" data-cy="dueDate" formControlName="dueDate" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.schoolLedgerHead" for="field_schoolLedgerHead"
+            >School Ledger Head</label
+          >
+          <select
+            class="form-control"
+            id="field_schoolLedgerHead"
+            data-cy="schoolLedgerHead"
+            name="schoolLedgerHead"
+            formControlName="schoolLedgerHead"
+          >
+            <option [ngValue]="undefined" hidden>Select Ledger Head</option>
+            <option
+              [ngValue]="
+                schoolLedgerHeadOption.id === editForm.get('schoolLedgerHead')!.value?.id
+                  ? editForm.get('schoolLedgerHead')!.value
+                  : schoolLedgerHeadOption
+              "
+              *ngFor="let schoolLedgerHeadOption of schoolLedgerHeadsSharedCollection; trackBy: trackSchoolLedgerHeadById"
+            >
+              {{ schoolLedgerHeadOption.ledgerHeadName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.aprFeeDisc" for="field_aprFeeDisc"
+            >Apr Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="aprFeeDisc"
+            id="field_aprFeeDisc"
+            data-cy="aprFeeDisc"
+            formControlName="aprFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.mayFeeDisc" for="field_mayFeeDisc"
+            >May Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="mayFeeDisc"
+            id="field_mayFeeDisc"
+            data-cy="mayFeeDisc"
+            formControlName="mayFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.junFeeDisc" for="field_junFeeDisc"
+            >Jun Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="junFeeDisc"
+            id="field_junFeeDisc"
+            data-cy="junFeeDisc"
+            formControlName="junFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.julFeeDisc" for="field_julFeeDisc"
+            >Jul Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="julFeeDisc"
+            id="field_julFeeDisc"
+            data-cy="julFeeDisc"
+            formControlName="julFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.augFeeDisc" for="field_augFeeDisc"
+            >Aug Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="augFeeDisc"
+            id="field_augFeeDisc"
+            data-cy="augFeeDisc"
+            formControlName="augFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.sepFeeDisc" for="field_sepFeeDisc"
+            >Sep Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="sepFeeDisc"
+            id="field_sepFeeDisc"
+            data-cy="sepFeeDisc"
+            formControlName="sepFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.octFeeDisc" for="field_octFeeDisc"
+            >Oct Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="octFeeDisc"
+            id="field_octFeeDisc"
+            data-cy="octFeeDisc"
+            formControlName="octFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.novFeeDisc" for="field_novFeeDisc"
+            >Nov Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="novFeeDisc"
+            id="field_novFeeDisc"
+            data-cy="novFeeDisc"
+            formControlName="novFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.decFeeDisc" for="field_decFeeDisc"
+            >Dec Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="decFeeDisc"
+            id="field_decFeeDisc"
+            data-cy="decFeeDisc"
+            formControlName="decFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.janFeeDisc" for="field_janFeeDisc"
+            >Jan Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="janFeeDisc"
+            id="field_janFeeDisc"
+            data-cy="janFeeDisc"
+            formControlName="janFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.febFeeDisc" for="field_febFeeDisc"
+            >Feb Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="febFeeDisc"
+            id="field_febFeeDisc"
+            data-cy="febFeeDisc"
+            formControlName="febFeeDisc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentDiscount.marFeeDisc" for="field_marFeeDisc"
+            >Mar Fee Disc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="marFeeDisc"
+            id="field_marFeeDisc"
+            data-cy="marFeeDisc"
+            formControlName="marFeeDisc"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

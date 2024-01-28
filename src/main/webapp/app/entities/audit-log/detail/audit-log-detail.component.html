@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="auditLog">
+      <h2 data-cy="auditLogDetailsHeading"><span jhiTranslate="manageitApp.auditLog.detail.title">Audit Log</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ auditLog.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.userName">User Name</span></dt>
+        <dd>
+          <span>{{ auditLog.userName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.userDeviceDetails">User Device Details</span></dt>
+        <dd>
+          <span>{{ auditLog.userDeviceDetails }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.action">Action</span></dt>
+        <dd>
+          <span>{{ auditLog.action }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.data1">Data 1</span></dt>
+        <dd>
+          <span>{{ auditLog.data1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.data2">Data 2</span></dt>
+        <dd>
+          <span>{{ auditLog.data2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.data3">Data 3</span></dt>
+        <dd>
+          <span>{{ auditLog.data3 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ auditLog.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ auditLog.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ auditLog.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.auditLog.school">School</span></dt>
+        <dd>
+          <div *ngIf="auditLog.school">
+            <a [routerLink]="['/school', auditLog.school?.id, 'view']">{{ auditLog.school?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/audit-log', auditLog.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

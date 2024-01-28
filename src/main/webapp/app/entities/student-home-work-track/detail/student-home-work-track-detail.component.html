@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="studentHomeWorkTrack">
+      <h2 data-cy="studentHomeWorkTrackDetailsHeading">
+        <span jhiTranslate="manageitApp.studentHomeWorkTrack.detail.title">Student Home Work Track</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ studentHomeWorkTrack.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentHomeWorkTrack.workStatus">Work Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.WorkStatus.' + studentHomeWorkTrack.workStatus }}">{{
+            studentHomeWorkTrack.workStatus
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentHomeWorkTrack.remarks">Remarks</span></dt>
+        <dd>
+          <span>{{ studentHomeWorkTrack.remarks }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentHomeWorkTrack.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ studentHomeWorkTrack.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentHomeWorkTrack.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ studentHomeWorkTrack.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentHomeWorkTrack.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ studentHomeWorkTrack.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentHomeWorkTrack.classStudent">Class Student</span></dt>
+        <dd>
+          <div *ngIf="studentHomeWorkTrack.classStudent">
+            <a [routerLink]="['/class-student', studentHomeWorkTrack.classStudent?.id, 'view']">{{
+              studentHomeWorkTrack.classStudent?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentHomeWorkTrack.classHomeWork">Class Home Work</span></dt>
+        <dd>
+          <div *ngIf="studentHomeWorkTrack.classHomeWork">
+            <a [routerLink]="['/class-home-work', studentHomeWorkTrack.classHomeWork?.id, 'view']">{{
+              studentHomeWorkTrack.classHomeWork?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/student-home-work-track', studentHomeWorkTrack.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

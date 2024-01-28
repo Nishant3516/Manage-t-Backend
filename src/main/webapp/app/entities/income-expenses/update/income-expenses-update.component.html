@@ -1,0 +1,244 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-income-expenses-heading"
+        data-cy="IncomeExpensesCreateUpdateHeading"
+        jhiTranslate="manageitApp.incomeExpenses.home.createOrEditLabel"
+      >
+        Create or edit a Income Expenses
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+<!--         <div class="form-group" [hidden]="editForm.get('id')!.value == null"> -->
+<!--           <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label> -->
+<!--           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" /> -->
+<!--         </div> -->
+
+<!--          <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.transactionType" for="field_transactionType" -->
+<!--             >Transaction Type</label -->
+<!--           > -->
+<!--           <select -->
+<!--             class="form-control" -->
+<!--             name="transactionType" -->
+<!--             formControlName="transactionType" -->
+<!--             id="field_transactionType" -->
+<!--             data-cy="transactionType" -->
+<!--           > -->
+<!--             <option [ngValue]="null">{{ 'manageitApp.TransactionType.null' | translate }}</option> -->
+<!--             <option *ngFor="let transactionType of transactionTypeValues" [value]="transactionType"> -->
+<!--               {{ 'manageitApp.TransactionType.' + transactionType | translate }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.vendor" for="field_vendor">Vendor</label>
+          <select class="form-control" id="field_vendor" data-cy="vendor" name="vendor" formControlName="vendor">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="vendorsOption.id === editForm.get('vendor')!.value?.id ? editForm.get('vendor')!.value : vendorsOption"
+              *ngFor="let vendorsOption of vendorsSharedCollection; trackBy: trackVendorsById"
+            >
+              {{ vendorsOption.vendorName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.ledgerHead" for="field_ledgerHead">Ledger Head</label>
+          <select class="form-control" id="field_ledgerHead" data-cy="ledgerHead" name="ledgerHead" formControlName="ledgerHead">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                schoolLedgerHeadOption.id === editForm.get('ledgerHead')!.value?.id
+                  ? editForm.get('ledgerHead')!.value
+                  : schoolLedgerHeadOption
+              "
+              *ngFor="let schoolLedgerHeadOption of schoolLedgerHeadsSharedCollection; trackBy: trackSchoolLedgerHeadById"
+            >
+              {{ schoolLedgerHeadOption.ledgerHeadName }}
+            </option>
+          </select>
+        </div>
+ 
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.amountPaid" for="field_amountPaid">Amount Paid</label>
+          <input
+            type="number"
+            class="form-control"
+            name="amountPaid"
+            id="field_amountPaid"
+            data-cy="amountPaid"
+            formControlName="amountPaid"
+          />
+          <div *ngIf="editForm.get('amountPaid')!.invalid && (editForm.get('amountPaid')!.dirty || editForm.get('amountPaid')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountPaid')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountPaid')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.modeOfPay" for="field_modeOfPay">Mode Of Pay</label> -->
+<!--           <select class="form-control" name="modeOfPay" formControlName="modeOfPay" id="field_modeOfPay" data-cy="modeOfPay"> -->
+<!--             <option [ngValue]="null">{{ 'manageitApp.ModeOfPayment.null' | translate }}</option> -->
+<!--             <option *ngFor="let modeOfPayment of modeOfPaymentValues" [value]="modeOfPayment"> -->
+<!--               {{ 'manageitApp.ModeOfPayment.' + modeOfPayment | translate }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.noteNumbers" for="field_noteNumbers"
+            >Note Numbers</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="noteNumbers"
+            id="field_noteNumbers"
+            data-cy="noteNumbers"
+            formControlName="noteNumbers"
+          />
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.upiId" for="field_upiId">Upi Id</label> -->
+<!--           <input type="text" class="form-control" name="upiId" id="field_upiId" data-cy="upiId" formControlName="upiId" /> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.remarks" for="field_remarks">Remarks</label>
+          <input type="text" class="form-control" name="remarks" id="field_remarks" data-cy="remarks" formControlName="remarks" />
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.paymentDate" for="field_paymentDate" -->
+<!--             >Payment Date</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_paymentDate" -->
+<!--               data-cy="paymentDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="paymentDate" -->
+<!--               ngbDatepicker -->
+<!--               #paymentDateDp="ngbDatepicker" -->
+<!--               formControlName="paymentDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="paymentDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.receiptId" for="field_receiptId">Receipt Id</label> -->
+<!--           <input type="text" class="form-control" name="receiptId" id="field_receiptId" data-cy="receiptId" formControlName="receiptId" /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.createDate" for="field_createDate">Create Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_createDate" -->
+<!--               data-cy="createDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="createDate" -->
+<!--               ngbDatepicker -->
+<!--               #createDateDp="ngbDatepicker" -->
+<!--               formControlName="createDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.lastModified" for="field_lastModified" -->
+<!--             >Last Modified</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_lastModified" -->
+<!--               data-cy="lastModified" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="lastModified" -->
+<!--               ngbDatepicker -->
+<!--               #lastModifiedDp="ngbDatepicker" -->
+<!--               formControlName="lastModified" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.incomeExpenses.cancelDate" for="field_cancelDate">Cancel Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_cancelDate" -->
+<!--               data-cy="cancelDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="cancelDate" -->
+<!--               ngbDatepicker -->
+<!--               #cancelDateDp="ngbDatepicker" -->
+<!--               formControlName="cancelDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+       
+        
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

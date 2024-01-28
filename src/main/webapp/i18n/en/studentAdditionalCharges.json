@@ -1,0 +1,42 @@
+{
+  "manageitApp": {
+    "studentAdditionalCharges": {
+      "home": {
+        "title": "Student Additional Charges",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Student Additional Charges",
+        "createOrEditLabel": "Create or edit a Student Additional Charges",
+        "notFound": "No Student Additional Charges found"
+      },
+      "created": "A new Student Additional Charges is created with identifier {{ param }}",
+      "updated": "A Student Additional Charges is updated with identifier {{ param }}",
+      "deleted": "A Student Additional Charges is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Student Additional Charges {{ id }}?"
+      },
+      "detail": {
+        "title": "Student Additional Charges"
+      },
+      "id": "ID",
+      "feeYear": "Session",
+      "dueDate": "Due Date",
+      "janAddChrg": "Jan",
+      "febAddChrgc": "Feb",
+      "marAddChrg": "Mar",
+      "aprAddChrg": "Apr",
+      "mayAddChrg": "May",
+      "junAddChrg": "Jun",
+      "julAddChrg": "Jul",
+      "augAddChrg": "Aug",
+      "sepAddChrg": "Sep",
+      "octAddChrg": "Oct",
+      "novAddChrg": "Nov",
+      "decAddChrg": "Dec",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolLedgerHead": "Ledger Head",
+      "classStudent": "Student"
+    }
+  }
+}

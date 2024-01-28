@@ -1,0 +1,97 @@
+<div>
+  <h2 id="page-heading" data-cy="SchoolEventHeading">
+    <span jhiTranslate="manageitApp.schoolEvent.home.title">School Events</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolEvent.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-school-event"
+        [routerLink]="['/school-event/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolEvent.home.createLabel"> Create a new School Event </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="schoolEvents?.length === 0">
+    <span jhiTranslate="manageitApp.schoolEvent.home.notFound">No schoolEvents found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="schoolEvents && schoolEvents.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.eventName">Event Name</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.eventDetails">Event Details</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.startDate">Start Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.endDate">End Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.createDate">Create Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.lastModified">Last Modified</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.cancelDate">Cancel Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolEvent.schoolClass">School Class</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schoolEvent of schoolEvents; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/school-event', schoolEvent.id, 'view']">{{ schoolEvent.id }}</a>
+          </td>
+          <td>{{ schoolEvent.eventName }}</td>
+          <td>{{ schoolEvent.eventDetails }}</td>
+          <td>{{ schoolEvent.startDate | formatMediumDate }}</td>
+          <td>{{ schoolEvent.endDate | formatMediumDate }}</td>
+          <td>{{ schoolEvent.createDate | formatMediumDate }}</td>
+          <td>{{ schoolEvent.lastModified | formatMediumDate }}</td>
+          <td>{{ schoolEvent.cancelDate | formatMediumDate }}</td>
+          <td>
+            <span *ngFor="let schoolClass of schoolEvent.schoolClasses; let last = last">
+              <a class="form-control-static" [routerLink]="['/school-class', schoolClass.id, 'view']">{{ schoolClass.className }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/school-event', schoolEvent.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/school-event', schoolEvent.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(schoolEvent)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "manageitApp": {
+    "studentAttendence": {
+      "home": {
+        "title": "StudentAttendences",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Student Attendence बनाएँ",
+        "createOrEditLabel": "Student Attendence बनाएँ या संपादित करें",
+        "notFound": "No Student Attendences found"
+      },
+      "created": "एक नया Student Attendence [identifier: {{ param }}] तैयार है",
+      "updated": "एक Student Attendence [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Student Attendence [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Student Attendence [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Student Attendence"
+      },
+      "id": "ID",
+      "schoolDate": "School Date",
+      "attendence": "Attendence",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classStudent": "Class Student"
+    }
+  }
+}

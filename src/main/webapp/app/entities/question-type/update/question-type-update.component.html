@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-question-type-heading"
+        data-cy="QuestionTypeCreateUpdateHeading"
+        jhiTranslate="manageitApp.questionType.home.createOrEditLabel"
+      >
+        Create or edit a Question Type
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionType.questionType" for="field_questionType"
+            >Question Type</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionType"
+            id="field_questionType"
+            data-cy="questionType"
+            formControlName="questionType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionType.marks" for="field_marks">Marks</label>
+          <input type="number" class="form-control" name="marks" id="field_marks" data-cy="marks" formControlName="marks" />
+        </div>
+
+
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,172 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-chapter-section-heading"
+        data-cy="ChapterSectionCreateUpdateHeading"
+        jhiTranslate="manageitApp.chapterSection.home.createOrEditLabel"
+      >
+        Create or edit a Chapter Section
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        
+        
+        <div class="form-group">
+            <jhi-class-subject-dropdown [callbackFunction]="loadAllChapterForASubjectCallback"></jhi-class-subject-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.chapterSection.subjectChapter" for="field_subjectChapter"
+            >Subject Chapter</label
+          >
+          <select
+            class="form-control"
+            id="field_subjectChapter"
+            data-cy="subjectChapter"
+            name="subjectChapter"
+            formControlName="subjectChapter"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                subjectChapterOption.id === editForm.get('subjectChapter')!.value?.id
+                  ? editForm.get('subjectChapter')!.value
+                  : subjectChapterOption
+              "
+              *ngFor="let subjectChapterOption of subjectChaptersSharedCollection; trackBy: trackSubjectChapterById"
+            >
+              {{ subjectChapterOption.chapterName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.chapterSection.sectionName" for="field_sectionName"
+            >Section Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sectionName"
+            id="field_sectionName"
+            data-cy="sectionName"
+            formControlName="sectionName"
+          />
+          <div *ngIf="editForm.get('sectionName')!.invalid && (editForm.get('sectionName')!.dirty || editForm.get('sectionName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sectionName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.chapterSection.sectionNumber" for="field_sectionNumber"
+            >Section Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sectionNumber"
+            id="field_sectionNumber"
+            data-cy="sectionNumber"
+            formControlName="sectionNumber"
+          />
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.chapterSection.createDate" for="field_createDate">Create Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_createDate" -->
+<!--               data-cy="createDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="createDate" -->
+<!--               ngbDatepicker -->
+<!--               #createDateDp="ngbDatepicker" -->
+<!--               formControlName="createDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.chapterSection.lastModified" for="field_lastModified" -->
+<!--             >Last Modified</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_lastModified" -->
+<!--               data-cy="lastModified" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="lastModified" -->
+<!--               ngbDatepicker -->
+<!--               #lastModifiedDp="ngbDatepicker" -->
+<!--               formControlName="lastModified" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.chapterSection.cancelDate" for="field_cancelDate">Cancel Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_cancelDate" -->
+<!--               data-cy="cancelDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="cancelDate" -->
+<!--               ngbDatepicker -->
+<!--               #cancelDateDp="ngbDatepicker" -->
+<!--               formControlName="cancelDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+        
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAllStudentsForAClass()" [formGroup]="editForm">
+      <h2
+        id="jhi-school-report-heading"
+        data-cy="SchoolReportCreateUpdateHeading"
+        jhiTranslate="manageitApp.schoolReport.home.createOrEditLabel"
+      >
+        Create or edit a School Report
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolReport.reportType" for="field_reportType">Report Type</label>
+          <select class="form-control" name="reportType" formControlName="reportType" id="field_reportType" data-cy="reportType">
+            <option [ngValue]="null">Select Report Type</option>
+            <option value="FEE_COLLECTION">{{ 'manageitApp.ReportType.FEE_COLLECTION' | translate }}</option>
+                        <option value="FEE_DUE">{{ 'manageitApp.ReportType.FEE_DUE' | translate }}</option>
+                        <option value="INCOME_EXPENSE">{{ 'manageitApp.ReportType.INCOME_EXPENSE' | translate }}</option>
+                        <option value="TRANSPORT">{{ 'manageitApp.ReportType.TRANSPORT' | translate }}</option>
+                        <option value="APPLY_FEE_DUE">{{ 'manageitApp.ReportType.APPLY_FEE_DUE' | translate }}</option>
+                        <option value="SESSION_TRANSITION">{{ 'manageitApp.ReportType.SESSION_TRANSITION' | translate }}</option>
+                        <option value="STUDENT_DETAILS">{{ 'manageitApp.ReportType.STUDENT_DETAILS' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('reportType')!.invalid && (editForm.get('reportType')!.dirty || editForm.get('reportType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reportType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolReport.startDate" for="field_startDate">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="text"
+              class="form-control"
+              name="startDate"
+              ngbDatepicker
+              #startDateDp="ngbDatepicker"
+              formControlName="startDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('startDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolReport.endDate" for="field_endDate">End Date</label>
+          <div class="input-group">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #endDateDp="ngbDatepicker"
+              formControlName="endDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('endDate')!.invalid && (editForm.get('endDate')!.dirty || editForm.get('endDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Generate</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="table-responsive" id="entities" *ngIf="schoolReportGenerated">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr>
+            <th scope="col"><span jhiTranslate="manageitApp.schoolReport.reportType">Report Type</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"><span jhiTranslate="manageitApp.schoolReport.startDate">Start Date</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"><span jhiTranslate="manageitApp.schoolReport.endDate">End Date</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"><span jhiTranslate="manageitApp.schoolReport.reportFile">Report File</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ schoolReportGenerated.reportType }}</td>
+            <td>{{ schoolReportGenerated.startDate | formatMediumDate }}</td>
+            <td>{{ schoolReportGenerated.endDate | formatMediumDate }}</td>
+            <td>
+              <a
+                *ngIf="schoolReportGenerated.reportFile"
+                (click)="openFile(schoolReportGenerated.reportFile, schoolReportGenerated.reportFileContentType)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              >
+              <span *ngIf="schoolReportGenerated.reportFile"
+                >{{ schoolReportGenerated.reportType }}.csv , {{ byteSize(schoolReportGenerated.reportFile) }}</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="studentDiscount">
+      <h2 data-cy="studentDiscountDetailsHeading"><span jhiTranslate="manageitApp.studentDiscount.detail.title">Student Discount</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ studentDiscount.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.feeYear">Fee Year</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.FeeYear.' + studentDiscount.feeYear }}">{{ studentDiscount.feeYear }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.dueDate">Due Date</span></dt>
+        <dd>
+          <span>{{ studentDiscount.dueDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.janFeeDisc">Jan Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.janFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.febFeeDisc">Feb Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.febFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.marFeeDisc">Mar Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.marFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.aprFeeDisc">Apr Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.aprFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.mayFeeDisc">May Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.mayFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.junFeeDisc">Jun Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.junFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.julFeeDisc">Jul Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.julFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.augFeeDisc">Aug Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.augFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.sepFeeDisc">Sep Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.sepFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.octFeeDisc">Oct Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.octFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.novFeeDisc">Nov Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.novFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.decFeeDisc">Dec Fee Disc</span></dt>
+        <dd>
+          <span>{{ studentDiscount.decFeeDisc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.schoolLedgerHead">School Ledger Head</span></dt>
+        <dd>
+          <div *ngIf="studentDiscount.schoolLedgerHead">
+            <a [routerLink]="['/school-ledger-head', studentDiscount.schoolLedgerHead?.id, 'view']">{{
+              studentDiscount.schoolLedgerHead?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentDiscount.classStudent">Class Student</span></dt>
+        <dd>
+          <div *ngIf="studentDiscount.classStudent">
+            <a [routerLink]="['/class-student', studentDiscount.classStudent?.id, 'view']">{{ studentDiscount.classStudent?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/student-discount', studentDiscount.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

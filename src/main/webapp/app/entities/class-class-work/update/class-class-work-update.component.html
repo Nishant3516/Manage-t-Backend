@@ -1,0 +1,235 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+      <h2
+        id="jhi-class-class-work-heading"
+        data-cy="ClassClassWorkCreateUpdateHeading"
+        jhiTranslate="manageitApp.classClassWork.home.createOrEditLabel"
+      >
+        Create or edit a Class Class Work
+      </h2>
+        <jhi-alert-error></jhi-alert-error>
+           <div class="form-group">
+            <jhi-class-subject-dropdown [callbackFunction]="loadAllChapterForASubjectCallback"></jhi-class-subject-dropdown>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" >Select Chapter</label>
+			  <select
+			    class="form-control"
+			    id="field_subjectChapter1"
+			    data-cy="subjectChapter1"
+			    [(ngModel)]="selectedChapter"
+			    (change)="loadAllSectionForAChapter()"
+			    name="subjectChapterFilter"
+			  >
+			    <option [ngValue]="null">Select Chapter</option>
+			    <option
+			      *ngFor="let subjectChapterOption of subjectChapters trackBy: trackFilterChapterByIdCommon"
+			      [ngValue]="subjectChapterOption.id"
+			    >
+			      {{ subjectChapterOption.id }} -- {{ subjectChapterOption.chapterName }}
+			    </option>
+			  </select>        
+		</div>
+ 
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+
+      <div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classClassWork.chapterSection" for="field_chapterSection"
+            >Chapter Section</label
+          >
+          <select
+            class="form-control"
+            id="field_chapterSection"
+            data-cy="chapterSection"
+            name="chapterSection"
+            formControlName="chapterSection"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                chapterSectionOption.id === editForm.get('chapterSection')!.value?.id
+                  ? editForm.get('chapterSection')!.value
+                  : chapterSectionOption
+              "
+              *ngFor="let chapterSectionOption of chapterSectionsSharedCollection; trackBy: trackChapterSectionById"
+            >
+              {{ chapterSectionOption.sectionName }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classClassWork.schoolDate" for="field_schoolDate">School Date</label>
+          <div class="input-group">
+            <input
+              id="field_schoolDate"
+              data-cy="schoolDate"
+              type="text"
+              class="form-control"
+              name="schoolDate"
+              ngbDatepicker
+              #schoolDateDp="ngbDatepicker"
+              formControlName="schoolDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="schoolDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('schoolDate')!.invalid && (editForm.get('schoolDate')!.dirty || editForm.get('schoolDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('schoolDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="manageitApp.classClassWork.studentAssignmentType"
+            for="field_studentAssignmentType"
+            >Student Assignment Type</label
+          >
+          <select
+            class="form-control"
+            name="studentAssignmentType"
+            formControlName="studentAssignmentType"
+            id="field_studentAssignmentType"
+            data-cy="studentAssignmentType"
+          >
+            <option [ngValue]="null">{{ 'manageitApp.StudentAssignmentType.null' | translate }}</option>
+            <option value="READING_WRITING">{{ 'manageitApp.StudentAssignmentType.READING_WRITING' | translate }}</option>
+            <option value="PROJECT">{{ 'manageitApp.StudentAssignmentType.PROJECT' | translate }}</option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('studentAssignmentType')!.invalid &&
+              (editForm.get('studentAssignmentType')!.dirty || editForm.get('studentAssignmentType')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('studentAssignmentType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classClassWork.classWorkText" for="field_classWorkText"
+            >Class Work Text</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="classWorkText"
+            id="field_classWorkText"
+            data-cy="classWorkText"
+            formControlName="classWorkText"
+          />
+          <div
+            *ngIf="
+              editForm.get('classWorkText')!.invalid && (editForm.get('classWorkText')!.dirty || editForm.get('classWorkText')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('classWorkText')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('classWorkText')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classClassWork.classWorkFile" for="field_classWorkFile"
+            >Class Work File</label
+          >
+          <div>
+            <div *ngIf="editForm.get('classWorkFile')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('classWorkFile')!.value, editForm.get('classWorkFileContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('classWorkFileContentType')!.value }}, {{ byteSize(editForm.get('classWorkFile')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ classWorkFile: null }); editForm.patchValue({ classWorkFileContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_classWorkFile"
+              data-cy="classWorkFile"
+              (change)="setFileData($event, 'classWorkFile', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="classWorkFile"
+            id="field_classWorkFile"
+            data-cy="classWorkFile"
+            formControlName="classWorkFile"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="classWorkFileContentType"
+            id="field_classWorkFileContentType"
+            formControlName="classWorkFileContentType"
+          />
+        </div>
+
+
+
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

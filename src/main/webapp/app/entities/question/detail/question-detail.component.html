@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="question">
+      <h2 data-cy="questionDetailsHeading"><span jhiTranslate="manageitApp.question.detail.title">Question</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ question.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.questionImportFile">Question Import File</span></dt>
+        <dd>
+          <div *ngIf="question.questionImportFile">
+            <a (click)="openFile(question.questionImportFile, question.questionImportFileContentType)" jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ question.questionImportFileContentType }}, {{ byteSize(question.questionImportFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.questionText">Question Text</span></dt>
+        <dd>
+          <span>{{ question.questionText }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.question.questionImage">Question Image</span></dt> -->
+<!--         <dd> -->
+<!--           <div *ngIf="question.questionImage"> -->
+<!--             <a (click)="openFile(question.questionImage, question.questionImageContentType)" jhiTranslate="entity.action.open">open</a> -->
+<!--             {{ question.questionImageContentType }}, {{ byteSize(question.questionImage) }} -->
+<!--           </div> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.answerImage">Answer Image</span></dt> -->
+<!--         <dd> -->
+<!--           <div *ngIf="question.answerImage"> -->
+<!--             <a (click)="openFile(question.answerImage, question.answerImageContentType)" jhiTranslate="entity.action.open">open</a> -->
+<!--             {{ question.answerImageContentType }}, {{ byteSize(question.answerImage) }} -->
+<!--           </div> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.imageSideBySide">Image Side By Side</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ question.imageSideBySide }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.option1">Option 1</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ question.option1 }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.option2">Option 2</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ question.option2 }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.option3">Option 3</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ question.option3 }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.option4">Option 4</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ question.option4 }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.option5">Option 5</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ question.option5 }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.question.status">Status</span></dt> -->
+<!--         <dd> -->
+<!--           <span jhiTranslate="{{ 'manageitApp.Status.' + question.status }}">{{ question.status }}</span> -->
+<!--         </dd> -->
+        <dt><span jhiTranslate="manageitApp.question.weightage">Weightage</span></dt>
+        <dd>
+          <span>{{ question.weightage }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.difficultyLevel">Difficulty Level</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.Difficulty.' + question.difficultyLevel }}">{{ question.difficultyLevel }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.tag">Tag</span></dt>
+        <dd>
+          <span *ngFor="let tag of question.tags; let last = last">
+            <a [routerLink]="['/tag', tag?.id, 'view']">{{ tag.tagText }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.questionType">Question Type</span></dt>
+        <dd>
+          <div *ngIf="question.questionType">
+            <a [routerLink]="['/question-type', question.questionType?.id, 'view']">{{ question.questionType?.questionType }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.schoolClass">School Class</span></dt>
+        <dd>
+          <div *ngIf="question.schoolClass">
+            <a [routerLink]="['/school-class', question.schoolClass?.id, 'view']">{{ question.schoolClass?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.classSubject">Class Subject</span></dt>
+        <dd>
+          <div *ngIf="question.classSubject">
+            <a [routerLink]="['/class-subject', question.classSubject?.id, 'view']">{{ question.classSubject?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.question.subjectChapter">Subject Chapter</span></dt>
+        <dd>
+          <div *ngIf="question.subjectChapter">
+            <a [routerLink]="['/subject-chapter', question.subjectChapter?.id, 'view']">{{ question.subjectChapter?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/question', question.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

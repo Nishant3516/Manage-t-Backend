@@ -1,0 +1,37 @@
+{
+  "manageitApp": {
+    "classLessionPlan": {
+      "home": {
+        "title": "ClassLessionPlans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Class Lession Plan बनाएँ",
+        "createOrEditLabel": "Class Lession Plan बनाएँ या संपादित करें",
+        "notFound": "No Class Lession Plans found"
+      },
+      "created": "एक नया Class Lession Plan [identifier: {{ param }}] तैयार है",
+      "updated": "एक Class Lession Plan [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Class Lession Plan [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Class Lession Plan [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Class Lession Plan"
+      },
+      "id": "ID",
+      "schoolDate": "School Date",
+      "classWorkText": "Class Work Text",
+      "homeWorkText": "Home Work Text",
+      "workStatus": "Work Status",
+      "lesionPlanFile": "Lesion Plan File",
+      "lessionPlanFileLink": "Lession Plan File Link",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classLessionPlanTrack": "Class Lession Plan Track",
+      "chapterSection": "Chapter Section",
+      "schoolClass": "School Class",
+      "classSubject": "Class Subject",
+      "subjectChapter": "Subject Chapter"
+    }
+  }
+}

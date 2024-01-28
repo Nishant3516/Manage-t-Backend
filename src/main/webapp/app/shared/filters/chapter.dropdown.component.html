@@ -1,0 +1,20 @@
+<div class="form-group">
+ <label class="form-control-label" >Select Chapter</label>
+  <select
+    class="form-control"
+    id="field_studentSubjectChapter"
+    data-cy="studentSubjectChapter"
+    [(ngModel)]="selectedChapterId"
+        (change)="callCallBackFunction()"
+    
+    name="studentClassSubjectFilter"
+  >
+    <option [ngValue]="null">Select Chapter</option>
+    <option
+      *ngFor="let subjectChapterOption of subjectChapters; trackBy: trackFilterSubjectChapterId"
+      [ngValue]="subjectChapterOption.id"
+    >
+      {{ subjectChapterOption.chapterName }}
+    </option>
+  </select>
+</div>

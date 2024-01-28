@@ -1,0 +1,29 @@
+{
+  "manageitApp": {
+    "classLessionPlanTrack": {
+      "home": {
+        "title": "ClassLessionPlanTracks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Class Lession Plan Track बनाएँ",
+        "createOrEditLabel": "Class Lession Plan Track बनाएँ या संपादित करें",
+        "notFound": "No Class Lession Plan Tracks found"
+      },
+      "created": "एक नया Class Lession Plan Track [identifier: {{ param }}] तैयार है",
+      "updated": "एक Class Lession Plan Track [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Class Lession Plan Track [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Class Lession Plan Track [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Class Lession Plan Track"
+      },
+      "id": "ID",
+      "workStatus": "Work Status",
+      "remarks": "Remarks",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classLessionPlan": "Class Lession Plan"
+    }
+  }
+}

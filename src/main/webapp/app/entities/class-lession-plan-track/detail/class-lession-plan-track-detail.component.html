@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="classLessionPlanTrack">
+      <h2 data-cy="classLessionPlanTrackDetailsHeading">
+        <span jhiTranslate="manageitApp.classLessionPlanTrack.detail.title">Class Lession Plan Track</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ classLessionPlanTrack.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlanTrack.workStatus">Work Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.TaskStatus.' + classLessionPlanTrack.workStatus }}">{{
+            classLessionPlanTrack.workStatus
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlanTrack.remarks">Remarks</span></dt>
+        <dd>
+          <span>{{ classLessionPlanTrack.remarks }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlanTrack.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ classLessionPlanTrack.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlanTrack.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ classLessionPlanTrack.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlanTrack.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ classLessionPlanTrack.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlanTrack.classLessionPlan">Class Lession Plan</span></dt>
+        <dd>
+          <div *ngIf="classLessionPlanTrack.classLessionPlan">
+            <a [routerLink]="['/class-lession-plan', classLessionPlanTrack.classLessionPlan?.id, 'view']">{{
+              classLessionPlanTrack.classLessionPlan?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/class-lession-plan-track', classLessionPlanTrack.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

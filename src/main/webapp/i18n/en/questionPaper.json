@@ -1,0 +1,43 @@
+{
+  "manageitApp": {
+    "questionPaper": {
+      "home": {
+        "title": "Question Papers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Question Paper",
+        "createOrEditLabel": "Create or edit a Question Paper",
+        "notFound": "No Question Papers found"
+      },
+      "created": "A new Question Paper is created with identifier {{ param }}",
+      "updated": "A Question Paper is updated with identifier {{ param }}",
+      "deleted": "A Question Paper is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Question Paper {{ id }}?"
+      },
+      "detail": {
+        "title": "Question Paper"
+      },
+      "id": "ID",
+      "tenatLogo": "Tenat Logo",
+      "questionPaperFile": "Question Paper File",
+      "questionPaperName": "Question Paper Name",
+      "mainTitle": "Main Title",
+      "subTitle": "Sub Title",
+      "leftSubHeading1": "Total Duration",
+      "leftSubHeading2": "Left Sub Heading 2",
+      "rightSubHeading1": "Right Sub Heading 1",
+      "rightSubHeading2": "Right Sub Heading 2",
+      "instructions": "Instructions",
+      "footerText": "Footer Text",
+      "totalMarks": "Total Marks",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "question": "Question",
+      "tag": "Tag",
+      "tenant": "Tenant",
+      "schoolClass": "School Class",
+      "classSubject": "Class Subject"
+    }
+  }
+}

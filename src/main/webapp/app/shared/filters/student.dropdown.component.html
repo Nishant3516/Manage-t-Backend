@@ -1,0 +1,20 @@
+<div class="form-group">
+ <label class="form-control-label" >Select Student</label>
+  <select
+    class="form-control"
+    id="field_studentClassSubject"
+    data-cy="studentClassSubjects"
+    [(ngModel)]="selectedStudentId"
+        (change)="callCallBackFunction()"
+    
+    name="studentClassSubjectFilter"
+  >
+    <option [ngValue]="null">Select Student</option>
+    <option
+      *ngFor="let classStudentOption of classStudents; trackBy: trackFilterClassStudentId"
+      [ngValue]="classStudentOption.id"
+    >
+      {{ classStudentOption.studentId }} -- {{ classStudentOption.firstName }} {{ classStudentOption.lastName }}
+    </option>
+  </select>
+</div>

@@ -1,0 +1,42 @@
+{
+  "manageitApp": {
+    "studentAdditionalCharges": {
+      "home": {
+        "title": "StudentAdditionalCharges",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Student Additional Charges बनाएँ",
+        "createOrEditLabel": "Student Additional Charges बनाएँ या संपादित करें",
+        "notFound": "No Student Additional Charges found"
+      },
+      "created": "एक नया Student Additional Charges [identifier: {{ param }}] तैयार है",
+      "updated": "एक Student Additional Charges [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Student Additional Charges [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Student Additional Charges [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Student Additional Charges"
+      },
+      "id": "ID",
+      "feeYear": "Fee Year",
+      "dueDate": "Due Date",
+      "janAddChrg": "Jan Add Chrg",
+      "febAddChrgc": "Feb Add Chrgc",
+      "marAddChrg": "Mar Add Chrg",
+      "aprAddChrg": "Apr Add Chrg",
+      "mayAddChrg": "May Add Chrg",
+      "junAddChrg": "Jun Add Chrg",
+      "julAddChrg": "Jul Add Chrg",
+      "augAddChrg": "Aug Add Chrg",
+      "sepAddChrg": "Sep Add Chrg",
+      "octAddChrg": "Oct Add Chrg",
+      "novAddChrg": "Nov Add Chrg",
+      "decAddChrg": "Dec Add Chrg",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolLedgerHead": "School Ledger Head",
+      "classStudent": "Class Student"
+    }
+  }
+}

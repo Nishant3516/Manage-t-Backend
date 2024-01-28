@@ -1,0 +1,34 @@
+{
+  "manageitApp": {
+    "classHomeWork": {
+      "home": {
+        "title": "ClassHomeWorks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Class Home Work बनाएँ",
+        "createOrEditLabel": "Class Home Work बनाएँ या संपादित करें",
+        "notFound": "No Class Home Works found"
+      },
+      "created": "एक नया Class Home Work [identifier: {{ param }}] तैयार है",
+      "updated": "एक Class Home Work [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Class Home Work [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Class Home Work [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Class Home Work"
+      },
+      "id": "ID",
+      "schoolDate": "School Date",
+      "studentAssignmentType": "Student Assignment Type",
+      "homeWorkText": "Home Work Text",
+      "homeWorkFile": "Home Work File",
+      "homeWorkFileLink": "Home Work File Link",
+      "assign": "Assign",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "studentHomeWorkTrack": "Student Home Work Track",
+      "chapterSection": "Chapter Section"
+    }
+  }
+}

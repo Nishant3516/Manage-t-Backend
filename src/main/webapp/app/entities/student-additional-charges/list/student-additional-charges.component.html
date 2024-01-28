@@ -1,0 +1,120 @@
+<div>
+  <h2 id="page-heading" data-cy="StudentAdditionalChargesHeading">
+    <span jhiTranslate="manageitApp.studentAdditionalCharges.home.title">Student Additional Charges</span>
+
+    <div class="d-flex justify-content-end">
+<!--       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.studentAdditionalCharges.home.refreshListLabel">Refresh List</span> -->
+<!--       </button> -->
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-student-additional-charges"
+        [routerLink]="['/student-additional-charges/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.studentAdditionalCharges.home.createLabel"> Create a new Student Additional Charges </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+  <jhi-class-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [callbackFunction]="getClassIdCallBack"></jhi-class-dropdown>
+  <jhi-student-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [selectedClassId] = "selectedClassId" [callbackFunction]="getStudentIdCallBack"></jhi-student-dropdown>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="studentAdditionalCharges?.length === 0">
+    <span jhiTranslate="manageitApp.studentAdditionalCharges.home.notFound">No studentAdditionalCharges found</span>
+  </div>
+
+
+  <div class="table-responsive" id="entities" *ngIf="studentAdditionalCharges && studentAdditionalCharges.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.classStudent">Class Student</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.feeYear">Fee Year</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.createDate">Create Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.schoolLedgerHead">School Ledger Head</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.aprAddChrg">Apr Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.mayAddChrg">May Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.junAddChrg">Jun Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.julAddChrg">Jul Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.augAddChrg">Aug Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.sepAddChrg">Sep Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.octAddChrg">Oct Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.novAddChrg">Nov Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.decAddChrg">Dec Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.janAddChrg">Jan Add Chrg</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.febAddChrgc">Feb Add Chrgc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAdditionalCharges.marAddChrg">Mar Add Chrg</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let studentAdditionalCharges of studentAdditionalCharges; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <div *ngIf="studentAdditionalCharges.classStudent">
+              <a [routerLink]="['/class-student', studentAdditionalCharges.classStudent?.id, 'view']"
+                >{{ studentAdditionalCharges.classStudent?.schoolClass?.className }} --
+                {{ studentAdditionalCharges.classStudent?.studentId }} -- {{ studentAdditionalCharges.classStudent?.firstName }}</a
+              >
+            </div>
+          </td>
+          <td jhiTranslate="{{ 'manageitApp.FeeYear.' + studentAdditionalCharges.feeYear }}">{{ studentAdditionalCharges.feeYear }}</td>
+          <td>{{ studentAdditionalCharges.createDate | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="studentAdditionalCharges.schoolLedgerHead">
+              <a [routerLink]="['/school-ledger-head', studentAdditionalCharges.schoolLedgerHead?.id, 'view']">{{
+                studentAdditionalCharges.schoolLedgerHead?.ledgerHeadName
+              }}</a>
+            </div>
+          </td>
+          <td>{{ studentAdditionalCharges.aprAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.mayAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.junAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.julAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.augAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.sepAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.octAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.novAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.decAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.janAddChrg }}</td>
+          <td>{{ studentAdditionalCharges.febAddChrgc }}</td>
+          <td>{{ studentAdditionalCharges.marAddChrg }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/student-additional-charges', studentAdditionalCharges.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/student-additional-charges', studentAdditionalCharges.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(studentAdditionalCharges)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

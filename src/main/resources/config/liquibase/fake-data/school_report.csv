@@ -1,0 +1,11 @@
+id;report_type;start_date;end_date;report_file;report_file_content_type;create_date;last_modified;cancel_date
+1;FEE_COLLECTION;2021-05-03;2021-05-03;../fake-data/blob/hipster.png;image/png;2021-05-04;2021-05-04;2021-05-03
+2;FEE_DUE;2021-05-03;2021-05-04;../fake-data/blob/hipster.png;image/png;2021-05-03;2021-05-03;2021-05-04
+3;FEE_DUE;2021-05-04;2021-05-03;../fake-data/blob/hipster.png;image/png;2021-05-03;2021-05-04;2021-05-04
+4;FEE_COLLECTION;2021-05-04;2021-05-04;../fake-data/blob/hipster.png;image/png;2021-05-04;2021-05-04;2021-05-03
+5;FEE_COLLECTION;2021-05-04;2021-05-03;../fake-data/blob/hipster.png;image/png;2021-05-03;2021-05-03;2021-05-03
+6;FEE_DUE;2021-05-03;2021-05-04;../fake-data/blob/hipster.png;image/png;2021-05-04;2021-05-04;2021-05-04
+7;FEE_DUE;2021-05-04;2021-05-03;../fake-data/blob/hipster.png;image/png;2021-05-04;2021-05-03;2021-05-04
+8;FEE_DUE;2021-05-04;2021-05-03;../fake-data/blob/hipster.png;image/png;2021-05-03;2021-05-03;2021-05-04
+9;FEE_COLLECTION;2021-05-04;2021-05-03;../fake-data/blob/hipster.png;image/png;2021-05-03;2021-05-03;2021-05-03
+10;FEE_COLLECTION;2021-05-04;2021-05-04;../fake-data/blob/hipster.png;image/png;2021-05-03;2021-05-04;2021-05-03

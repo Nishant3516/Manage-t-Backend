@@ -1,0 +1,184 @@
+<div>
+  <h2 id="page-heading" data-cy="StudentHomeWorkTrackHeading">
+    <span jhiTranslate="manageitApp.studentHomeWorkTrack.home.title">Student Home Work Tracks {{startDate?.startDate}} {{endDate?" To "+endDate:""}} </span>
+
+<!--     <div class="d-flex justify-content-end"> -->
+<!--       <button class="btn btn-info mr-2" (click)="loadStudentHomeWorkTracks()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.studentHomeWorkTrack.home.refreshListLabel">Refresh List</span> -->
+<!--       </button> -->
+
+<!--       <button -->
+<!--         id="jh-create-entity" -->
+<!--         data-cy="entityCreateButton" -->
+<!--         class="btn btn-primary jh-create-entity create-student-home-work-track" -->
+<!--         [routerLink]="['/student-home-work-track/new']" -->
+<!--       > -->
+<!--         <fa-icon icon="plus"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.studentHomeWorkTrack.home.createLabel"> Create a new Student Home Work Track </span> -->
+<!--       </button> -->
+<!--     </div> -->
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+ <div class="form-group">
+          <label class="form-control-label">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_astartDate"
+              data-cy="astartDate"
+              type="text"
+              class="form-control"
+              name="astartDate"
+              ngbDatepicker
+              #astartDateDp="ngbDatepicker"
+              [(ngModel)]="startDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="astartDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        
+        </div>
+        
+           <label class="form-control-label" >End Date</label>
+          <div class="input-group">
+            <input
+              id="field_aendDate"
+              data-cy="aendDate"
+              type="text"
+              class="form-control"
+              name="aendDate"
+              ngbDatepicker
+              #aendDateDp="ngbDatepicker"
+              [(ngModel)]="endDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="aendDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+
+  <jhi-class-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [callbackFunction]="getClassIdCallBack"></jhi-class-dropdown>
+  <jhi-subject-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_STUDENT'"  [classId] = "selectedClassId" [callbackFunction]="getSubjectIdCallBack"></jhi-subject-dropdown>
+  <jhi-student-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [selectedClassId] = "selectedClassId" [callbackFunction]="getStudentIdCallBack"></jhi-student-dropdown>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadStudentHomeWorkTracks()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span >Fetch</span>
+      </button>
+
+    </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="studentHomeWorkTracks?.length === 0">
+    <span jhiTranslate="manageitApp.studentHomeWorkTrack.home.notFound">No studentHomeWorkTracks found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="studentHomeWorkTracks && studentHomeWorkTracks.length > 0">
+  <div class="d-flex justify-content-end">
+    <button type="submit" (click)="saveAll()"  [disabled]="studentHomeWorkMarked()" class="btn btn-warning btn-sm" data-cy="entityPresentButton">
+                <span class="d-none d-md-inline" >Final Submit</span>
+    </button>
+  </div>	
+
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+          <th scope="col" jhiSortBy="workStatus">
+            <span jhiTranslate="manageitApp.studentHomeWorkTrack.workStatus">Work Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="remarks">
+            <span >Subject -- Chapter</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="manageitApp.studentHomeWorkTrack.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="classStudent.id">
+            <span jhiTranslate="manageitApp.studentHomeWorkTrack.classStudent">Class Student</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="classHomeWork.id">
+            <span jhiTranslate="manageitApp.studentHomeWorkTrack.classHomeWork">Class Home Work</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let studentHomeWorkTrack of studentHomeWorkTracks; trackBy: trackId" data-cy="entityTable">
+          <td [ngClass]="studentHomeWorkTrack.workStatus==='Done'? 'table-success': 'table-warning' "   jhiTranslate="{{ 'manageitApp.WorkStatus.' + studentHomeWorkTrack.workStatus }}">{{ studentHomeWorkTrack.workStatus }}</td>
+          <td>{{ studentHomeWorkTrack.remarks }}</td>
+          <td>{{ studentHomeWorkTrack.createDate | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="studentHomeWorkTrack.classStudent">
+              <a [routerLink]="['/class-student', studentHomeWorkTrack.classStudent?.id, 'view']">{{
+                studentHomeWorkTrack.classStudent?.id
+              }}</a> --{{ studentHomeWorkTrack.classStudent?.studentId}} --{{ studentHomeWorkTrack.classStudent?.firstName}}
+            </div>
+          </td>
+          <td>
+            <div *ngIf="studentHomeWorkTrack.classHomeWork">
+              <a [routerLink]="['/class-home-work', studentHomeWorkTrack.classHomeWork?.id, 'view']">{{
+                studentHomeWorkTrack.classHomeWork?.id
+              }}</a> --{{studentHomeWorkTrack.classHomeWork?.homeWorkText}}
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/student-home-work-track', studentHomeWorkTrack.id, 'view']" -->
+<!--                 class="btn btn-info btn-sm" -->
+<!--                 data-cy="entityDetailsButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="eye"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span> -->
+<!--               </button> -->
+
+              <button *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'" [disabled]=studentHomeWorkTrack.cancelDate?true:false   type="submit" (click)="save(studentHomeWorkTrack,true)" class="btn btn-success btn-sm" data-cy="entityDeleteButton">
+                <span class="d-none d-md-inline" >Done</span>
+              </button>
+              <button *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [disabled]=studentHomeWorkTrack.cancelDate?true:false  type="submit" (click)="save(studentHomeWorkTrack,false)" class="btn btn-warning btn-sm" data-cy="entityDeleteButton">
+                <span class="d-none d-md-inline" >NotDone</span>
+              </button>
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/student-home-work-track', studentHomeWorkTrack.id, 'edit']" -->
+<!--                 class="btn btn-primary btn-sm" -->
+<!--                 data-cy="entityEditButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="pencil-alt"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span> -->
+<!--               </button> -->
+
+<!--               <button type="submit" (click)="delete(studentHomeWorkTrack)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton"> -->
+<!--                 <fa-icon icon="times"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span> -->
+<!--               </button> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!--   <div *ngIf="studentHomeWorkTracks && studentHomeWorkTracks.length > 0"> -->
+<!--     <div class="row justify-content-center"> -->
+<!--       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count> -->
+<!--     </div> -->
+
+<!--     <div class="row justify-content-center"> -->
+<!--       <ngb-pagination -->
+<!--         [collectionSize]="totalItems" -->
+<!--         [(page)]="ngbPaginationPage" -->
+<!--         [pageSize]="itemsPerPage" -->
+<!--         [maxSize]="5" -->
+<!--         [rotate]="true" -->
+<!--         [boundaryLinks]="true" -->
+<!--         (pageChange)="loadPage($event)" -->
+<!--       ></ngb-pagination> -->
+<!--     </div> -->
+<!--   </div> -->
+</div>

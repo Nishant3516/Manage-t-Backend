@@ -1,0 +1,42 @@
+{
+  "manageitApp": {
+    "schoolClass": {
+      "home": {
+        "title": "SchoolClasses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया School Class बनाएँ",
+        "createOrEditLabel": "School Class बनाएँ या संपादित करें",
+        "notFound": "No School Classes found"
+      },
+      "created": "एक नया School Class [identifier: {{ param }}] तैयार है",
+      "updated": "एक School Class [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "School Class [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "School Class [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "School Class"
+      },
+      "id": "ID",
+      "className": "Class Name",
+      "classLongName": "Class Long Name",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classStudent": "Class Student",
+      "classLessionPlan": "Class Lession Plan",
+      "question": "Question",
+      "questionPaper": "Question Paper",
+      "school": "School",
+      "schoolNotifications": "School Notifications",
+      "classFee": "Class Fee",
+      "classSubject": "Class Subject",
+      "schoolUser": "School User",
+      "schoolDaysOff": "School Days Off",
+      "schoolEvent": "School Event",
+      "schoolPictureGallery": "School Picture Gallery",
+      "vchoolVideoGallery": "Vchool Video Gallery",
+      "schoolReport": "School Report"
+    }
+  }
+}

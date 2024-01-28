@@ -1,0 +1,30 @@
+{
+  "manageitApp": {
+    "idStore": {
+      "home": {
+        "title": "Id Stores",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Id Store",
+        "createOrEditLabel": "Create or edit a Id Store",
+        "notFound": "No Id Stores found"
+      },
+      "created": "A new Id Store is created with identifier {{ param }}",
+      "updated": "A Id Store is updated with identifier {{ param }}",
+      "deleted": "A Id Store is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Id Store {{ id }}?"
+      },
+      "detail": {
+        "title": "Id Store"
+      },
+      "id": "ID",
+      "entrytype": "Entrytype",
+      "lastGeneratedId": "Last Generated Id",
+      "startId": "Start Id",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "school": "School"
+    }
+  }
+}

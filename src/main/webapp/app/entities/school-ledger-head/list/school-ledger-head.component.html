@@ -1,0 +1,80 @@
+<div>
+  <h2 id="page-heading" data-cy="SchoolLedgerHeadHeading">
+    <span jhiTranslate="manageitApp.schoolLedgerHead.home.title">School Ledger Heads</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolLedgerHead.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-school-ledger-head"
+        [routerLink]="['/school-ledger-head/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolLedgerHead.home.createLabel"> Create a new School Ledger Head </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="schoolLedgerHeads?.length === 0">
+    <span jhiTranslate="manageitApp.schoolLedgerHead.home.notFound">No schoolLedgerHeads found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="schoolLedgerHeads && schoolLedgerHeads.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolLedgerHead.studentLedgerHeadType">Student Ledger Head Type</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolLedgerHead.ledgerHeadName">Ledger Head Name</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.schoolLedgerHead.ledgerHeadLongName">Ledger Head Long Name</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schoolLedgerHead of schoolLedgerHeads; trackBy: trackId" data-cy="entityTable">
+          <td jhiTranslate="{{ 'manageitApp.SchoolLedgerHeadType.' + schoolLedgerHead.studentLedgerHeadType }}">
+            {{ schoolLedgerHead.studentLedgerHeadType }}
+          </td>
+          <td>{{ schoolLedgerHead.ledgerHeadName }}</td>
+          <td>{{ schoolLedgerHead.ledgerHeadLongName }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/school-ledger-head', schoolLedgerHead.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/school-ledger-head', schoolLedgerHead.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(schoolLedgerHead)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

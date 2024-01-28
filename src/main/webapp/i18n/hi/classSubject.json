@@ -1,0 +1,33 @@
+{
+  "manageitApp": {
+    "classSubject": {
+      "home": {
+        "title": "ClassSubjects",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Class Subject बनाएँ",
+        "createOrEditLabel": "Class Subject बनाएँ या संपादित करें",
+        "notFound": "No Class Subjects found"
+      },
+      "created": "एक नया Class Subject [identifier: {{ param }}] तैयार है",
+      "updated": "एक Class Subject [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Class Subject [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Class Subject [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Class Subject"
+      },
+      "id": "ID",
+      "subjectName": "Subject Name",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "subjectChapter": "Subject Chapter",
+      "classLessionPlan": "Class Lession Plan",
+      "question": "Question",
+      "questionPaper": "Question Paper",
+      "schoolClass": "School Class",
+      "schoolUser": "School User"
+    }
+  }
+}

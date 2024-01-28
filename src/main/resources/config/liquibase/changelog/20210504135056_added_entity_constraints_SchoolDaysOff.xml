@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity SchoolDaysOff.
+    -->
+    <changeSet id="20210504135056-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="school_days_off_id"
+                                 baseTableName="rel_school_days_off__school_class"
+                                 constraintName="fk_rel_school_days_off__school_class__school_days_off_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_days_off"/>
+
+        <addForeignKeyConstraint baseColumnNames="school_class_id"
+                                 baseTableName="rel_school_days_off__school_class"
+                                 constraintName="fk_rel_school_days_off__school_class__school_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_class"/>
+    </changeSet>
+</databaseChangeLog>

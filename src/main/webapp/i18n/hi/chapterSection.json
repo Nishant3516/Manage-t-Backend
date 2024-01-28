@@ -1,0 +1,32 @@
+{
+  "manageitApp": {
+    "chapterSection": {
+      "home": {
+        "title": "ChapterSections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Chapter Section बनाएँ",
+        "createOrEditLabel": "Chapter Section बनाएँ या संपादित करें",
+        "notFound": "No Chapter Sections found"
+      },
+      "created": "एक नया Chapter Section [identifier: {{ param }}] तैयार है",
+      "updated": "एक Chapter Section [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Chapter Section [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Chapter Section [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Chapter Section"
+      },
+      "id": "ID",
+      "sectionName": "Section Name",
+      "sectionNumber": "Section Number",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classHomeWork": "Class Home Work",
+      "classClassWork": "Class Class Work",
+      "classLessionPlan": "Class Lession Plan",
+      "subjectChapter": "Subject Chapter"
+    }
+  }
+}

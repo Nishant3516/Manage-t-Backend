@@ -1,0 +1,9 @@
+{
+  "manageitApp": {
+    "VendorType": {
+      "null": "",
+      "EXTERNAL": "EXTERNAL",
+      "INTERNAL": "INTERNAL"
+    }
+  }
+}

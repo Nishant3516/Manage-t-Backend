@@ -1,0 +1,9 @@
+{
+  "manageitApp": {
+    "ModeOfPayment": {
+      "null": "",
+      "CASH": "CASH",
+      "UPI": "UPI"
+    }
+  }
+}

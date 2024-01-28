@@ -1,0 +1,235 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-school-days-off-heading"
+        data-cy="SchoolDaysOffCreateUpdateHeading"
+        jhiTranslate="manageitApp.schoolDaysOff.home.createOrEditLabel"
+      >
+        Create or edit a School Days Off
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.dayOffType" for="field_dayOffType">Day Off Type</label>
+          <select class="form-control" name="dayOffType" formControlName="dayOffType" id="field_dayOffType" data-cy="dayOffType">
+            <option [ngValue]="null">{{ 'manageitApp.DayOffType.null' | translate }}</option>
+            <option value="WEEKEND">{{ 'manageitApp.DayOffType.WEEKEND' | translate }}</option>
+            <option value="VACATION">{{ 'manageitApp.DayOffType.VACATION' | translate }}</option>
+            <option value="PUBLIC_HOLIDAY">{{ 'manageitApp.DayOffType.PUBLIC_HOLIDAY' | translate }}</option>
+            <option value="EMERGENCY">{{ 'manageitApp.DayOffType.EMERGENCY' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('dayOffType')!.invalid && (editForm.get('dayOffType')!.dirty || editForm.get('dayOffType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dayOffType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.dayOffName" for="field_dayOffName">Day Off Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dayOffName"
+            id="field_dayOffName"
+            data-cy="dayOffName"
+            formControlName="dayOffName"
+          />
+          <div *ngIf="editForm.get('dayOffName')!.invalid && (editForm.get('dayOffName')!.dirty || editForm.get('dayOffName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dayOffName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.dayOffDetails" for="field_dayOffDetails"
+            >Day Off Details</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dayOffDetails"
+            id="field_dayOffDetails"
+            data-cy="dayOffDetails"
+            formControlName="dayOffDetails"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.startDate" for="field_startDate">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="text"
+              class="form-control"
+              name="startDate"
+              ngbDatepicker
+              #startDateDp="ngbDatepicker"
+              formControlName="startDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('startDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.endDate" for="field_endDate">End Date</label>
+          <div class="input-group">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #endDateDp="ngbDatepicker"
+              formControlName="endDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('endDate')!.invalid && (editForm.get('endDate')!.dirty || editForm.get('endDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.createDate" for="field_createDate">Create Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_createDate" -->
+<!--               data-cy="createDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="createDate" -->
+<!--               ngbDatepicker -->
+<!--               #createDateDp="ngbDatepicker" -->
+<!--               formControlName="createDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.lastModified" for="field_lastModified" -->
+<!--             >Last Modified</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_lastModified" -->
+<!--               data-cy="lastModified" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="lastModified" -->
+<!--               ngbDatepicker -->
+<!--               #lastModifiedDp="ngbDatepicker" -->
+<!--               formControlName="lastModified" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.schoolDaysOff.cancelDate" for="field_cancelDate">Cancel Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_cancelDate" -->
+<!--               data-cy="cancelDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="cancelDate" -->
+<!--               ngbDatepicker -->
+<!--               #cancelDateDp="ngbDatepicker" -->
+<!--               formControlName="cancelDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label jhiTranslate="manageitApp.schoolDaysOff.schoolClass" for="field_schoolClasses">School Class</label>
+          <select
+            class="form-control"
+            id="field_schoolClasses"
+            data-cy="schoolClass"
+            multiple
+            name="schoolClasses"
+            formControlName="schoolClasses"
+          >
+            <option
+              [ngValue]="getSelectedSchoolClass(schoolClassOption, editForm.get('schoolClasses')!.value)"
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

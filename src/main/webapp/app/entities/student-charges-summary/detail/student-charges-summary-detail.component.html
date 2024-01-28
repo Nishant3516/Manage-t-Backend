@@ -1,0 +1,114 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="studentChargesSummary">
+      <h2 data-cy="studentChargesSummaryDetailsHeading">
+        <span jhiTranslate="manageitApp.studentChargesSummary.detail.title">Student Charges Summary</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.summaryType">Summary Type</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.summaryType }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.feeYear">Fee Year</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.feeYear }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.dueDate">Due Date</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.dueDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.aprSummary">Apr Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.aprSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.maySummary">May Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.maySummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.junSummary">Jun Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.junSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.julSummary">Jul Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.julSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.augSummary">Aug Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.augSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.sepSummary">Sep Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.sepSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.octSummary">Oct Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.octSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.novSummary">Nov Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.novSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.decSummary">Dec Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.decSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.janSummary">Jan Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.janSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.febSummary">Feb Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.febSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.marSummary">Mar Summary</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.marSummary }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.additionalInfo1">Additional Info 1</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.additionalInfo1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.additionalInfo2">Additional Info 2</span></dt>
+        <dd>
+          <span>{{ studentChargesSummary.additionalInfo2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.schoolLedgerHead">School Ledger Head</span></dt>
+        <dd>
+          <div *ngIf="studentChargesSummary.schoolLedgerHead">
+            <a [routerLink]="['/school-ledger-head', studentChargesSummary.schoolLedgerHead?.id, 'view']">{{
+              studentChargesSummary.schoolLedgerHead?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentChargesSummary.classStudent">Class Student</span></dt>
+        <dd>
+          <div *ngIf="studentChargesSummary.classStudent">
+            <a [routerLink]="['/class-student', studentChargesSummary.classStudent?.id, 'view']">{{
+              studentChargesSummary.classStudent?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/student-charges-summary', studentChargesSummary.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div>
+  <h2 id="page-heading" data-cy="ClassHomeWorkHeading">
+    <span jhiTranslate="manageitApp.classHomeWork.home.title">Class Home Works</span>
+
+    <div class="d-flex justify-content-end">
+<!--       <button class="btn btn-info mr-2" (click)="loadAllHomeworkForASubject()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span>Find</span> -->
+<!--       </button> -->
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-class-home-work"
+        [routerLink]="['/class-home-work/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.classHomeWork.home.createLabel"> Create a new Class Home Work </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+          <div class="form-group">
+          
+            
+  
+        <div class="form-group">
+          <label class="form-control-label">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_astartDate"
+              data-cy="astartDate"
+              type="text"
+              class="form-control"
+              name="astartDate"
+              ngbDatepicker
+              #astartDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="astartDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        
+        </div>
+        
+           <label class="form-control-label" >End Date</label>
+          <div class="input-group">
+            <input
+              id="field_aendDate"
+              data-cy="aendDate"
+              type="text"
+              class="form-control"
+              name="aendDate"
+              ngbDatepicker
+              #aendDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceEndDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="aendDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          
+          
+          
+          
+            <jhi-class-subject-dropdown [callbackFunction]="loadAllChapterForASubjectCallback"></jhi-class-subject-dropdown>
+        </div>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="classHomeWorks?.length === 0">
+    <span jhiTranslate="manageitApp.classHomeWork.home.notFound">No classHomeWorks found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="classHomeWorks && classHomeWorks.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="schoolDate">
+            <span jhiTranslate="manageitApp.classHomeWork.schoolDate">School Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="studentAssignmentType">
+            <span jhiTranslate="manageitApp.classHomeWork.studentAssignmentType">Student Assignment Type</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="homeWorkText">
+            <span jhiTranslate="manageitApp.classHomeWork.homeWorkText">Home Work Text</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="homeWorkFile">
+            <span jhiTranslate="manageitApp.classHomeWork.homeWorkFile">Home Work File</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="chapterSection.id">
+            <span jhiTranslate="manageitApp.classHomeWork.chapterSection">Chapter Section</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let classHomeWork of classHomeWorks; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/class-home-work', classHomeWork.id, 'view']">{{ classHomeWork.id }}</a>
+          </td>
+          <td>{{ classHomeWork.schoolDate | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'manageitApp.StudentAssignmentType.' + classHomeWork.studentAssignmentType }}">
+            {{ classHomeWork.studentAssignmentType }}
+          </td>
+          <td>{{ classHomeWork.homeWorkText }}</td>
+          <td>
+            <a
+              *ngIf="classHomeWork.homeWorkFile"
+              (click)="openFile(classHomeWork.homeWorkFile, classHomeWork.homeWorkFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="classHomeWork.homeWorkFile"
+              >{{ classHomeWork.homeWorkFileContentType }}, {{ byteSize(classHomeWork.homeWorkFile) }}</span
+            >
+          </td>
+          <td>
+            <div *ngIf="classHomeWork.chapterSection">
+              <a [routerLink]="['/chapter-section', classHomeWork.chapterSection?.id, 'view']">{{ classHomeWork.chapterSection?.sectionName }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/class-home-work', classHomeWork.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/class-home-work', classHomeWork.id, 'edit']" -->
+<!--                 class="btn btn-primary btn-sm" -->
+<!--                 data-cy="entityEditButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="pencil-alt"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span> -->
+<!--               </button> -->
+
+              <button type="submit" (click)="delete(classHomeWork)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!--   <div *ngIf="classHomeWorks && classHomeWorks.length > 0"> -->
+<!--     <div class="row justify-content-center"> -->
+<!--       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count> -->
+<!--     </div> -->
+
+<!--     <div class="row justify-content-center"> -->
+<!--       <ngb-pagination -->
+<!--         [collectionSize]="totalItems" -->
+<!--         [(page)]="ngbPaginationPage" -->
+<!--         [pageSize]="itemsPerPage" -->
+<!--         [maxSize]="5" -->
+<!--         [rotate]="true" -->
+<!--         [boundaryLinks]="true" -->
+<!--         (pageChange)="loadPage($event)" -->
+<!--       ></ngb-pagination> -->
+<!--     </div> -->
+<!--   </div> -->
+</div>

@@ -1,0 +1,133 @@
+<div>
+  <h2 id="page-heading" data-cy="SchoolPictureGalleryHeading">
+    <span jhiTranslate="manageitApp.schoolPictureGallery.home.title">School Picture Galleries</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolPictureGallery.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-school-picture-gallery"
+        [routerLink]="['/school-picture-gallery/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolPictureGallery.home.createLabel"> Create a new School Picture Gallery </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="schoolPictureGalleries?.length === 0">
+    <span jhiTranslate="manageitApp.schoolPictureGallery.home.notFound">No schoolPictureGalleries found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="schoolPictureGalleries && schoolPictureGalleries.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="pictureTitle">
+            <span jhiTranslate="manageitApp.schoolPictureGallery.pictureTitle">Picture Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="pictureDescription">
+            <span jhiTranslate="manageitApp.schoolPictureGallery.pictureDescription">Picture Description</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="pictureFile">
+            <span jhiTranslate="manageitApp.schoolPictureGallery.pictureFile">Picture File</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="pictureLink">
+            <span jhiTranslate="manageitApp.schoolPictureGallery.pictureLink">Picture Link</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="manageitApp.schoolPictureGallery.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <span jhiTranslate="manageitApp.schoolPictureGallery.lastModified">Last Modified</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cancelDate">
+            <span jhiTranslate="manageitApp.schoolPictureGallery.cancelDate">Cancel Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schoolPictureGallery of schoolPictureGalleries; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/school-picture-gallery', schoolPictureGallery.id, 'view']">{{ schoolPictureGallery.id }}</a>
+          </td>
+          <td>{{ schoolPictureGallery.pictureTitle }}</td>
+          <td>{{ schoolPictureGallery.pictureDescription }}</td>
+          <td>
+            <a
+              *ngIf="schoolPictureGallery.pictureFile"
+              (click)="openFile(schoolPictureGallery.pictureFile, schoolPictureGallery.pictureFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="schoolPictureGallery.pictureFile"
+              >{{ schoolPictureGallery.pictureFileContentType }}, {{ byteSize(schoolPictureGallery.pictureFile) }}</span
+            >
+          </td>
+          <td>{{ schoolPictureGallery.pictureLink }}</td>
+          <td>{{ schoolPictureGallery.createDate | formatMediumDate }}</td>
+          <td>{{ schoolPictureGallery.lastModified | formatMediumDate }}</td>
+          <td>{{ schoolPictureGallery.cancelDate | formatMediumDate }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/school-picture-gallery', schoolPictureGallery.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/school-picture-gallery', schoolPictureGallery.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(schoolPictureGallery)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="schoolPictureGalleries && schoolPictureGalleries.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

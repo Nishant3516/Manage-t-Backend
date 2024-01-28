@@ -1,0 +1,43 @@
+{
+  "manageitApp": {
+    "classFee": {
+      "home": {
+        "title": "Class Fees",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Class Fee",
+        "createOrEditLabel": "Create or edit a Class Fee",
+        "notFound": "No Class Fees found"
+      },
+      "created": "A new Class Fee is created with identifier {{ param }}",
+      "updated": "A Class Fee is updated with identifier {{ param }}",
+      "deleted": "A Class Fee is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Class Fee {{ id }}?"
+      },
+      "detail": {
+        "title": "Class Fee"
+      },
+      "id": "ID",
+      "feeYear": "Session",
+      "dueDate": "Due Date",
+      "janFee": "Jan",
+      "febFee": "Feb",
+      "marFee": "Mar",
+      "aprFee": "Apr",
+      "mayFee": "May",
+      "junFee": "Jun",
+      "julFee": "Jul",
+      "augFee": "Aug",
+      "sepFee": "Sep",
+      "octFee": "Oct",
+      "novFee": "Nov",
+      "decFee": "Dec",
+      "payByDate": "Due Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "Class",
+      "schoolLedgerHead": "Ledger Head"
+    }
+  }
+}

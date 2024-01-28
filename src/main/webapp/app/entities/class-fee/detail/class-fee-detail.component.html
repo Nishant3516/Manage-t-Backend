@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="classFee">
+      <h2 data-cy="classFeeDetailsHeading"><span jhiTranslate="manageitApp.classFee.detail.title">Class Fee</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ classFee.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.feeYear">Fee Year</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.FeeYear.' + classFee.feeYear }}">{{ classFee.feeYear }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.dueDate">Due Date</span></dt>
+        <dd>
+          <span>{{ classFee.dueDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.janFee">Jan Fee</span></dt>
+        <dd>
+          <span>{{ classFee.janFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.febFee">Feb Fee</span></dt>
+        <dd>
+          <span>{{ classFee.febFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.marFee">Mar Fee</span></dt>
+        <dd>
+          <span>{{ classFee.marFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.aprFee">Apr Fee</span></dt>
+        <dd>
+          <span>{{ classFee.aprFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.mayFee">May Fee</span></dt>
+        <dd>
+          <span>{{ classFee.mayFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.junFee">Jun Fee</span></dt>
+        <dd>
+          <span>{{ classFee.junFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.julFee">Jul Fee</span></dt>
+        <dd>
+          <span>{{ classFee.julFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.augFee">Aug Fee</span></dt>
+        <dd>
+          <span>{{ classFee.augFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.sepFee">Sep Fee</span></dt>
+        <dd>
+          <span>{{ classFee.sepFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.octFee">Oct Fee</span></dt>
+        <dd>
+          <span>{{ classFee.octFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.novFee">Nov Fee</span></dt>
+        <dd>
+          <span>{{ classFee.novFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.decFee">Dec Fee</span></dt>
+        <dd>
+          <span>{{ classFee.decFee }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.payByDate">Pay By Date</span></dt>
+        <dd>
+          <span>{{ classFee.payByDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ classFee.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ classFee.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ classFee.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.schoolClass">School Class</span></dt>
+        <dd>
+          <span *ngFor="let schoolClass of classFee.schoolClasses; let last = last">
+            <a [routerLink]="['/school-class', schoolClass?.id, 'view']">{{ schoolClass.className }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classFee.schoolLedgerHead">School Ledger Head</span></dt>
+        <dd>
+          <div *ngIf="classFee.schoolLedgerHead">
+            <a [routerLink]="['/school-ledger-head', classFee.schoolLedgerHead?.id, 'view']">{{
+              classFee.schoolLedgerHead?.ledgerHeadName
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/class-fee', classFee.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

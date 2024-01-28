@@ -1,0 +1,582 @@
+entity AuditLog {
+	userName String required,
+	userDeviceDetails String required,
+    action String ,
+    data1 String,
+    data2 String,
+    data3 String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+    
+}
+entity SchoolReport {
+	reportType ReportType required,
+	 startDate LocalDate required,
+	 endDate LocalDate required,
+	 reportFile Blob
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+    
+}
+
+entity SchoolDaysOff {
+	dayOffType DayOffType required,
+	dayOffName String required,
+	dayOffDetails String ,
+	 startDate LocalDate required,
+	 endDate LocalDate required,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+    
+}
+entity SchoolEvent {
+	eventName String required,
+	eventDetails String ,
+ 	startDate LocalDate required,
+	 endDate LocalDate required,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+    
+}
+entity SchoolPictureGallery {
+	pictureTitle String required,
+	pictureDescription String ,
+    pictureFile Blob required,
+    pictureLink String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+    
+}
+entity SchoolVideoGallery {
+	videoTitle String required,
+	videoDescription String ,
+    videoFile Blob required,
+    videoLink String,
+    createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+    
+}
+entity SchoolUser {
+    loginName String required,
+    password String required,
+    userEmail String required,
+    extraInfo String ,
+    activated Boolean
+    userType UserType
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity School {
+	groupName String required ,
+	schoolName String required,
+    address String ,
+    afflNumber String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity SchoolClass {
+    className String required,
+    classLongName String ,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity IdStore{
+    entrytype IdType required,
+    lastGeneratedId Long required,
+    startId Long,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity SchoolNotifications  {
+    notificationTitle String required,
+    notificationDetails String required,
+    notificationFile Blob,
+    notificationFileLink String,
+    showTillDate LocalDate ,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity ClassStudent {
+    studentPhoto Blob,
+    studentPhotoLink String,
+	studentId String ,
+	firstName String required,
+	gender Gender ,
+	lastName String ,
+    rollNumber String,
+	phoneNumber String ,
+	bloodGroup BloodGroup,
+    dateOfBirth Instant,
+    startDate LocalDate,
+    addressLine1 String,
+    addressLine2 String,
+    nickName String,
+    fatherName String,
+    motherName String,
+	email String,
+	admissionDate LocalDate,
+    regNumber String,
+    endDate LocalDate,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity SchoolLedgerHead {
+    studentLedgerHeadType SchoolLedgerHeadType  required,
+	ledgerHeadName String required,
+    ledgerHeadLongName String ,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+
+entity ClassFee {
+    feeYear FeeYear required,
+    dueDate Integer required,
+    janFee Double,
+    febFee Double,
+    marFee Double,
+	aprFee Double,
+	mayFee Double,
+    junFee Double,
+    julFee Double,
+    augFee Double,
+	sepFee Double,
+	octFee Double,
+	novFee Double,
+    decFee Double,
+    payByDate LocalDate,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity StudentDiscount {
+    feeYear FeeYear required,
+    dueDate Integer,
+    janFeeDisc Double,
+    febFeeDisc Double,
+    marFeeDisc Double,
+	aprFeeDisc Double,
+	mayFeeDisc Double,
+    junFeeDisc Double,
+    julFeeDisc Double,
+    augFeeDisc Double,
+	sepFeeDisc Double,
+	octFeeDisc Double,
+	novFeeDisc Double,
+    decFeeDisc Double,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity StudentAdditionalCharges {
+    feeYear FeeYear required,
+    dueDate Integer required,
+    janAddChrg Double,
+    febAddChrgc Double,
+    marAddChrg Double,
+	aprAddChrg Double,
+	mayAddChrg Double,
+    junAddChrg Double,
+    julAddChrg Double,
+    augAddChrg Double,
+	sepAddChrg Double,
+	octAddChrg Double,
+	novAddChrg Double,
+    decAddChrg Double,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+
+entity StudentPayments {
+    amountPaid Double required,
+	modeOfPay ModeOfPayment,
+	noteNumbers String,
+    upiId String,
+    remarks String,
+    paymentDate LocalDate ,
+    receiptId String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity StudentAttendence {
+    schoolDate LocalDate required ,
+    attendence Boolean required,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity ClassHomeWork {
+	schoolDate LocalDate  required,
+    studentAssignmentType StudentAssignmentType  required,
+	homeWorkText String required maxlength(1000) ,
+    homeWorkFile Blob,
+    homeWorkFileLink String,
+    assign Boolean,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity ClassClassWork {
+	schoolDate LocalDate  required,
+    studentAssignmentType StudentAssignmentType required,
+	classWorkText String required maxlength(1000) ,
+    classWorkFile Blob,
+    classWorkFileLink String,
+    assign Boolean,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity ClassLessionPlan {
+	schoolDate LocalDate  required,
+    classWorkText String required maxlength(1000) ,
+	homeWorkText String required maxlength(1000) ,
+    workStatus TaskStatus  required,
+    lesionPlanFile Blob,
+    lessionPlanFileLink String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity ClassLessionPlanTrack {
+    workStatus TaskStatus  required,
+    remarks String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity StudentHomeWorkTrack {
+    workStatus WorkStatus  required,
+    remarks String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity StudentClassWorkTrack {
+    workStatus WorkStatus  required,
+    remarks String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity ClassSubject {
+	subjectName String required,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity SubjectChapter {
+	chapterName String required,
+	chapterNumber Integer ,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity ChapterSection {
+	sectionName String required,
+	sectionNumber String ,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity StudentChargesSummary {
+    summaryType String, 
+    feeYear String ,
+    dueDate Integer ,
+	aprSummary String,
+	maySummary String,
+    junSummary String,
+    julSummary String,
+    augSummary String,
+	sepSummary String,
+	octSummary String,
+	novSummary String,
+    decSummary String,
+        janSummary String,
+        febSummary String,
+        marSummary String,
+    additionalInfo1 String,
+    additionalInfo2 String,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+
+entity STRoute{
+        transportRouteName String required,
+        routeCharge Double required,
+        transportRouteAddress String ,
+		contactNumber String,
+        createDate LocalDate,
+	    cancelDate LocalDate,
+		remarks String,
+}
+
+entity STIncomeExpenses {
+    amountPaid Double required,
+        modeOfPay ModeOfPayment,
+        noteNumbers String,
+    upiId String,
+    remarks String,
+    paymentDate LocalDate ,
+    receiptId String,
+        createDate LocalDate,
+        lastModified LocalDate,
+    cancelDate LocalDate,
+	transactionType TransactionType,
+}
+entity Vendors {
+    vendorPhoto Blob,
+    vendorPhotoLink String,
+        vendorId String ,
+        vendorName String required,
+        phoneNumber String ,
+    dateOfBirth Instant,
+    addressLine1 String,
+    addressLine2 String,
+    nickName String,
+        email String,
+        createDate LocalDate,
+    cancelDate LocalDate,
+vendorType VendorType,
+}
+
+entity IncomeExpenses {
+    amountPaid Double required,
+        modeOfPay ModeOfPayment,
+        noteNumbers String,
+    upiId String,
+    remarks String,
+    paymentDate LocalDate ,
+    receiptId String,
+        createDate LocalDate,
+        lastModified LocalDate,
+    cancelDate LocalDate,
+	transactionType TransactionType,
+}
+
+entity Question {
+    questionImportFile Blob,
+	questionText TextBlob,
+    questionImage Blob,
+    answerImage Blob,
+    imageSideBySide Boolean,
+    option1 String,
+    option2 String,
+    option3 String,
+    option4 String,
+    option5 String,
+    status Status,
+    weightage Integer,
+    difficultyLevel Difficulty,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity QuestionPaper {
+	questionPaperFile Blob,
+	questionPaperName String,
+	mainTitle String,
+    subTitle String,
+    leftSubHeading1 String,
+    leftSubHeading2 String,
+    rightSubHeading1 String,
+    rightSubHeading2 String,
+    instructions String,
+    footerText String,
+    totalMarks Integer,
+ 	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity QuestionType {
+	questionType String,
+    marks Integer,
+	createDate LocalDate,
+	lastModified LocalDate,
+  	cancelDate LocalDate
+}
+entity Tenant{
+	tenantName String,
+    tenantLogo Blob,
+	createDate LocalDate,
+	lastModified LocalDate,
+  	cancelDate LocalDate
+}
+entity Tag{
+	tagText String,
+    tagLevel TagLevel,
+	createDate LocalDate,
+	lastModified LocalDate,
+  	cancelDate LocalDate
+}
+
+enum Status {
+    DRAFT, INPROGRESS, PUBLISHED, ONLINE
+}
+enum TagLevel {
+    FIRST, SECOND, THIRD, FOURTH, FIFTH
+}
+enum Difficulty {
+    EASY, MEDIUM, HARD
+}
+
+
+enum IdType {
+    STUDENT, RECEIPT, EXAMID, VOUCHERID
+}
+enum SchoolLedgerHeadType {
+    FEE, ADMITION, EXIT, FINE
+}
+enum TaskStatus {
+    NotStarted, InProgress, OnTrack, OffTrack
+}
+enum WorkStatus {
+    Done, NotDone
+}
+
+enum StudentAssignmentType {
+    READING_WRITING, PROJECT
+}
+enum FeeYear {
+    YEAR_2021, YEAR_2022, YEAR_2022
+}
+enum ModeOfPayment {
+    CASH, UPI
+}
+enum UserType {
+    STUDENT, TEACHER, PARENT, NONTEACHER
+}
+enum DayOffType {
+    WEEKEND, VACATION, PUBLIC_HOLIDAY, EMERGENCY
+}
+enum ReportType {
+    FEE_COLLECTION, FEE_DUE
+}
+enum Gender {
+    FEMALE, MALE, OTHER, WONT_DECLARE
+}
+enum BloodGroup {
+    A_Pos, A_Neg, B_Pos, B_Neg, AB_Pos, AB_Neg, O_Pos, O_Neg, DO_NOT_KNOW
+}
+
+enum VendorType {
+    EXTERNAL, INTERNAL
+}
+enum TransactionType {
+    EXPENSE, INCOME
+}
+
+
+relationship OneToMany {
+    Vendors to IncomeExpenses{vendor},
+    SchoolLedgerHead to IncomeExpenses {ledgerHead},
+
+	ClassStudent to STIncomeExpenses{classStudent},
+    STRoute to STIncomeExpenses{stRoute},
+    Vendors to STIncomeExpenses{operatedBy},
+
+    School to SchoolClass{school},
+    School to SchoolLedgerHead{school},
+    School to IdStore{school}
+    School to AuditLog{school}
+   
+    SchoolClass to ClassStudent{schoolClass},
+    
+    ClassSubject to SubjectChapter{classSubject},
+    SubjectChapter to ChapterSection{subjectChapter},
+    
+    SchoolLedgerHead to ClassFee{schoolLedgerHead},
+    
+    SchoolLedgerHead to StudentDiscount{schoolLedgerHead}
+	ClassStudent to StudentDiscount{classStudent},
+
+    SchoolLedgerHead to StudentAdditionalCharges{schoolLedgerHead}
+	ClassStudent to StudentAdditionalCharges{classStudent},
+    
+    SchoolLedgerHead to StudentChargesSummary{schoolLedgerHead}
+    ClassStudent to StudentChargesSummary{classStudent},
+
+    ClassStudent to StudentPayments{classStudent},
+    ClassStudent to StudentAttendence{classStudent},
+
+ 
+    ChapterSection to ClassHomeWork{chapterSection},
+    ChapterSection to ClassClassWork{chapterSection},
+    ChapterSection to ClassLessionPlan{chapterSection},
+    
+    //Just to generate sample for filtering class, subject, chapter and section
+    SchoolClass to ClassLessionPlan{schoolClass},
+    ClassSubject to ClassLessionPlan{classSubject},
+    SubjectChapter to ClassLessionPlan{subjectChapter},
+    ChapterSection to ClassLessionPlan{chapterSection},
+    ClassLessionPlan to ClassLessionPlanTrack{classLessionPlan},
+   
+    ClassStudent to StudentHomeWorkTrack{classStudent},
+    ClassHomeWork to StudentHomeWorkTrack{classHomeWork},
+      
+    ClassStudent to StudentClassWorkTrack{classStudent},
+    ClassClassWork to StudentClassWorkTrack{classClassWork},
+	QuestionType to Question{questionType}
+    Tenant to Question{tenant}
+    Tenant to QuestionType{tenant}
+    Tenant to QuestionPaper{tenant}
+    Tenant to Tag{tenant}
+    
+    //Having the relation ship duplicate here makes the querying easy ..get all question for a class, then this will need
+    //trnversing from chapter to all the subjects and then to class
+    SchoolClass to Question{schoolClass},
+    ClassSubject to Question{classSubject},
+    SubjectChapter to Question{subjectChapter},
+
+    SchoolClass to QuestionPaper{schoolClass},
+    ClassSubject to QuestionPaper{classSubject},
+    
+
+}
+relationship ManyToMany {
+	SchoolNotifications{schoolClass(className)} to SchoolClass{schoolNotifications}
+	ClassFee{schoolClass(className)} to SchoolClass{classFee}
+	ClassSubject{schoolClass(className)} to SchoolClass{classSubject}
+	SchoolUser{schoolClass(className)} to SchoolClass{schoolUser}
+	SchoolUser{classSubject(subjectName)} to ClassSubject{schoolUser}
+	SchoolDaysOff{schoolClass(className)} to SchoolClass{schoolDaysOff}
+	SchoolEvent{schoolClass(className)} to SchoolClass{schoolEvent}
+	SchoolPictureGallery{schoolClass(className)} to SchoolClass{schoolPictureGallery}
+	SchoolVideoGallery{schoolClass(className)} to SchoolClass{vchoolVideoGallery}
+	SchoolReport{schoolClass(className)} to SchoolClass{schoolReport}
+	QuestionPaper{question(question)} to Question{questionPaper}
+    QuestionPaper{tag(tag)} to Tag{questionPaper}
+    Question{tag(tag)} to Tag{question}
+	
+}
+
+
+// Set pagination options
+paginate AuditLog, SchoolClass, ClassStudent, ClassHomeWork, ClassClassWork, ClassLessionPlan, ClassLessionPlanTrack, StudentHomeWorkTrack, StudentClassWorkTrack, ClassSubject, SubjectChapter, ChapterSection, 
+ SchoolPictureGallery, SchoolVideoGallery, SchoolReport, AuditLog, SchoolUser, Tag, QuestionType, Question, QuestionPaper, SchoolNotifications, StudentChargesSummary, STRoute, STIncomeExpenses with pagination
+
+// Use Data Transfer Objects (DTO)
+ // dto * with mapstruct
+
+// Set service options to all except few
+service * with serviceClass
+
+filter AuditLog, SchoolUser, School, SchoolClass, IdStore, SchoolNotifications, ClassStudent, SchoolLedgerHead, ClassFee, StudentDiscount, StudentAdditionalCharges, StudentPayments, 
+StudentAttendence, ClassHomeWork, ClassClassWork, ClassLessionPlan, ClassLessionPlanTrack, StudentHomeWorkTrack, StudentClassWorkTrack, ClassSubject, SubjectChapter, ChapterSection, SchoolDaysOff, 
+SchoolEvent, SchoolPictureGallery, SchoolVideoGallery, SchoolReport, StudentChargesSummary, STIncomeExpenses, STRoute,  Tag, QuestionType, Question, QuestionPaper
+

@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sTRoute">
+      <h2 data-cy="sTRouteDetailsHeading"><span jhiTranslate="manageitApp.sTRoute.detail.title">ST Route</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ sTRoute.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTRoute.transportRouteName">Transport Route Name</span></dt>
+        <dd>
+          <span>{{ sTRoute.transportRouteName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTRoute.routeCharge">Route Charge</span></dt>
+        <dd>
+          <span>{{ sTRoute.routeCharge }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTRoute.transportRouteAddress">Transport Route Address</span></dt>
+        <dd>
+          <span>{{ sTRoute.transportRouteAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTRoute.contactNumber">Contact Number</span></dt>
+        <dd>
+          <span>{{ sTRoute.contactNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTRoute.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ sTRoute.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTRoute.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ sTRoute.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTRoute.remarks">Remarks</span></dt>
+        <dd>
+          <span>{{ sTRoute.remarks }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/st-route', sTRoute.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

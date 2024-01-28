@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="vendors">
+      <h2 data-cy="vendorsDetailsHeading"><span jhiTranslate="manageitApp.vendors.detail.title">Vendors</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ vendors.id }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.vendors.vendorPhoto">Vendor Photo</span></dt> -->
+<!--         <dd> -->
+<!--           <div *ngIf="vendors.vendorPhoto"> -->
+<!--             <a (click)="openFile(vendors.vendorPhoto, vendors.vendorPhotoContentType)" jhiTranslate="entity.action.open">open</a> -->
+<!--             {{ vendors.vendorPhotoContentType }}, {{ byteSize(vendors.vendorPhoto) }} -->
+<!--           </div> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.vendors.vendorPhotoLink">Vendor Photo Link</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ vendors.vendorPhotoLink }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.vendors.vendorId">Vendor Id</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ vendors.vendorId }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.vendors.vendorName">Vendor Name</span></dt> -->
+        <dd>
+          <span>{{ vendors.vendorName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.vendors.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ vendors.phoneNumber }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.vendors.dateOfBirth">Date Of Birth</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ vendors.dateOfBirth | formatMediumDatetime }}</span> -->
+<!--         </dd> -->
+        <dt><span jhiTranslate="manageitApp.vendors.addressLine1">Address Line 1</span></dt>
+        <dd>
+          <span>{{ vendors.addressLine1 }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.vendors.addressLine2">Address Line 2</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ vendors.addressLine2 }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.vendors.nickName">Nick Name</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ vendors.nickName }}</span> -->
+<!--         </dd> -->
+        <dt><span jhiTranslate="manageitApp.vendors.email">Email</span></dt>
+        <dd>
+          <span>{{ vendors.email }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.vendors.createDate">Create Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ vendors.createDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.vendors.cancelDate">Cancel Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ vendors.cancelDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+        <dt><span jhiTranslate="manageitApp.vendors.vendorType">Vendor Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.VendorType.' + vendors.vendorType }}">{{ vendors.vendorType }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/vendors', vendors.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

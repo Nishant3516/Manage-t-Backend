@@ -1,0 +1,11 @@
+{
+  "manageitApp": {
+    "UserType": {
+      "null": "",
+      "STUDENT": "STUDENT",
+      "TEACHER": "TEACHER",
+      "PARENT": "PARENT",
+      "NONTEACHER": "NONTEACHER"
+    }
+  }
+}

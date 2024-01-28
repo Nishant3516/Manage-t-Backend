@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolPictureGallery">
+      <h2 data-cy="schoolPictureGalleryDetailsHeading">
+        <span jhiTranslate="manageitApp.schoolPictureGallery.detail.title">School Picture Gallery</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolPictureGallery.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.pictureTitle">Picture Title</span></dt>
+        <dd>
+          <span>{{ schoolPictureGallery.pictureTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.pictureDescription">Picture Description</span></dt>
+        <dd>
+          <span>{{ schoolPictureGallery.pictureDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.pictureFile">Picture File</span></dt>
+        <dd>
+          <div *ngIf="schoolPictureGallery.pictureFile">
+            <a
+              (click)="openFile(schoolPictureGallery.pictureFile, schoolPictureGallery.pictureFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ schoolPictureGallery.pictureFileContentType }}, {{ byteSize(schoolPictureGallery.pictureFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.pictureLink">Picture Link</span></dt>
+        <dd>
+          <span>{{ schoolPictureGallery.pictureLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolPictureGallery.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolPictureGallery.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolPictureGallery.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolPictureGallery.schoolClass">School Class</span></dt>
+        <dd>
+          <span *ngFor="let schoolClass of schoolPictureGallery.schoolClasses; let last = last">
+            <a [routerLink]="['/school-class', schoolClass?.id, 'view']">{{ schoolClass.className }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school-picture-gallery', schoolPictureGallery.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

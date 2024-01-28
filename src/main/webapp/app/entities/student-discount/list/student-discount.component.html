@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="StudentDiscountHeading">
+    <span jhiTranslate="manageitApp.studentDiscount.home.title">Student Discounts</span>
+
+    <div class="d-flex justify-content-end">
+<!--       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.studentDiscount.home.refreshListLabel">Refresh List</span> -->
+<!--       </button> -->
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-student-discount"
+        [routerLink]="['/student-discount/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.studentDiscount.home.createLabel"> Create a new Student Discount </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="studentDiscounts?.length === 0">
+    <span jhiTranslate="manageitApp.studentDiscount.home.notFound">No studentDiscounts found</span>
+  </div>
+  <!-- This is to fetch all classes for a school and then to fetch all students in that class , this will be modularised later, JS is modular, for UI there is some issue -->
+  <div class="d-flex flex-row">
+    <select
+      class="form-control"
+      id="field_studentClass"
+      data-cy="studentClass"
+      [(ngModel)]="selectedClassId"
+      (change)="loadAllStudentsForAClass()"
+      name="schoolClassFilter"
+    >
+      <option [ngValue]="undefined" hidden>Select Class</option>
+      <option *ngFor="let studentClassOption of schoolClasses; trackBy: trackFilterClassById" [ngValue]="studentClassOption.id">
+        {{ studentClassOption.className }}
+      </option>
+    </select>
+  </div>
+  <div class="d-flex flex-row">
+    <select
+      class="form-control"
+      id="field_schoolStudent"
+      data-cy="schoolStudent"
+      [(ngModel)]="selectedStudentId"
+      (change)="loadDiscountsForAStudent()"
+      name="classStudentFilter"
+    >
+      <option [ngValue]="undefined" hidden>Select Student</option>
+      <option *ngFor="let schoolStudentOption of classStudentsForAClass; trackBy: trackFilterStudentId" [ngValue]="schoolStudentOption.id">
+        {{ schoolStudentOption.studentId }} -- {{ schoolStudentOption.firstName }}
+      </option>
+    </select>
+  </div>
+  <!-- School class and class student filter ends here -->
+
+  <div class="table-responsive" id="entities" *ngIf="studentDiscounts && studentDiscounts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.classStudent">Class Student</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.feeYear">Fee Year</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.dueDate">Due Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.schoolLedgerHead">School Ledger Head</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.aprFeeDisc">Apr Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.mayFeeDisc">May Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.junFeeDisc">Jun Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.julFeeDisc">Jul Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.augFeeDisc">Aug Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.sepFeeDisc">Sep Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.octFeeDisc">Oct Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.novFeeDisc">Nov Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.decFeeDisc">Dec Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.janFeeDisc">Jan Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.febFeeDisc">Feb Fee Disc</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentDiscount.marFeeDisc">Mar Fee Disc</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let studentDiscount of studentDiscounts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <div *ngIf="studentDiscount.classStudent">
+              <a [routerLink]="['/class-student', studentDiscount.classStudent?.id, 'view']"
+                >{{ studentDiscount.classStudent.schoolClass?.className }} -- {{ studentDiscount.classStudent?.studentId }} --{{
+                  studentDiscount.classStudent?.firstName
+                }}
+              </a>
+            </div>
+          </td>
+          <td jhiTranslate="{{ 'manageitApp.FeeYear.' + studentDiscount.feeYear }}">{{ studentDiscount.feeYear }}</td>
+          <td>{{ studentDiscount.dueDate }}</td>
+          <td>
+            <div *ngIf="studentDiscount.schoolLedgerHead">
+              <a [routerLink]="['/school-ledger-head', studentDiscount.schoolLedgerHead?.id, 'view']">{{
+                studentDiscount.schoolLedgerHead?.ledgerHeadName
+              }}</a>
+            </div>
+          </td>
+          <td>{{ studentDiscount.aprFeeDisc }}</td>
+          <td>{{ studentDiscount.mayFeeDisc }}</td>
+          <td>{{ studentDiscount.junFeeDisc }}</td>
+          <td>{{ studentDiscount.julFeeDisc }}</td>
+          <td>{{ studentDiscount.augFeeDisc }}</td>
+          <td>{{ studentDiscount.sepFeeDisc }}</td>
+          <td>{{ studentDiscount.octFeeDisc }}</td>
+          <td>{{ studentDiscount.novFeeDisc }}</td>
+          <td>{{ studentDiscount.decFeeDisc }}</td>
+          <td>{{ studentDiscount.janFeeDisc }}</td>
+          <td>{{ studentDiscount.febFeeDisc }}</td>
+          <td>{{ studentDiscount.marFeeDisc }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/student-discount', studentDiscount.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/student-discount', studentDiscount.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(studentDiscount)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-class-lession-plan-track-heading"
+        data-cy="ClassLessionPlanTrackCreateUpdateHeading"
+        jhiTranslate="manageitApp.classLessionPlanTrack.home.createOrEditLabel"
+      >
+        Create or edit a Class Lession Plan Track
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlanTrack.workStatus" for="field_workStatus"
+            >Work Status</label
+          >
+          <select class="form-control" name="workStatus" formControlName="workStatus" id="field_workStatus" data-cy="workStatus">
+            <option [ngValue]="null">{{ 'manageitApp.TaskStatus.null' | translate }}</option>
+            <option value="NotStarted">{{ 'manageitApp.TaskStatus.NotStarted' | translate }}</option>
+            <option value="InProgress">{{ 'manageitApp.TaskStatus.InProgress' | translate }}</option>
+            <option value="OnTrack">{{ 'manageitApp.TaskStatus.OnTrack' | translate }}</option>
+            <option value="OffTrack">{{ 'manageitApp.TaskStatus.OffTrack' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('workStatus')!.invalid && (editForm.get('workStatus')!.dirty || editForm.get('workStatus')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('workStatus')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlanTrack.remarks" for="field_remarks">Remarks</label>
+          <input type="text" class="form-control" name="remarks" id="field_remarks" data-cy="remarks" formControlName="remarks" />
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlanTrack.createDate" for="field_createDate" -->
+<!--             >Create Date</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_createDate" -->
+<!--               data-cy="createDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="createDate" -->
+<!--               ngbDatepicker -->
+<!--               #createDateDp="ngbDatepicker" -->
+<!--               formControlName="createDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlanTrack.lastModified" for="field_lastModified" -->
+<!--             >Last Modified</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_lastModified" -->
+<!--               data-cy="lastModified" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="lastModified" -->
+<!--               ngbDatepicker -->
+<!--               #lastModifiedDp="ngbDatepicker" -->
+<!--               formControlName="lastModified" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlanTrack.cancelDate" for="field_cancelDate" -->
+<!--             >Cancel Date</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_cancelDate" -->
+<!--               data-cy="cancelDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="cancelDate" -->
+<!--               ngbDatepicker -->
+<!--               #cancelDateDp="ngbDatepicker" -->
+<!--               formControlName="cancelDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlanTrack.classLessionPlan" for="field_classLessionPlan"
+            >Class Lession Plan</label
+          >
+          <select
+            class="form-control"
+            id="field_classLessionPlan"
+            data-cy="classLessionPlan"
+            name="classLessionPlan"
+            formControlName="classLessionPlan"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                classLessionPlanOption.id === editForm.get('classLessionPlan')!.value?.id
+                  ? editForm.get('classLessionPlan')!.value
+                  : classLessionPlanOption
+              "
+              *ngFor="let classLessionPlanOption of classLessionPlansSharedCollection; trackBy: trackClassLessionPlanById"
+            >
+              {{ classLessionPlanOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

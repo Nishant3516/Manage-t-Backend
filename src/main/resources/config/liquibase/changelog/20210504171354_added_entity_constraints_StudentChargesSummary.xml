@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity StudentChargesSummary.
+    -->
+    <changeSet id="20210504171354-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="school_ledger_head_id"
+                                 baseTableName="student_charges_summary"
+                                 constraintName="fk_student_charges_summary__school_ledger_head_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_ledger_head"/>
+
+        <addForeignKeyConstraint baseColumnNames="class_student_id"
+                                 baseTableName="student_charges_summary"
+                                 constraintName="fk_student_charges_summary__class_student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_student"/>
+    </changeSet>
+</databaseChangeLog>

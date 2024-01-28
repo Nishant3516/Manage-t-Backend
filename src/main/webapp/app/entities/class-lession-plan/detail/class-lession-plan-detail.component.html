@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="classLessionPlan">
+      <h2 data-cy="classLessionPlanDetailsHeading">
+        <span jhiTranslate="manageitApp.classLessionPlan.detail.title">Class Lession Plan</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.schoolDate">School Date</span></dt>
+        <dd>
+          <span>{{ classLessionPlan.schoolDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.schoolClass">School Class</span></dt>
+        <dd>
+          <div *ngIf="classLessionPlan.schoolClass">
+            <a [routerLink]="['/school-class', classLessionPlan.schoolClass?.id, 'view']">{{ classLessionPlan.schoolClass?.className }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.classSubject">Class Subject</span></dt>
+        <dd>
+          <div *ngIf="classLessionPlan.classSubject">
+            <a [routerLink]="['/class-subject', classLessionPlan.classSubject?.id, 'view']">{{ classLessionPlan.classSubject?.subjectName }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.subjectChapter">Subject Chapter</span></dt>
+        <dd>
+          <div *ngIf="classLessionPlan.subjectChapter">
+            <a [routerLink]="['/subject-chapter', classLessionPlan.subjectChapter?.id, 'view']">{{
+              classLessionPlan.subjectChapter?.chapterName
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.chapterSection">Chapter Section</span></dt>
+        <dd>
+          <div *ngIf="classLessionPlan.chapterSection">
+            <a [routerLink]="['/chapter-section', classLessionPlan.chapterSection?.id, 'view']">{{
+              classLessionPlan.chapterSection?.sectionName
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.classWorkText">Class Work Text</span></dt>
+        <dd>
+          <span>{{ classLessionPlan.classWorkText }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.homeWorkText">Home Work Text</span></dt>
+        <dd>
+          <span>{{ classLessionPlan.homeWorkText }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.workStatus">Work Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.TaskStatus.' + classLessionPlan.workStatus }}">{{ classLessionPlan.workStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.lesionPlanFile">Lesion Plan File</span></dt>
+        <dd>
+          <div *ngIf="classLessionPlan.lesionPlanFile">
+            <a
+              (click)="openFile(classLessionPlan.lesionPlanFile, classLessionPlan.lesionPlanFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ classLessionPlan.lesionPlanFileContentType }}, {{ byteSize(classLessionPlan.lesionPlanFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classLessionPlan.lessionPlanFileLink">Lession Plan File Link</span></dt>
+        <dd>
+          <span>{{ classLessionPlan.lessionPlanFileLink }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.classLessionPlan.createDate">Create Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ classLessionPlan.createDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.classLessionPlan.lastModified">Last Modified</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ classLessionPlan.lastModified | formatMediumDate }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.classLessionPlan.cancelDate">Cancel Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ classLessionPlan.cancelDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/class-lession-plan', classLessionPlan.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,306 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <!-- This is to fetch all classes for a school and then to fetch all students in that class , this will be modularised later, JS is modular, for UI there is some issue -->
+    <div class="d-flex flex-row">
+      <select
+        class="form-control-filter"
+        id="field_studentClass_filter"
+        data-cy="studentClass_filter"
+        [(ngModel)]="selectedClassId"
+        (change)="loadAllStudentsForAClass()"
+        name="schoolClassFilter"
+      >
+        <option [ngValue]="undefined" hidden>Select Class</option>
+        <option *ngFor="let studentClassOption of schoolClasses; trackBy: trackFilterClassById" [ngValue]="studentClassOption.id">
+          {{ studentClassOption.id }} -- {{ studentClassOption.className }}
+        </option>
+      </select>
+    </div>
+    <!-- School class and class student filter ends here -->
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-student-additional-charges-heading"
+        data-cy="StudentAdditionalChargesCreateUpdateHeading"
+        jhiTranslate="manageitApp.studentAdditionalCharges.home.createOrEditLabel"
+      >
+        Create or edit a Student Additional Charges
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.classStudent" for="field_classStudent"
+            >Class Student</label
+          >
+          <select class="form-control" id="field_classStudent" data-cy="classStudent" name="classStudent" formControlName="classStudent">
+            <option [ngValue]="undefined" hidden>Select Student</option>
+            <option
+              [ngValue]="
+                classStudentOption.id === editForm.get('classStudent')!.value?.id ? editForm.get('classStudent')!.value : classStudentOption
+              "
+              *ngFor="let classStudentOption of classStudentsSharedCollection; trackBy: trackClassStudentById"
+            >
+              {{ classStudentOption.studentId }} -- {{ classStudentOption.firstName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.feeYear" for="field_feeYear">Fee Year</label>
+          <select class="form-control" name="feeYear" formControlName="feeYear" id="field_feeYear" data-cy="feeYear">
+            <option [ngValue]="undefined" hidden>Select Session</option>
+<!--             <option value="YEAR_2021">{{ 'manageitApp.FeeYear.YEAR_2021' | translate }}</option> -->
+            <option value="YEAR_2023">{{ 'manageitApp.FeeYear.YEAR_2023' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('feeYear')!.invalid && (editForm.get('feeYear')!.dirty || editForm.get('feeYear')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('feeYear')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.dueDate" for="field_dueDate">Due Date</label>
+          <input type="number" class="form-control" name="dueDate" id="field_dueDate" data-cy="dueDate" formControlName="dueDate" />
+          <div *ngIf="editForm.get('dueDate')!.invalid && (editForm.get('dueDate')!.dirty || editForm.get('dueDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dueDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dueDate')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="manageitApp.studentAdditionalCharges.schoolLedgerHead"
+            for="field_schoolLedgerHead"
+            >School Ledger Head</label
+          >
+          <select
+            class="form-control"
+            id="field_schoolLedgerHead"
+            data-cy="schoolLedgerHead"
+            name="schoolLedgerHead"
+            formControlName="schoolLedgerHead"
+          >
+            <option [ngValue]="undefined" hidden>Select Ledger Head</option>
+            <option
+              [ngValue]="
+                schoolLedgerHeadOption.id === editForm.get('schoolLedgerHead')!.value?.id
+                  ? editForm.get('schoolLedgerHead')!.value
+                  : schoolLedgerHeadOption
+              "
+              *ngFor="let schoolLedgerHeadOption of schoolLedgerHeadsSharedCollection; trackBy: trackSchoolLedgerHeadById"
+            >
+              {{ schoolLedgerHeadOption.ledgerHeadName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.aprAddChrg" for="field_aprAddChrg"
+            >Apr Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="aprAddChrg"
+            id="field_aprAddChrg"
+            data-cy="aprAddChrg"
+            formControlName="aprAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.mayAddChrg" for="field_mayAddChrg"
+            >May Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="mayAddChrg"
+            id="field_mayAddChrg"
+            data-cy="mayAddChrg"
+            formControlName="mayAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.junAddChrg" for="field_junAddChrg"
+            >Jun Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="junAddChrg"
+            id="field_junAddChrg"
+            data-cy="junAddChrg"
+            formControlName="junAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.julAddChrg" for="field_julAddChrg"
+            >Jul Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="julAddChrg"
+            id="field_julAddChrg"
+            data-cy="julAddChrg"
+            formControlName="julAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.augAddChrg" for="field_augAddChrg"
+            >Aug Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="augAddChrg"
+            id="field_augAddChrg"
+            data-cy="augAddChrg"
+            formControlName="augAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.sepAddChrg" for="field_sepAddChrg"
+            >Sep Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="sepAddChrg"
+            id="field_sepAddChrg"
+            data-cy="sepAddChrg"
+            formControlName="sepAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.octAddChrg" for="field_octAddChrg"
+            >Oct Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="octAddChrg"
+            id="field_octAddChrg"
+            data-cy="octAddChrg"
+            formControlName="octAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.novAddChrg" for="field_novAddChrg"
+            >Nov Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="novAddChrg"
+            id="field_novAddChrg"
+            data-cy="novAddChrg"
+            formControlName="novAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.decAddChrg" for="field_decAddChrg"
+            >Dec Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="decAddChrg"
+            id="field_decAddChrg"
+            data-cy="decAddChrg"
+            formControlName="decAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.janAddChrg" for="field_janAddChrg"
+            >Jan Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="janAddChrg"
+            id="field_janAddChrg"
+            data-cy="janAddChrg"
+            formControlName="janAddChrg"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.febAddChrgc" for="field_febAddChrgc"
+            >Feb Add Chrgc</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="febAddChrgc"
+            id="field_febAddChrgc"
+            data-cy="febAddChrgc"
+            formControlName="febAddChrgc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentAdditionalCharges.marAddChrg" for="field_marAddChrg"
+            >Mar Add Chrg</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="marAddChrg"
+            id="field_marAddChrg"
+            data-cy="marAddChrg"
+            formControlName="marAddChrg"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

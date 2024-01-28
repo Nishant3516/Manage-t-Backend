@@ -1,0 +1,37 @@
+{
+  "manageitApp": {
+    "classLessionPlan": {
+      "home": {
+        "title": "Lession Plans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Lession Plan",
+        "createOrEditLabel": "Create or edit a Lession Plan",
+        "notFound": "No Lession Plans found"
+      },
+      "created": "A new Lession Plan is created with identifier {{ param }}",
+      "updated": "A Lession Plan is updated with identifier {{ param }}",
+      "deleted": "A Lession Plan is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Lession Plan {{ id }}?"
+      },
+      "detail": {
+        "title": "Lession Plan"
+      },
+      "id": "ID",
+      "schoolDate": "Date",
+      "classWorkText": "Work Text",
+      "homeWorkText": "Home Work Text",
+      "workStatus": "Work Status",
+      "lesionPlanFile": "Lesion Plan File",
+      "lessionPlanFileLink": "Lession Plan File Link",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classLessionPlanTrack": "Track Lession Plan",
+      "chapterSection": "Chapter Section",
+      "schoolClass": "Class",
+      "classSubject": "Subject",
+      "subjectChapter": "Subject Chapter"
+    }
+  }
+}

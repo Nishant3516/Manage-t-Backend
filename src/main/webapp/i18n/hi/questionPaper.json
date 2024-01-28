@@ -1,0 +1,43 @@
+{
+  "manageitApp": {
+    "questionPaper": {
+      "home": {
+        "title": "QuestionPapers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Question Paper बनाएँ",
+        "createOrEditLabel": "Question Paper बनाएँ या संपादित करें",
+        "notFound": "No Question Papers found"
+      },
+      "created": "एक नया Question Paper [identifier: {{ param }}] तैयार है",
+      "updated": "एक Question Paper [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Question Paper [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Question Paper [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Question Paper"
+      },
+      "id": "ID",
+      "tenatLogo": "Tenat Logo",
+      "questionPaperFile": "Question Paper File",
+      "questionPaperName": "Question Paper Name",
+      "mainTitle": "Main Title",
+      "subTitle": "Sub Title",
+      "leftSubHeading1": "Left Sub Heading 1",
+      "leftSubHeading2": "Left Sub Heading 2",
+      "rightSubHeading1": "Right Sub Heading 1",
+      "rightSubHeading2": "Right Sub Heading 2",
+      "instructions": "Instructions",
+      "footerText": "Footer Text",
+      "totalMarks": "Total Marks",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "question": "Question",
+      "tag": "Tag",
+      "tenant": "Tenant",
+      "schoolClass": "School Class",
+      "classSubject": "Class Subject"
+    }
+  }
+}

@@ -1,0 +1,177 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-class-fee-heading" data-cy="ClassFeeCreateUpdateHeading" jhiTranslate="manageitApp.classFee.home.createOrEditLabel">
+        Create or edit a Class Fee
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.feeYear" for="field_feeYear">Fee Year</label>
+          <select class="form-control" name="feeYear" formControlName="feeYear" id="field_feeYear" data-cy="feeYear">
+            <option [ngValue]="undefined" hidden>Select Session</option>
+<!--             <option value="YEAR_2021">{{ 'manageitApp.FeeYear.YEAR_2021' | translate }}</option> -->
+            <option value="YEAR_2023">{{ 'manageitApp.FeeYear.YEAR_2023' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('feeYear')!.invalid && (editForm.get('feeYear')!.dirty || editForm.get('feeYear')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('feeYear')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.dueDate" for="field_dueDate">Due Date</label>
+          <input type="number" class="form-control" name="dueDate" id="field_dueDate" data-cy="dueDate" formControlName="dueDate" />
+          <div *ngIf="editForm.get('dueDate')!.invalid && (editForm.get('dueDate')!.dirty || editForm.get('dueDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dueDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dueDate')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.schoolLedgerHead" for="field_schoolLedgerHead"
+            >School Ledger Head</label
+          >
+          <select
+            class="form-control"
+            id="field_schoolLedgerHead"
+            data-cy="schoolLedgerHead"
+            name="schoolLedgerHead"
+            formControlName="schoolLedgerHead"
+          >
+            <option [ngValue]="undefined" hidden>Select Ledger Head</option>
+            <option
+              [ngValue]="
+                schoolLedgerHeadOption.id === editForm.get('schoolLedgerHead')!.value?.id
+                  ? editForm.get('schoolLedgerHead')!.value
+                  : schoolLedgerHeadOption
+              "
+              *ngFor="let schoolLedgerHeadOption of schoolLedgerHeadsSharedCollection; trackBy: trackSchoolLedgerHeadById"
+            >
+              {{ schoolLedgerHeadOption.ledgerHeadName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="manageitApp.classFee.schoolClass" for="field_schoolClasses">School Class</label>
+          <select
+            class="form-control"
+            id="field_schoolClasses"
+            data-cy="schoolClass"
+            multiple
+            name="schoolClasses"
+            formControlName="schoolClasses"
+          >
+            <option
+              [ngValue]="getSelectedSchoolClass(schoolClassOption, editForm.get('schoolClasses')!.value)"
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.aprFee" for="field_aprFee">Apr Fee</label>
+          <input type="number" class="form-control" name="aprFee" id="field_aprFee" data-cy="aprFee" formControlName="aprFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.mayFee" for="field_mayFee">May Fee</label>
+          <input type="number" class="form-control" name="mayFee" id="field_mayFee" data-cy="mayFee" formControlName="mayFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.junFee" for="field_junFee">Jun Fee</label>
+          <input type="number" class="form-control" name="junFee" id="field_junFee" data-cy="junFee" formControlName="junFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.julFee" for="field_julFee">Jul Fee</label>
+          <input type="number" class="form-control" name="julFee" id="field_julFee" data-cy="julFee" formControlName="julFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.augFee" for="field_augFee">Aug Fee</label>
+          <input type="number" class="form-control" name="augFee" id="field_augFee" data-cy="augFee" formControlName="augFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.sepFee" for="field_sepFee">Sep Fee</label>
+          <input type="number" class="form-control" name="sepFee" id="field_sepFee" data-cy="sepFee" formControlName="sepFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.octFee" for="field_octFee">Oct Fee</label>
+          <input type="number" class="form-control" name="octFee" id="field_octFee" data-cy="octFee" formControlName="octFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.novFee" for="field_novFee">Nov Fee</label>
+          <input type="number" class="form-control" name="novFee" id="field_novFee" data-cy="novFee" formControlName="novFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.decFee" for="field_decFee">Dec Fee</label>
+          <input type="number" class="form-control" name="decFee" id="field_decFee" data-cy="decFee" formControlName="decFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.janFee" for="field_janFee">Jan Fee</label>
+          <input type="number" class="form-control" name="janFee" id="field_janFee" data-cy="janFee" formControlName="janFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.febFee" for="field_febFee">Feb Fee</label>
+          <input type="number" class="form-control" name="febFee" id="field_febFee" data-cy="febFee" formControlName="febFee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classFee.marFee" for="field_marFee">Mar Fee</label>
+          <input type="number" class="form-control" name="marFee" id="field_marFee" data-cy="marFee" formControlName="marFee" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

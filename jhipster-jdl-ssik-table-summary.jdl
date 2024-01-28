@@ -1,0 +1,67 @@
+entity AuditLog 
+entity ChapterSection 
+entity ClassClassWork 
+entity ClassFee 
+entity ClassHomeWork 
+entity ClassLessionPlan 
+entity ClassLessionPlanTrack 
+entity ClassStudent 
+entity ClassSubject 
+entity IdStore
+entity IncomeExpenses 
+entity School 
+entity SchoolClass 
+entity SchoolDaysOff 
+entity SchoolEvent 
+entity SchoolLedgerHead 
+entity SchoolNotifications  
+entity SchoolPictureGallery 
+entity SchoolReport 
+entity SchoolUser 
+entity SchoolVideoGallery 
+entity STIncomeExpenses 
+entity STRoute
+entity StudentAdditionalCharges 
+entity StudentAttendence 
+entity StudentChargesSummary 
+entity StudentClassWorkTrack 
+entity StudentDiscount 
+entity StudentHomeWorkTrack 
+entity StudentPayments 
+entity SubjectChapter 
+entity Vendors
+
+
+
+    
+    School to AuditLog{school}
+    School to ChapterSection{school},
+    School to ClassClassWork{school},
+    School to ClassFee{school}
+    School to ClassHomeWork{school}
+    School to ClassLessionPlan{school}
+    School to ClassLessionPlanTrack{school}
+    School to ClassStudent{school}
+    School to ClassSubject{school}
+    School to IdStore{school}
+    School to IncomeExpenses{school}
+    School to SchoolClass{school}
+    School to SchoolDaysOff{school}
+    School to SchoolEvent{school}
+    School to SchoolLedgerHead{school}
+    School to SchoolNotifications{school}
+    School to SchoolPictureGallery{school}
+    School to SchoolReport{school}
+    School to SchoolUser{school}
+    School to SchoolVideoGallery{school}
+	School to STIncomeExpenses{school}
+	School to STRoute{school}
+	School to StudentAdditionalCharges{school}
+	School to StudentAttendence{school}
+	School to StudentChargesSummary{school}
+	School to StudentClassWorkTrack{school}
+	School to StudentDiscount{school}
+	School to StudentHomeWorkTrack{school}
+	School to StudentPayments{school}
+	School to SubjectChapter{school}
+	School to Vendors{school}

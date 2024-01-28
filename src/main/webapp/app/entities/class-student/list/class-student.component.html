@@ -1,0 +1,128 @@
+<div>
+  <h2 id="page-heading" data-cy="ClassStudentHeading">
+    <div class="d-flex flex-row">
+      <select
+        class="form-control"
+        id="field_studentClass"
+        data-cy="studentClass"
+        [(ngModel)]="selectedClassId"
+        (change)="loadAllStudentsForAClass()"
+        name="studentClass"
+      >
+        <option [ngValue]="undefined" hidden>Select Class</option>
+        <option *ngFor="let studentClassOption of schoolClasses; trackBy: trackFilterClassById" [ngValue]="studentClassOption.id">
+          {{ studentClassOption.className }}
+        </option>
+      </select>
+    </div>
+
+    <span jhiTranslate="manageitApp.classStudent.home.title">Class Students</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPageWithDeleted()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span >Show Deleted</span>
+      </button>
+
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.classStudent.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-class-student"
+        [routerLink]="['/class-student/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.classStudent.home.createLabel"> Create a new Class Student </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="classStudents?.length === 0">
+    <span jhiTranslate="manageitApp.classStudent.home.notFound">No classStudents found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="classStudents && classStudents.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="studentId">
+            <span jhiTranslate="manageitApp.classStudent.studentId">Student Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="firstName">
+            <span jhiTranslate="manageitApp.classStudent.firstName">First Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rollNumber">
+            <span jhiTranslate="manageitApp.classStudent.rollNumber">Roll Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="phoneNumber">
+            <span jhiTranslate="manageitApp.classStudent.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="addressLine1">
+            <span jhiTranslate="manageitApp.classStudent.addressLine1">Address Line 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="fatherName">
+            <span jhiTranslate="manageitApp.classStudent.fatherName">Father Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="motherName">
+            <span jhiTranslate="manageitApp.classStudent.motherName">Mother Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let classStudent of classStudents; trackBy: trackId" data-cy="entityTable">
+          <td>{{ classStudent.schoolClass?.className }} -- {{ classStudent.studentId }}</td>
+          <td>{{ classStudent.firstName }}</td>
+          <td>{{ classStudent.rollNumber }}</td>
+          <td>{{ classStudent.phoneNumber }}</td>
+          <td>{{ classStudent.addressLine1 }}</td>
+          <td>{{ classStudent.fatherName }}</td>
+          <td>{{ classStudent.motherName }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/class-student', classStudent.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/class-student', classStudent.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+			<div *ngIf="!classStudent.cancelDate">
+              <button type="submit" (click)="delete(classStudent)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+              </div>
+              <div *ngIf="classStudent.cancelDate">
+	              <button type="submit" (click)="delete(classStudent)" class="btn btn-warning btn-sm" data-cy="entityDeleteButton">
+	                <fa-icon icon="times"></fa-icon>
+	                <span class="d-none d-md-inline" >Restore</span>
+	              </button>
+ 			</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "manageitApp": {
+    "schoolDaysOff": {
+      "home": {
+        "title": "School Days Offs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School Days Off",
+        "createOrEditLabel": "Create or edit a School Days Off",
+        "notFound": "No School Days Offs found"
+      },
+      "created": "A new School Days Off is created with identifier {{ param }}",
+      "updated": "A School Days Off is updated with identifier {{ param }}",
+      "deleted": "A School Days Off is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School Days Off {{ id }}?"
+      },
+      "detail": {
+        "title": "School Days Off"
+      },
+      "id": "ID",
+      "dayOffType": "Day Off Type",
+      "dayOffName": "Day Off Name",
+      "dayOffDetails": "Day Off Details",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "School Class"
+    }
+  }
+}

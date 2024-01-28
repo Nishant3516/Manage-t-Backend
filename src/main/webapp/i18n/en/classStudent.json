@@ -1,0 +1,57 @@
+{
+  "manageitApp": {
+    "classStudent": {
+      "home": {
+        "title": "Class Students",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Class Student",
+        "createOrEditLabel": "Create or edit a Class Student",
+        "notFound": "No Class Students found"
+      },
+      "created": "A new Class Student is created with identifier {{ param }}",
+      "updated": "A Class Student is updated with identifier {{ param }}",
+      "deleted": "A Class Student is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Class Student {{ id }}?"
+      },
+      "undelete": {
+        "question": "Are you sure you want to delete Class Student {{ id }}?"
+      },
+      "detail": {
+        "title": "Class Student"
+      },
+      "id": "ID",
+      "studentPhoto": "Student Photo",
+      "studentPhotoLink": "Student Photo Link",
+      "studentId": "Student Id",
+      "firstName": "First Name",
+      "gender": "Gender",
+      "lastName": "Last Name",
+      "rollNumber": "Roll Number",
+      "phoneNumber": "Phone Number",
+      "bloodGroup": "Blood Group",
+      "dateOfBirth": "Date Of Birth",
+      "startDate": "Start Date",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "nickName": "Nick Name",
+      "fatherName": "Father Name",
+      "motherName": "Mother Name",
+      "email": "Email",
+      "admissionDate": "Admission Date",
+      "regNumber": "Reg Number",
+      "endDate": "End Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "studentDiscount": "Student Discount",
+      "studentAdditionalCharges": "Student Additional Charges",
+      "studentChargesSummary": "Student Charges Summary",
+      "studentPayments": "Student Payments",
+      "studentAttendence": "Student Attendence",
+      "studentHomeWorkTrack": "Student Home Work Track",
+      "studentClassWorkTrack": "Student Class Work Track",
+      "schoolClass": "School Class"
+    }
+  }
+}

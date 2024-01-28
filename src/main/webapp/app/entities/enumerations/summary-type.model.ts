@@ -1,0 +1,9 @@
+export enum SummaryType {
+  CLASS_CHARGES = 'CLASS_CHARGES',
+
+  STUDENT_CHARGES = 'STUDENT_CHARGES',
+
+  DISCOUNT = 'DISCOUNT',
+
+  SUMMARY = 'SUMMARY',
+}

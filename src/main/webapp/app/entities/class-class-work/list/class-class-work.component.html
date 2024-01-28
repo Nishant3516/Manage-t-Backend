@@ -1,0 +1,177 @@
+<div>
+  <h2 id="page-heading" data-cy="ClassClassWorkHeading">
+    <span jhiTranslate="manageitApp.classClassWork.home.title">Class Class Works</span>
+
+    <div class="d-flex justify-content-end">
+<!--       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.classClassWork.home.refreshListLabel">Refresh List</span> -->
+<!--       </button> -->
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-class-class-work"
+        [routerLink]="['/class-class-work/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.classClassWork.home.createLabel"> Create a new Class Class Work </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+         <div class="form-group">
+          
+            
+  
+        <div class="form-group">
+          <label class="form-control-label">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_astartDate"
+              data-cy="astartDate"
+              type="text"
+              class="form-control"
+              name="astartDate"
+              ngbDatepicker
+              #astartDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="astartDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        
+        </div>
+        
+           <label class="form-control-label" >End Date</label>
+          <div class="input-group">
+            <input
+              id="field_aendDate"
+              data-cy="aendDate"
+              type="text"
+              class="form-control"
+              name="aendDate"
+              ngbDatepicker
+              #aendDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceEndDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="aendDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          
+          
+          
+          
+            <jhi-class-subject-dropdown [callbackFunction]="loadAllChapterForASubjectCallback"></jhi-class-subject-dropdown>
+        </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="classClassWorks?.length === 0">
+    <span jhiTranslate="manageitApp.classClassWork.home.notFound">No classClassWorks found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="classClassWorks && classClassWorks.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="schoolDate">
+            <span jhiTranslate="manageitApp.classClassWork.schoolDate">School Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="studentAssignmentType">
+            <span jhiTranslate="manageitApp.classClassWork.studentAssignmentType">Student Assignment Type</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="classWorkText">
+            <span jhiTranslate="manageitApp.classClassWork.classWorkText">Class Work Text</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="classWorkFile">
+            <span jhiTranslate="manageitApp.classClassWork.classWorkFile">Class Work File</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="chapterSection.id">
+            <span jhiTranslate="manageitApp.classClassWork.chapterSection">Chapter Section</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let classClassWork of classClassWorks; trackBy: trackId" data-cy="entityTable">
+          <td>{{ classClassWork.schoolDate | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'manageitApp.StudentAssignmentType.' + classClassWork.studentAssignmentType }}">
+            {{ classClassWork.studentAssignmentType }}
+          </td>
+          <td>{{ classClassWork.classWorkText }}</td>
+          <td>
+            <a
+              *ngIf="classClassWork.classWorkFile"
+              (click)="openFile(classClassWork.classWorkFile, classClassWork.classWorkFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="classClassWork.classWorkFile"
+              >{{ classClassWork.classWorkFileContentType }}, {{ byteSize(classClassWork.classWorkFile) }}</span
+            >
+          </td>
+          <td>
+            <div *ngIf="classClassWork.chapterSection">
+              <a [routerLink]="['/chapter-section', classClassWork.chapterSection?.id, 'view']">{{ classClassWork.chapterSection?.sectionName }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/class-class-work', classClassWork.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/class-class-work', classClassWork.id, 'edit']" -->
+<!--                 class="btn btn-primary btn-sm" -->
+<!--                 data-cy="entityEditButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="pencil-alt"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span> -->
+<!--               </button> -->
+
+              <button type="submit" (click)="delete(classClassWork)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!--   <div *ngIf="classClassWorks && classClassWorks.length > 0"> -->
+<!--     <div class="row justify-content-center"> -->
+<!--       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count> -->
+<!--     </div> -->
+
+<!--     <div class="row justify-content-center"> -->
+<!--       <ngb-pagination -->
+<!--         [collectionSize]="totalItems" -->
+<!--         [(page)]="ngbPaginationPage" -->
+<!--         [pageSize]="itemsPerPage" -->
+<!--         [maxSize]="5" -->
+<!--         [rotate]="true" -->
+<!--         [boundaryLinks]="true" -->
+<!--         (pageChange)="loadPage($event)" -->
+<!--       ></ngb-pagination> -->
+<!--     </div> -->
+<!--   </div> -->
+</div>

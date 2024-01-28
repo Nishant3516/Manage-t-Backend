@@ -1,0 +1,79 @@
+
+entity Question {
+    questionImportFile Blob,
+	questionText String,
+    questionImage Blob,
+    answerImage Blob,
+    imageSideBySide Boolean,
+    option1 String,
+    option2 String,
+    option3 String,
+    option4 String,
+    option5 String,
+    status Status,
+    weightage Integer,
+    difficultyLevel Difficulty,
+	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity QuestionPaper {
+	tenatLogo Blob,
+	mainTitle String,
+    subTitle String,
+    leftSubHeading1 String,
+    leftSubHeading2 String,
+    rightSubHeading1 String,
+    rightSubHeading2 String,
+    instructions String,
+    footerText String,
+    totalMarks Integer,
+ 	createDate LocalDate,
+	lastModified LocalDate,
+    cancelDate LocalDate
+}
+entity QuestionType {
+	questionType String,
+    marks Integer,
+	createDate LocalDate,
+	lastModified LocalDate,
+  	cancelDate LocalDate
+}
+entity Tenant{
+	tenantName String,
+    tenantLogo Blob,
+	createDate LocalDate,
+	lastModified LocalDate,
+  	cancelDate LocalDate
+}
+entity Tag{
+	tagText String,
+    tagLevel TagLevel,
+	createDate LocalDate,
+	lastModified LocalDate,
+  	cancelDate LocalDate
+}
+enum Status {
+    DRAFT, INPROGRESS, PUBLISHED, ONLINE
+}
+enum TagLevel {
+    FIRST, SECOND, THIRD, FOURTH, FIFTH
+}
+enum Difficulty {
+    EASY, MEDIUM, HARD
+}
+relationship ManyToMany {
+	QuestionPaper{question(question)} to Question{questionPaper}
+    QuestionPaper{tag(tag)} to Tag{questionPaper}
+    Question{tag(tag)} to Tag{question}
+}
+relationship OneToMany {
+	QuestionType to Question{questionType}
+    Tenant to Question{tenant}
+    Tenant to QuestionType{tenant}
+    Tenant to QuestionPaper{tenant}
+    Tenant to Tag{tenant}
+}
+
+
+

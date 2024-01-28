@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-school-class-heading"
+        data-cy="SchoolClassCreateUpdateHeading"
+        jhiTranslate="manageitApp.schoolClass.home.createOrEditLabel"
+      >
+        Create or edit a School Class
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolClass.className" for="field_className">Class Name</label>
+          <input type="text" class="form-control" name="className" id="field_className" data-cy="className" formControlName="className" />
+          <div *ngIf="editForm.get('className')!.invalid && (editForm.get('className')!.dirty || editForm.get('className')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('className')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolClass.classLongName" for="field_classLongName"
+            >Class Long Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="classLongName"
+            id="field_classLongName"
+            data-cy="classLongName"
+            formControlName="classLongName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolClass.school" for="field_school">School</label>
+          <select class="form-control" id="field_school" data-cy="school" name="school" formControlName="school">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="schoolOption.id === editForm.get('school')!.value?.id ? editForm.get('school')!.value : schoolOption"
+              *ngFor="let schoolOption of schoolsSharedCollection; trackBy: trackSchoolById"
+            >
+              {{ schoolOption.schoolName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

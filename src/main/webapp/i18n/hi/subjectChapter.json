@@ -1,0 +1,32 @@
+{
+  "manageitApp": {
+    "subjectChapter": {
+      "home": {
+        "title": "SubjectChapters",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Subject Chapter बनाएँ",
+        "createOrEditLabel": "Subject Chapter बनाएँ या संपादित करें",
+        "notFound": "No Subject Chapters found"
+      },
+      "created": "एक नया Subject Chapter [identifier: {{ param }}] तैयार है",
+      "updated": "एक Subject Chapter [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Subject Chapter [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Subject Chapter [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Subject Chapter"
+      },
+      "id": "ID",
+      "chapterName": "Chapter Name",
+      "chapterNumber": "Chapter Number",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "chapterSection": "Chapter Section",
+      "classLessionPlan": "Class Lession Plan",
+      "question": "Question",
+      "classSubject": "Class Subject"
+    }
+  }
+}

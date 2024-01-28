@@ -1,0 +1,145 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-school-notifications-heading"
+        data-cy="SchoolNotificationsCreateUpdateHeading"
+        jhiTranslate="manageitApp.schoolNotifications.home.createOrEditLabel"
+      >
+        Create or edit a School Notifications
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolNotifications.notificationTitle" for="field_notificationTitle"
+            >Notification Title</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="notificationTitle"
+            id="field_notificationTitle"
+            data-cy="notificationTitle"
+            formControlName="notificationTitle"
+          />
+          <div
+            *ngIf="
+              editForm.get('notificationTitle')!.invalid &&
+              (editForm.get('notificationTitle')!.dirty || editForm.get('notificationTitle')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('notificationTitle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="manageitApp.schoolNotifications.notificationDetails"
+            for="field_notificationDetails"
+            >Notification Details</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="notificationDetails"
+            id="field_notificationDetails"
+            data-cy="notificationDetails"
+            formControlName="notificationDetails"
+          />
+          <div
+            *ngIf="
+              editForm.get('notificationDetails')!.invalid &&
+              (editForm.get('notificationDetails')!.dirty || editForm.get('notificationDetails')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('notificationDetails')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolNotifications.notificationFile" for="field_notificationFile"
+            >Notification File</label
+          >
+          <div>
+            <div *ngIf="editForm.get('notificationFile')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('notificationFile')!.value, editForm.get('notificationFileContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('notificationFileContentType')!.value }}, {{ byteSize(editForm.get('notificationFile')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ notificationFile: null }); editForm.patchValue({ notificationFileContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_notificationFile"
+              data-cy="notificationFile"
+              (change)="setFileData($event, 'notificationFile', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="notificationFile"
+            id="field_notificationFile"
+            data-cy="notificationFile"
+            formControlName="notificationFile"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="notificationFileContentType"
+            id="field_notificationFileContentType"
+            formControlName="notificationFileContentType"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

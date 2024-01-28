@@ -1,0 +1,187 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-audit-log-heading" data-cy="AuditLogCreateUpdateHeading" jhiTranslate="manageitApp.auditLog.home.createOrEditLabel">
+        Create or edit a Audit Log
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.userName" for="field_userName">User Name</label>
+          <input type="text" class="form-control" name="userName" id="field_userName" data-cy="userName" formControlName="userName" />
+          <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('userName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.userDeviceDetails" for="field_userDeviceDetails"
+            >User Device Details</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="userDeviceDetails"
+            id="field_userDeviceDetails"
+            data-cy="userDeviceDetails"
+            formControlName="userDeviceDetails"
+          />
+          <div
+            *ngIf="
+              editForm.get('userDeviceDetails')!.invalid &&
+              (editForm.get('userDeviceDetails')!.dirty || editForm.get('userDeviceDetails')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('userDeviceDetails')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.action" for="field_action">Action</label>
+          <input type="text" class="form-control" name="action" id="field_action" data-cy="action" formControlName="action" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.data1" for="field_data1">Data 1</label>
+          <input type="text" class="form-control" name="data1" id="field_data1" data-cy="data1" formControlName="data1" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.data2" for="field_data2">Data 2</label>
+          <input type="text" class="form-control" name="data2" id="field_data2" data-cy="data2" formControlName="data2" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.data3" for="field_data3">Data 3</label>
+          <input type="text" class="form-control" name="data3" id="field_data3" data-cy="data3" formControlName="data3" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.createDate" for="field_createDate">Create Date</label>
+          <div class="input-group">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="text"
+              class="form-control"
+              name="createDate"
+              ngbDatepicker
+              #createDateDp="ngbDatepicker"
+              formControlName="createDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.lastModified" for="field_lastModified">Last Modified</label>
+          <div class="input-group">
+            <input
+              id="field_lastModified"
+              data-cy="lastModified"
+              type="text"
+              class="form-control"
+              name="lastModified"
+              ngbDatepicker
+              #lastModifiedDp="ngbDatepicker"
+              formControlName="lastModified"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.cancelDate" for="field_cancelDate">Cancel Date</label>
+          <div class="input-group">
+            <input
+              id="field_cancelDate"
+              data-cy="cancelDate"
+              type="text"
+              class="form-control"
+              name="cancelDate"
+              ngbDatepicker
+              #cancelDateDp="ngbDatepicker"
+              formControlName="cancelDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.school" for="field_school">School</label>
+          <select class="form-control" id="field_school" data-cy="school" name="school" formControlName="school">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="schoolOption.id === editForm.get('school')!.value?.id ? editForm.get('school')!.value : schoolOption"
+              *ngFor="let schoolOption of schoolsSharedCollection; trackBy: trackSchoolById"
+            >
+              {{ schoolOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.auditLog.schoolUser" for="field_schoolUser">School User</label>
+          <select class="form-control" id="field_schoolUser" data-cy="schoolUser" name="schoolUser" formControlName="schoolUser">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                schoolUserOption.id === editForm.get('schoolUser')!.value?.id ? editForm.get('schoolUser')!.value : schoolUserOption
+              "
+              *ngFor="let schoolUserOption of schoolUsersSharedCollection; trackBy: trackSchoolUserById"
+            >
+              {{ schoolUserOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

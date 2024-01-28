@@ -1,0 +1,43 @@
+{
+  "manageitApp": {
+    "classFee": {
+      "home": {
+        "title": "ClassFees",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Class Fee बनाएँ",
+        "createOrEditLabel": "Class Fee बनाएँ या संपादित करें",
+        "notFound": "No Class Fees found"
+      },
+      "created": "एक नया Class Fee [identifier: {{ param }}] तैयार है",
+      "updated": "एक Class Fee [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Class Fee [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Class Fee [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Class Fee"
+      },
+      "id": "ID",
+      "feeYear": "Fee Year",
+      "dueDate": "Due Date",
+      "janFee": "Jan Fee",
+      "febFee": "Feb Fee",
+      "marFee": "Mar Fee",
+      "aprFee": "Apr Fee",
+      "mayFee": "May Fee",
+      "junFee": "Jun Fee",
+      "julFee": "Jul Fee",
+      "augFee": "Aug Fee",
+      "sepFee": "Sep Fee",
+      "octFee": "Oct Fee",
+      "novFee": "Nov Fee",
+      "decFee": "Dec Fee",
+      "payByDate": "Pay By Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "School Class",
+      "schoolLedgerHead": "School Ledger Head"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolDaysOff">
+      <h2 data-cy="schoolDaysOffDetailsHeading"><span jhiTranslate="manageitApp.schoolDaysOff.detail.title">School Days Off</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.dayOffType">Day Off Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.DayOffType.' + schoolDaysOff.dayOffType }}">{{ schoolDaysOff.dayOffType }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.dayOffName">Day Off Name</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.dayOffName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.dayOffDetails">Day Off Details</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.dayOffDetails }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.startDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.endDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolDaysOff.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolDaysOff.schoolClass">School Class</span></dt>
+        <dd>
+          <span *ngFor="let schoolClass of schoolDaysOff.schoolClasses; let last = last">
+            <a [routerLink]="['/school-class', schoolClass?.id, 'view']">{{ schoolClass.className }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school-days-off', schoolDaysOff.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

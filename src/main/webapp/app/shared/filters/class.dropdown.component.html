@@ -1,0 +1,18 @@
+<div class="form-group">
+ <label class="form-control-label" >Select Class</label>
+  <select
+    class="form-control"
+    id="field_studentClass1"
+    data-cy="studentClass1"
+    [(ngModel)]="selectedClassId"
+    (change)="callCallBackFunction()"
+    name="studentClassFilterCommon"
+  >
+    <option [ngValue]="null">Select Class</option>
+    <option *ngFor="let studentClassOption of schoolClasses trackBy: trackFilterClassByIdCommon" [ngValue]="studentClassOption.id">
+      {{ studentClassOption.className }}
+    </option>
+  </select>
+  
+</div>
+

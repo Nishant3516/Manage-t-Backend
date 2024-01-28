@@ -1,0 +1,30 @@
+{
+  "manageitApp": {
+    "idStore": {
+      "home": {
+        "title": "IdStores",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Id Store बनाएँ",
+        "createOrEditLabel": "Id Store बनाएँ या संपादित करें",
+        "notFound": "No Id Stores found"
+      },
+      "created": "एक नया Id Store [identifier: {{ param }}] तैयार है",
+      "updated": "एक Id Store [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Id Store [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Id Store [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Id Store"
+      },
+      "id": "ID",
+      "entrytype": "Entrytype",
+      "lastGeneratedId": "Last Generated Id",
+      "startId": "Start Id",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "school": "School"
+    }
+  }
+}

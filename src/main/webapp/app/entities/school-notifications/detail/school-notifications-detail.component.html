@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolNotifications">
+      <h2 data-cy="schoolNotificationsDetailsHeading">
+        <span jhiTranslate="manageitApp.schoolNotifications.detail.title">School Notifications</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.notificationTitle">Notification Title</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.notificationTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.notificationDetails">Notification Details</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.notificationDetails }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.notificationFile">Notification File</span></dt>
+        <dd>
+          <div *ngIf="schoolNotifications.notificationFile">
+            <a
+              (click)="openFile(schoolNotifications.notificationFile, schoolNotifications.notificationFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ schoolNotifications.notificationFileContentType }}, {{ byteSize(schoolNotifications.notificationFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.notificationFileLink">Notification File Link</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.notificationFileLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.showTillDate">Show Till Date</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.showTillDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolNotifications.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolNotifications.schoolClass">School Class</span></dt>
+        <dd>
+          <span *ngFor="let schoolClass of schoolNotifications.schoolClasses; let last = last">
+            <a [routerLink]="['/school-class', schoolClass?.id, 'view']">{{ schoolClass.className }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school-notifications', schoolNotifications.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

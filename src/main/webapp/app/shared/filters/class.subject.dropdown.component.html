@@ -1,0 +1,22 @@
+
+<jhi-class-dropdown [callbackFunction]="loadAllSubjectsForAClassCallback"></jhi-class-dropdown>
+
+<div class="form-group">
+ <label class="form-control-label" >Select Subject</label>
+  <select
+    class="form-control"
+    id="field_studentClassSubject"
+    data-cy="studentClassSubjects"
+    [(ngModel)]="selectedSubjectId"
+    (change)="loadAllChaptersForASubject()"
+    name="studentClassSubjectFilter"
+  >
+    <option [ngValue]="null">Select Subject</option>
+    <option
+      *ngFor="let studentClassSubjectOption of classSubjects; trackBy: trackFilterClassSubjectId"
+      [ngValue]="studentClassSubjectOption.id"
+    >
+      {{ studentClassSubjectOption.subjectName }}
+    </option>
+  </select>
+</div>

@@ -1,0 +1,31 @@
+{
+  "manageitApp": {
+    "schoolPictureGallery": {
+      "home": {
+        "title": "School Picture Galleries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School Picture Gallery",
+        "createOrEditLabel": "Create or edit a School Picture Gallery",
+        "notFound": "No School Picture Galleries found"
+      },
+      "created": "A new School Picture Gallery is created with identifier {{ param }}",
+      "updated": "A School Picture Gallery is updated with identifier {{ param }}",
+      "deleted": "A School Picture Gallery is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School Picture Gallery {{ id }}?"
+      },
+      "detail": {
+        "title": "School Picture Gallery"
+      },
+      "id": "ID",
+      "pictureTitle": "Picture Title",
+      "pictureDescription": "Picture Description",
+      "pictureFile": "Picture File",
+      "pictureLink": "Picture Link",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "School Class"
+    }
+  }
+}

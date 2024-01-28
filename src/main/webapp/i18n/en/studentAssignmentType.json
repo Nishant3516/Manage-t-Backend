@@ -1,0 +1,9 @@
+{
+  "manageitApp": {
+    "StudentAssignmentType": {
+      "null": "",
+      "READING_WRITING": "READING_WRITING",
+      "PROJECT": "PROJECT"
+    }
+  }
+}

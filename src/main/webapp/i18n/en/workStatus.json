@@ -1,0 +1,9 @@
+{
+  "manageitApp": {
+    "WorkStatus": {
+      "null": "",
+      "Done": "Done",
+      "NotDone": "NotDone"
+    }
+  }
+}

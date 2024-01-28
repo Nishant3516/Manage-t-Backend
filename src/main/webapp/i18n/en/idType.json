@@ -1,0 +1,11 @@
+{
+  "manageitApp": {
+    "IdType": {
+      "null": "",
+      "STUDENT": "STUDENT",
+      "RECEIPT": "RECEIPT",
+      "EXAMID": "EXAMID",
+      "VOUCHERID": "VOUCHERID"
+    }
+  }
+}

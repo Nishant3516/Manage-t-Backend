@@ -1,0 +1,9 @@
+{
+  "manageitApp": {
+    "TransactionType": {
+      "null": "",
+      "EXPENSE": "EXPENSE",
+      "INCOME": "INCOME"
+    }
+  }
+}

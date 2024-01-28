@@ -1,0 +1,11 @@
+id;amount_paid;mode_of_pay;note_numbers;upi_id;remarks;payment_date;receipt_id;create_date;last_modified;cancel_date;transaction_type
+1;7219;UPI;standardization Metal Bedfordshire;Ouguiya;Grocery incremental;2022-04-07;B2B client-server;2022-04-06;2022-04-07;2022-04-06;EXPENSE
+2;80326;UPI;JSON;virtual;XML bus Dollar;2022-04-06;Frozen;2022-04-06;2022-04-07;2022-04-07;EXPENSE
+3;57306;UPI;Bacon Euro high-level;calculating Bridge;back-end magnetic;2022-04-06;overriding Web;2022-04-07;2022-04-06;2022-04-07;EXPENSE
+4;12287;CASH;bricks-and-clicks Supervisor Factors;Mexican COM violet;Island Senior;2022-04-06;generation;2022-04-07;2022-04-06;2022-04-07;EXPENSE
+5;91534;UPI;connecting;Plastic withdrawal Cross-group;Account groupware;2022-04-07;mobile Account driver;2022-04-07;2022-04-06;2022-04-06;INCOME
+6;22935;UPI;Nicaragua;Turnpike;purple payment;2022-04-06;Dakota 24;2022-04-06;2022-04-07;2022-04-06;INCOME
+7;22227;CASH;Euro generate invoice;Borders Refined Rustic;plum;2022-04-06;Parkway;2022-04-06;2022-04-06;2022-04-06;EXPENSE
+8;37555;UPI;bandwidth-monitored;Cotton Data;Cheese index capacitor;2022-04-06;Sleek Rial Internal;2022-04-07;2022-04-06;2022-04-07;EXPENSE
+9;90038;UPI;Maryland Interactions exploit;core Sleek;24/7 Future;2022-04-06;salmon Soft reboot;2022-04-06;2022-04-07;2022-04-06;INCOME
+10;14633;UPI;auxiliary Gardens;Frozen;Belarussian;2022-04-07;Guinea-Bissau;2022-04-06;2022-04-07;2022-04-06;INCOME

@@ -1,0 +1,32 @@
+{
+  "manageitApp": {
+    "chapterSection": {
+      "home": {
+        "title": "Chapter Sections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chapter Section",
+        "createOrEditLabel": "Create or edit a Chapter Section",
+        "notFound": "No Chapter Sections found"
+      },
+      "created": "A new Chapter Section is created with identifier {{ param }}",
+      "updated": "A Chapter Section is updated with identifier {{ param }}",
+      "deleted": "A Chapter Section is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chapter Section {{ id }}?"
+      },
+      "detail": {
+        "title": "Chapter Section"
+      },
+      "id": "ID",
+      "sectionName": "Section Name",
+      "sectionNumber": "Section Number",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classHomeWork": "Class Home Work",
+      "classClassWork": "Class Class Work",
+      "classLessionPlan": "Class Lession Plan",
+      "subjectChapter": "Subject Chapter"
+    }
+  }
+}

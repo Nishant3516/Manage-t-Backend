@@ -1,0 +1,200 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-school-user-heading" data-cy="SchoolUserCreateUpdateHeading" jhiTranslate="manageitApp.schoolUser.home.createOrEditLabel">
+        Create or edit a School User
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.loginName" for="field_loginName">Login Name</label>
+          <input type="text" class="form-control" name="loginName" id="field_loginName" data-cy="loginName" formControlName="loginName" />
+          <div *ngIf="editForm.get('loginName')!.invalid && (editForm.get('loginName')!.dirty || editForm.get('loginName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('loginName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.password" for="field_password">Password</label>
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+          <div *ngIf="editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('password')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.userEmail" for="field_userEmail">User Email</label>
+          <input type="text" class="form-control" name="userEmail" id="field_userEmail" data-cy="userEmail" formControlName="userEmail" />
+          <div *ngIf="editForm.get('userEmail')!.invalid && (editForm.get('userEmail')!.dirty || editForm.get('userEmail')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('userEmail')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.extraInfo" for="field_extraInfo">Extra Info</label>
+          <input type="text" class="form-control" name="extraInfo" id="field_extraInfo" data-cy="extraInfo" formControlName="extraInfo" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.activated" for="field_activated">Activated</label>
+          <input type="checkbox" class="form-check" name="activated" id="field_activated" data-cy="activated" formControlName="activated" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.userType" for="field_userType">User Type</label>
+          <select class="form-control" name="userType" formControlName="userType" id="field_userType" data-cy="userType">
+            <option [ngValue]="null">{{ 'manageitApp.UserType.null' | translate }}</option>
+            <option value="STUDENT">{{ 'manageitApp.UserType.STUDENT' | translate }}</option>
+            <option value="TEACHER">{{ 'manageitApp.UserType.TEACHER' | translate }}</option>
+            <option value="PARENT">{{ 'manageitApp.UserType.PARENT' | translate }}</option>
+            <option value="NONTEACHER">{{ 'manageitApp.UserType.NONTEACHER' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.createDate" for="field_createDate">Create Date</label>
+          <div class="input-group">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="text"
+              class="form-control"
+              name="createDate"
+              ngbDatepicker
+              #createDateDp="ngbDatepicker"
+              formControlName="createDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.lastModified" for="field_lastModified"
+            >Last Modified</label
+          >
+          <div class="input-group">
+            <input
+              id="field_lastModified"
+              data-cy="lastModified"
+              type="text"
+              class="form-control"
+              name="lastModified"
+              ngbDatepicker
+              #lastModifiedDp="ngbDatepicker"
+              formControlName="lastModified"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolUser.cancelDate" for="field_cancelDate">Cancel Date</label>
+          <div class="input-group">
+            <input
+              id="field_cancelDate"
+              data-cy="cancelDate"
+              type="text"
+              class="form-control"
+              name="cancelDate"
+              ngbDatepicker
+              #cancelDateDp="ngbDatepicker"
+              formControlName="cancelDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="manageitApp.schoolUser.schoolClass" for="field_schoolClasses">School Class</label>
+          <select
+            class="form-control"
+            id="field_schoolClasses"
+            data-cy="schoolClass"
+            multiple
+            name="schoolClasses"
+            formControlName="schoolClasses"
+          >
+            <option
+              [ngValue]="getSelectedSchoolClass(schoolClassOption, editForm.get('schoolClasses')!.value)"
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="manageitApp.schoolUser.classSubject" for="field_classSubjects">Class Subject</label>
+          <select
+            class="form-control"
+            id="field_classSubjects"
+            data-cy="classSubject"
+            multiple
+            name="classSubjects"
+            formControlName="classSubjects"
+          >
+            <option
+              [ngValue]="getSelectedClassSubject(classSubjectOption, editForm.get('classSubjects')!.value)"
+              *ngFor="let classSubjectOption of classSubjectsSharedCollection; trackBy: trackClassSubjectById"
+            >
+              {{ classSubjectOption.subjectName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

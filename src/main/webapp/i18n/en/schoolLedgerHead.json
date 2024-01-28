@@ -1,0 +1,34 @@
+{
+  "manageitApp": {
+    "schoolLedgerHead": {
+      "home": {
+        "title": "School Ledger Heads",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School Ledger Head",
+        "createOrEditLabel": "Create or edit a School Ledger Head",
+        "notFound": "No School Ledger Heads found"
+      },
+      "created": "A new School Ledger Head is created with identifier {{ param }}",
+      "updated": "A School Ledger Head is updated with identifier {{ param }}",
+      "deleted": "A School Ledger Head is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School Ledger Head {{ id }}?"
+      },
+      "detail": {
+        "title": "School Ledger Head"
+      },
+      "id": "ID",
+      "studentLedgerHeadType": "Student Ledger Head Type",
+      "ledgerHeadName": "Ledger Head Name",
+      "ledgerHeadLongName": "Ledger Head Long Name",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classFee": "Class Fee",
+      "studentDiscount": "Student Discount",
+      "studentAdditionalCharges": "Student Additional Charges",
+      "studentChargesSummary": "Student Charges Summary",
+      "school": "School"
+    }
+  }
+}

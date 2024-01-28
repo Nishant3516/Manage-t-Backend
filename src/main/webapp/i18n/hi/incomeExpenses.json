@@ -1,0 +1,36 @@
+{
+  "manageitApp": {
+    "incomeExpenses": {
+      "home": {
+        "title": "IncomeExpenses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Income Expenses बनाएँ",
+        "createOrEditLabel": "Income Expenses बनाएँ या संपादित करें",
+        "notFound": "No Income Expenses found"
+      },
+      "created": "एक नया Income Expenses [identifier: {{ param }}] तैयार है",
+      "updated": "एक Income Expenses [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Income Expenses [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Income Expenses [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Income Expenses"
+      },
+      "id": "ID",
+      "amountPaid": "Amount Paid",
+      "modeOfPay": "Mode Of Pay",
+      "noteNumbers": "Note Numbers",
+      "upiId": "Upi Id",
+      "remarks": "Remarks",
+      "paymentDate": "Payment Date",
+      "receiptId": "Receipt Id",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "transactionType": "Transaction Type",
+      "vendor": "Vendor",
+      "ledgerHead": "Ledger Head"
+    }
+  }
+}

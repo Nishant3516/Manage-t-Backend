@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="studentAttendence">
+      <h2 data-cy="studentAttendenceDetailsHeading">
+        <span jhiTranslate="manageitApp.studentAttendence.detail.title">Student Attendence</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ studentAttendence.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAttendence.schoolDate">School Date</span></dt>
+        <dd>
+          <span>{{ studentAttendence.schoolDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAttendence.attendence">Attendence</span></dt>
+        <dd>
+          <span>{{ studentAttendence.attendence }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAttendence.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ studentAttendence.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAttendence.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ studentAttendence.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAttendence.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ studentAttendence.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAttendence.classStudent">Class Student</span></dt>
+        <dd>
+          <div *ngIf="studentAttendence.classStudent">
+            <a [routerLink]="['/class-student', studentAttendence.classStudent?.id, 'view']">{{ studentAttendence.classStudent?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/student-attendence', studentAttendence.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

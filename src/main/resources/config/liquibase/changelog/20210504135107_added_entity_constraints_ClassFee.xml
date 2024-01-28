@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ClassFee.
+    -->
+    <changeSet id="20210504135107-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="class_fee_id"
+                                 baseTableName="rel_class_fee__school_class"
+                                 constraintName="fk_rel_class_fee__school_class__class_fee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_fee"/>
+
+        <addForeignKeyConstraint baseColumnNames="school_class_id"
+                                 baseTableName="rel_class_fee__school_class"
+                                 constraintName="fk_rel_class_fee__school_class__school_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_class"/>
+
+        <addForeignKeyConstraint baseColumnNames="school_ledger_head_id"
+                                 baseTableName="class_fee"
+                                 constraintName="fk_class_fee__school_ledger_head_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_ledger_head"/>
+    </changeSet>
+</databaseChangeLog>

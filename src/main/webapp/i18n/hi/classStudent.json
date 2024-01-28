@@ -1,0 +1,55 @@
+{
+  "manageitApp": {
+    "classStudent": {
+      "home": {
+        "title": "ClassStudents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Class Student बनाएँ",
+        "createOrEditLabel": "Class Student बनाएँ या संपादित करें",
+        "notFound": "No Class Students found"
+      },
+      "created": "एक नया Class Student [identifier: {{ param }}] तैयार है",
+      "updated": "एक Class Student [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Class Student [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Class Student [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Class Student"
+      },
+      "id": "ID",
+      "studentPhoto": "Student Photo",
+      "studentPhotoLink": "Student Photo Link",
+      "studentId": "Student Id",
+      "firstName": "First Name",
+      "gender": "Gender",
+      "lastName": "Last Name",
+      "rollNumber": "Roll Number",
+      "phoneNumber": "Phone Number",
+      "bloodGroup": "Blood Group",
+      "dateOfBirth": "Date Of Birth",
+      "startDate": "Start Date",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "nickName": "Nick Name",
+      "fatherName": "Father Name",
+      "motherName": "Mother Name",
+      "email": "Email",
+      "admissionDate": "Admission Date",
+      "regNumber": "Reg Number",
+      "endDate": "End Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "sTIncomeExpenses": "S T Income Expenses",
+      "studentDiscount": "Student Discount",
+      "studentAdditionalCharges": "Student Additional Charges",
+      "studentChargesSummary": "Student Charges Summary",
+      "studentPayments": "Student Payments",
+      "studentAttendence": "Student Attendence",
+      "studentHomeWorkTrack": "Student Home Work Track",
+      "studentClassWorkTrack": "Student Class Work Track",
+      "schoolClass": "School Class"
+    }
+  }
+}

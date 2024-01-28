@@ -1,0 +1,149 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-school-heading" data-cy="SchoolCreateUpdateHeading" jhiTranslate="manageitApp.school.home.createOrEditLabel">
+        Create or edit a School
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.school.groupName" for="field_groupName">Group Name</label>
+          <input type="text" class="form-control" name="groupName" id="field_groupName" data-cy="groupName" formControlName="groupName" />
+          <div *ngIf="editForm.get('groupName')!.invalid && (editForm.get('groupName')!.dirty || editForm.get('groupName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('groupName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.school.schoolName" for="field_schoolName">School Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="schoolName"
+            id="field_schoolName"
+            data-cy="schoolName"
+            formControlName="schoolName"
+          />
+          <div *ngIf="editForm.get('schoolName')!.invalid && (editForm.get('schoolName')!.dirty || editForm.get('schoolName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('schoolName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.school.address" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.school.afflNumber" for="field_afflNumber">Affl Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="afflNumber"
+            id="field_afflNumber"
+            data-cy="afflNumber"
+            formControlName="afflNumber"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.school.createDate" for="field_createDate">Create Date</label>
+          <div class="input-group">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="text"
+              class="form-control"
+              name="createDate"
+              ngbDatepicker
+              #createDateDp="ngbDatepicker"
+              formControlName="createDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.school.lastModified" for="field_lastModified">Last Modified</label>
+          <div class="input-group">
+            <input
+              id="field_lastModified"
+              data-cy="lastModified"
+              type="text"
+              class="form-control"
+              name="lastModified"
+              ngbDatepicker
+              #lastModifiedDp="ngbDatepicker"
+              formControlName="lastModified"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.school.cancelDate" for="field_cancelDate">Cancel Date</label>
+          <div class="input-group">
+            <input
+              id="field_cancelDate"
+              data-cy="cancelDate"
+              type="text"
+              class="form-control"
+              name="cancelDate"
+              ngbDatepicker
+              #cancelDateDp="ngbDatepicker"
+              formControlName="cancelDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

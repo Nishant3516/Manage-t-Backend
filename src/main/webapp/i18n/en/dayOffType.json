@@ -1,0 +1,11 @@
+{
+  "manageitApp": {
+    "DayOffType": {
+      "null": "",
+      "WEEKEND": "WEEKEND",
+      "VACATION": "VACATION",
+      "PUBLIC_HOLIDAY": "PUBLIC_HOLIDAY",
+      "EMERGENCY": "EMERGENCY"
+    }
+  }
+}

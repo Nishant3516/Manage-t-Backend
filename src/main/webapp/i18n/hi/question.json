@@ -1,0 +1,46 @@
+{
+  "manageitApp": {
+    "question": {
+      "home": {
+        "title": "Questions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Question बनाएँ",
+        "createOrEditLabel": "Question बनाएँ या संपादित करें",
+        "notFound": "No Questions found"
+      },
+      "created": "एक नया Question [identifier: {{ param }}] तैयार है",
+      "updated": "एक Question [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Question [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Question [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Question"
+      },
+      "id": "ID",
+      "questionImportFile": "Question Import File",
+      "questionText": "Question Text",
+      "questionImage": "Question Image",
+      "answerImage": "Answer Image",
+      "imageSideBySide": "Image Side By Side",
+      "option1": "Option 1",
+      "option2": "Option 2",
+      "option3": "Option 3",
+      "option4": "Option 4",
+      "option5": "Option 5",
+      "status": "Status",
+      "weightage": "Weightage",
+      "difficultyLevel": "Difficulty Level",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "tag": "Tag",
+      "questionType": "Question Type",
+      "tenant": "Tenant",
+      "schoolClass": "School Class",
+      "classSubject": "Class Subject",
+      "subjectChapter": "Subject Chapter",
+      "questionPaper": "Question Paper"
+    }
+  }
+}

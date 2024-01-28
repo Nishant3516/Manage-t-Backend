@@ -1,0 +1,11 @@
+id;tenant_name;tenant_logo;tenant_logo_content_type;create_date;last_modified;cancel_date
+1;Representative;../fake-data/blob/hipster.png;image/png;2022-04-25;2022-04-26;2022-04-26
+2;withdrawal;../fake-data/blob/hipster.png;image/png;2022-04-26;2022-04-26;2022-04-25
+3;mission-critical Shoes;../fake-data/blob/hipster.png;image/png;2022-04-25;2022-04-25;2022-04-25
+4;matrix;../fake-data/blob/hipster.png;image/png;2022-04-26;2022-04-25;2022-04-26
+5;revolutionize;../fake-data/blob/hipster.png;image/png;2022-04-26;2022-04-25;2022-04-26
+6;Practical olive;../fake-data/blob/hipster.png;image/png;2022-04-26;2022-04-26;2022-04-25
+7;Grocery Home Indiana;../fake-data/blob/hipster.png;image/png;2022-04-25;2022-04-25;2022-04-26
+8;Universal quantify Cambridgeshire;../fake-data/blob/hipster.png;image/png;2022-04-26;2022-04-26;2022-04-26
+9;Sausages Georgia;../fake-data/blob/hipster.png;image/png;2022-04-25;2022-04-26;2022-04-26
+10;innovate Kentucky Shirt;../fake-data/blob/hipster.png;image/png;2022-04-25;2022-04-25;2022-04-25

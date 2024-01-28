@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+      <h2
+        id="jhi-student-attendence-heading"
+        data-cy="StudentAttendenceCreateUpdateHeading"
+        
+      >List of Student Attendances
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+
+    <div class="d-flex justify-content-end">
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+      </div>
+      
+        <div class="form-group">
+          <label class="form-control-label">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_astartDate"
+              data-cy="astartDate"
+              type="text"
+              class="form-control"
+              name="astartDate"
+              ngbDatepicker
+              #astartDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="astartDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        
+        </div>
+        
+           <label class="form-control-label" >End Date</label>
+          <div class="input-group">
+            <input
+              id="field_aendDate"
+              data-cy="aendDate"
+              type="text"
+              class="form-control"
+              name="aendDate"
+              ngbDatepicker
+              #aendDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceEndDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="aendDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+         
+                <jhi-class-student-dropdown [callbackFunction]="boundFunction"></jhi-class-student-dropdown>
+        
+  <div class="table-responsive" id="entities" *ngIf="studentAttendences && studentAttendences.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAttendence.schoolDate">School Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAttendence.classStudent">Class Student</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAttendence.attendence">Attendence</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let studentAttendence of studentAttendences; trackBy: trackId" data-cy="entityTable">
+          <td>{{ studentAttendence.schoolDate | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="studentAttendence.classStudent">
+              <a [routerLink]="['/class-student', studentAttendence.classStudent?.id, 'view']">{{ studentAttendence.classStudent?.studentId }} -- {{ studentAttendence.classStudent?.firstName }} {{ studentAttendence.classStudent?.lastName }}</a>
+            </div>
+          </td>
+          <td [ngClass]="studentAttendence.attendence? 'table-success': 'table-danger' " >{{ studentAttendence.attendence }}</td>
+ 
+          <td class="text-right">
+            <div class="btn-group">
+            
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+        
+        
+      </div>
+
+
+  </div>
+</div>

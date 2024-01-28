@@ -1,0 +1,11 @@
+{
+  "manageitApp": {
+    "SchoolLedgerHeadType": {
+      "null": "",
+      "FEE": "FEE",
+      "ADMITION": "ADMITION",
+      "EXIT": "EXIT",
+      "FINE": "FINE"
+    }
+  }
+}

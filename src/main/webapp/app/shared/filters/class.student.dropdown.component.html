@@ -1,0 +1,20 @@
+<jhi-class-dropdown [callbackFunction]="loadAllStudentsForAClassCallback"></jhi-class-dropdown>
+
+<div class="form-group">
+ <label class="form-control-label" >Select Student</label>
+  <select
+    class="form-control"
+    id="field_studentClass1"
+    data-cy="studentClass1"
+    [(ngModel)]="selectedStudentId"
+    (change)="callCallBackFunction()"
+    name="studentClassFilterCommon"
+  >
+    <option [ngValue]="null">Select Student</option>
+    <option *ngFor="let classStudent of classStudents trackBy: trackFilterStudentId" [ngValue]="classStudent.id">
+      {{ classStudent.firstName }}
+    </option>
+  </select>
+  
+</div>
+

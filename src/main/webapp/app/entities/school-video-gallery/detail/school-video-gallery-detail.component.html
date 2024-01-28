@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolVideoGallery">
+      <h2 data-cy="schoolVideoGalleryDetailsHeading">
+        <span jhiTranslate="manageitApp.schoolVideoGallery.detail.title">School Video Gallery</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolVideoGallery.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.videoTitle">Video Title</span></dt>
+        <dd>
+          <span>{{ schoolVideoGallery.videoTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.videoDescription">Video Description</span></dt>
+        <dd>
+          <span>{{ schoolVideoGallery.videoDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.videoFile">Video File</span></dt>
+        <dd>
+          <div *ngIf="schoolVideoGallery.videoFile">
+            <a (click)="openFile(schoolVideoGallery.videoFile, schoolVideoGallery.videoFileContentType)" jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ schoolVideoGallery.videoFileContentType }}, {{ byteSize(schoolVideoGallery.videoFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.videoLink">Video Link</span></dt>
+        <dd>
+          <span>{{ schoolVideoGallery.videoLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolVideoGallery.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolVideoGallery.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolVideoGallery.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolVideoGallery.schoolClass">School Class</span></dt>
+        <dd>
+          <span *ngFor="let schoolClass of schoolVideoGallery.schoolClasses; let last = last">
+            <a [routerLink]="['/school-class', schoolClass?.id, 'view']">{{ schoolClass.className }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school-video-gallery', schoolVideoGallery.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

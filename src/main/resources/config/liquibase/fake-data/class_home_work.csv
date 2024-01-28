@@ -1,0 +1,11 @@
+id;school_date;student_assignment_type;home_work_text;home_work_file;home_work_file_content_type;home_work_file_link;assign;create_date;last_modified;cancel_date
+1;2021-05-03;READING_WRITING;payment Awesome Dollar;../fake-data/blob/hipster.png;image/png;payment;true;2021-05-04;2021-05-03;2021-05-04
+2;2021-05-04;READING_WRITING;invoice Indiana Georgia;../fake-data/blob/hipster.png;image/png;Corporate Grass-roots;true;2021-05-03;2021-05-04;2021-05-03
+3;2021-05-03;READING_WRITING;Singapore Delaware pink;../fake-data/blob/hipster.png;image/png;PNG;false;2021-05-04;2021-05-03;2021-05-03
+4;2021-05-04;PROJECT;synthesize;../fake-data/blob/hipster.png;image/png;AI process;false;2021-05-04;2021-05-03;2021-05-03
+5;2021-05-04;READING_WRITING;Division Computers;../fake-data/blob/hipster.png;image/png;plug-and-play Mouse;true;2021-05-03;2021-05-03;2021-05-04
+6;2021-05-03;READING_WRITING;Baht;../fake-data/blob/hipster.png;image/png;feed Awesome;false;2021-05-04;2021-05-04;2021-05-03
+7;2021-05-04;READING_WRITING;calculate;../fake-data/blob/hipster.png;image/png;payment Tenge;true;2021-05-04;2021-05-04;2021-05-04
+8;2021-05-04;READING_WRITING;implement connect;../fake-data/blob/hipster.png;image/png;teal;true;2021-05-04;2021-05-03;2021-05-04
+9;2021-05-04;PROJECT;Future;../fake-data/blob/hipster.png;image/png;invoice Analyst;true;2021-05-03;2021-05-04;2021-05-04
+10;2021-05-04;PROJECT;compress;../fake-data/blob/hipster.png;image/png;Soap reintermediate;true;2021-05-03;2021-05-04;2021-05-03

@@ -1,0 +1,31 @@
+{
+  "manageitApp": {
+    "schoolReport": {
+      "home": {
+        "title": "School Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School Report",
+        "createOrEditLabel": "Create or edit a School Report",
+        "notFound": "No School Reports found"
+      },
+      "created": "A new School Report is created with identifier {{ param }}",
+      "updated": "A School Report is updated with identifier {{ param }}",
+      "deleted": "A School Report is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School Report {{ id }}?"
+      },
+      "detail": {
+        "title": "School Report"
+      },
+      "id": "ID",
+      "reportType": "Report Type",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "reportFile": "Report File",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "School Class"
+    }
+  }
+}

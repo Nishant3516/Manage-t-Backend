@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="StudentAttendenceHeading">
+    <span jhiTranslate="manageitApp.studentAttendence.home.title">Student Attendences</span>
+
+    <div class="d-flex justify-content-end">
+    
+
+ <!-- <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" [(ngModel)]="attendanceDate"  ngbDatepicker #d1="ngbDatepicker" required> -->
+
+<!--       <button class="btn btn-info mr-2" (click)="loadAllAttendanceForAClass()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span >Search</span> -->
+<!--       </button> -->
+
+      <button *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'" 
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-student-attendence"
+        [routerLink]="['/student-attendence/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span > Show Attendence For A Student</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+
+  
+  
+        <div class="form-group">
+          <label class="form-control-label">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_astartDate"
+              data-cy="astartDate"
+              type="text"
+              class="form-control"
+              name="astartDate"
+              ngbDatepicker
+              #astartDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="astartDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        
+        </div>
+        
+           <label class="form-control-label" >End Date</label>
+          <div class="input-group">
+            <input
+              id="field_aendDate"
+              data-cy="aendDate"
+              type="text"
+              class="form-control"
+              name="aendDate"
+              ngbDatepicker
+              #aendDateDp="ngbDatepicker"
+              [(ngModel)]="attendanceEndDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="aendDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+         
+                <jhi-class-dropdown  *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [callbackFunction]="boundFunction"></jhi-class-dropdown>
+        
+   <div class="alert alert-warning" id="no-result" *ngIf="studentAttendences?.length === 0">
+    <span jhiTranslate="manageitApp.studentAttendence.home.notFound">No studentAttendences found</span>
+  </div>
+     <div class="d-flex justify-content-end">
+    
+             <button type="submit" (click)="loadAllAttendanceForAClass()" class="btn btn-success btn-sm" data-cy="entityPresentButton">
+                <span class="d-none d-md-inline" >Show Attendence</span>
+              </button>
+            
+              
+    </div>	       
+        
+  <div class="table-responsive" id="entities" *ngIf="studentAttendences && studentAttendences.length > 0">
+  <div class="d-flex justify-content-end">
+    <button type="submit" (click)="saveAll()"  [disabled]="attendanceMarked()" class="btn btn-warning btn-sm" data-cy="entityPresentButton">
+                <span class="d-none d-md-inline" >Final Submit</span>
+              </button>
+                </div>	
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAttendence.schoolDate">School Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAttendence.classStudent">Class Student</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.studentAttendence.attendence">Attendence</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let studentAttendence of studentAttendences; trackBy: trackId" data-cy="entityTable">
+          <td>{{ studentAttendence.schoolDate | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="studentAttendence.classStudent">
+              <a [routerLink]="['/class-student', studentAttendence.classStudent?.id, 'view']">{{ studentAttendence.classStudent?.studentId }} -- {{ studentAttendence.classStudent?.firstName}} {{ studentAttendence.classStudent?.lastName}}</a>
+            </div>
+          </td>
+          <td [ngClass]="studentAttendence.attendence? 'table-success': 'table-danger' " >{{ studentAttendence.attendence }}</td>
+ 
+          <td class="text-right">
+            <div class="btn-group">
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/student-attendence', studentAttendence.id, 'view']" -->
+<!--                 class="btn btn-info btn-sm" -->
+<!--                 data-cy="entityDetailsButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="eye"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span> -->
+<!--               </button> -->
+
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/student-attendence', studentAttendence.id, 'edit']" -->
+<!--                 class="btn btn-primary btn-sm" -->
+<!--                 data-cy="entityEditButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="pencil-alt"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span> -->
+<!--               </button> -->
+
+              <button *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'" [disabled]=studentAttendence.cancelDate?true:false type="submit" (click)="save(studentAttendence,true)" class="btn btn-success btn-sm" data-cy="entityPresentButton">
+                <span class="d-none d-md-inline" >Present</span>
+              </button>
+              <button *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'" [disabled]=studentAttendence.cancelDate?true:false type="submit" (click)="save(studentAttendence,false)" class="btn btn-warning btn-sm" data-cy="entityAbsentButton">
+                <span class="d-none d-md-inline" >Absent</span>
+              </button>
+
+<!--               <button type="submit" (click)="delete(studentAttendence)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton"> -->
+<!--                 <fa-icon icon="times"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span> -->
+<!--               </button> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

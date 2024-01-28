@@ -1,0 +1,268 @@
+<div>
+  <h2 id="page-heading" data-cy="QuestionHeading">
+    <span jhiTranslate="manageitApp.question.home.title">Questions</span>
+
+    <div class="d-flex justify-content-end">
+<!--       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.question.home.refreshListLabel">Refresh List</span> -->
+<!--       </button> -->
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-question"
+        [routerLink]="['/question/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.question.home.createLabel"> Create a new Question </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-class-dropdown [callbackFunction]="getClassIdCallBack"></jhi-class-dropdown>
+  <jhi-subject-dropdown [classId] = "selectedClassId" [questionTypeId] = "selectedQuestionTypeId" [callbackFunction]="getSubjectIdCallBack"></jhi-subject-dropdown>
+  <jhi-questiontype-dropdown [callbackFunction]="getQuestionTypeIdCallBack"></jhi-questiontype-dropdown>
+  <jhi-chapter-dropdown [selectedSubjectId] = "selectedSubjectId" [callbackFunction]="getChapterIdCallBack"></jhi-chapter-dropdown>
+	 <div class="form-group">
+          <label class="form-control-label"
+            >Question Papers for subject</label
+          >
+	    <select
+		    class="form-control"
+		    id="field_questionPapers"
+		    data-cy="questionPapers"
+		    [(ngModel)]="selectedQuestionPaper"
+		     name="questionsPaperFilter"
+		     (change)="findAQuestionPaperForASubject()"
+		  >
+	    <option *ngFor="let questionPaper of questionPapers trackBy: trackIdQPaper" [ngValue]="questionPaper">
+	      {{ questionPaper.questionPaperName }}
+	    </option>
+	  </select>
+   </div>
+    <div class="d-flex justify-content-end">
+         <button type="submit" (click)="openFile(foundQuestionPaper.questionPaperFile, foundQuestionPaper.questionPaperFileContentType)" [hidden]=isQuestionPaperSelected()  class="btn btn-info btn-sm" data-cy="entityAddToQuestionButton">
+                 
+        <span > Download Question Paper </span>
+              </button>
+    </div>
+    
+<!--      <div > -->
+<!--             <a -->
+<!--               (click)="isQuestionPaperSelectedForDownload()" -->
+<!--               jhiTranslate="entity.action.open" -->
+<!--               [hidden]=isQuestionPaperSelected() >open</a -->
+<!--             > -->
+           
+<!--           </div> -->
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="questions?.length === 0">
+    <span jhiTranslate="manageitApp.question.home.notFound">No questions found</span>
+  </div>
+ 
+  <div class="table-responsive" id="entities" *ngIf="questions && questions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+<!--           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th> -->
+<!--           <th scope="col" jhiSortBy="questionImportFile"> -->
+<!--             <span jhiTranslate="manageitApp.question.questionImportFile">Question Import File</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+          <th scope="col" jhiSortBy="questionType.id">
+            <span jhiTranslate="manageitApp.question.questionType">Question Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="questionText">
+            <span jhiTranslate="manageitApp.question.questionText">Question Text</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+<!--           <th scope="col" jhiSortBy="questionImage"> -->
+<!--             <span jhiTranslate="manageitApp.question.questionImage">Question Image</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="answerImage"> -->
+<!--             <span jhiTranslate="manageitApp.question.answerImage">Answer Image</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="imageSideBySide"> -->
+<!--             <span jhiTranslate="manageitApp.question.imageSideBySide">Image Side By Side</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="option1"> -->
+<!--             <span jhiTranslate="manageitApp.question.option1">Option 1</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="option2"> -->
+<!--             <span jhiTranslate="manageitApp.question.option2">Option 2</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="option3"> -->
+<!--             <span jhiTranslate="manageitApp.question.option3">Option 3</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="option4"> -->
+<!--             <span jhiTranslate="manageitApp.question.option4">Option 4</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="option5"> -->
+<!--             <span jhiTranslate="manageitApp.question.option5">Option 5</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="status"> -->
+<!--             <span jhiTranslate="manageitApp.question.status">Status</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="weightage"> -->
+<!--             <span jhiTranslate="manageitApp.question.weightage">Weightage</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+          <th scope="col" jhiSortBy="difficultyLevel">
+            <span jhiTranslate="manageitApp.question.difficultyLevel">Difficulty Level</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+<!--           <th scope="col" jhiSortBy="createDate"> -->
+<!--             <span jhiTranslate="manageitApp.question.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="lastModified"> -->
+<!--             <span jhiTranslate="manageitApp.question.lastModified">Last Modified</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="cancelDate"> -->
+<!--             <span jhiTranslate="manageitApp.question.cancelDate">Cancel Date</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="tenant.id"> -->
+<!--             <span jhiTranslate="manageitApp.question.tenant">Tenant</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="schoolClass.id"> -->
+<!--             <span jhiTranslate="manageitApp.question.schoolClass">School Class</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="classSubject.id"> -->
+<!--             <span jhiTranslate="manageitApp.question.classSubject">Class Subject</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+          <th scope="col" jhiSortBy="subjectChapter.id">
+            <span jhiTranslate="manageitApp.question.subjectChapter">Subject Chapter</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let question of questions; trackBy: trackId" data-cy="entityTable">
+<!--           <td> -->
+<!--             <a [routerLink]="['/question', question.id, 'view']">{{ question.id }}</a> -->
+<!--           </td> -->
+<!--           <td> -->
+<!--             <a -->
+<!--               *ngIf="question.questionImportFile" -->
+<!--               (click)="openFile(question.questionImportFile, question.questionImportFileContentType)" -->
+<!--               jhiTranslate="entity.action.open" -->
+<!--               >open</a -->
+<!--             > -->
+<!--             <span *ngIf="question.questionImportFile" -->
+<!--               >{{ question.questionImportFileContentType }}, {{ byteSize(question.questionImportFile) }}</span -->
+<!--             > -->
+<!--           </td> -->
+          <td>
+            <div *ngIf="question.questionType">
+              <a [routerLink]="['/question-type', question.questionType?.id, 'view']">{{ question.questionType?.questionType}}</a>
+            </div>
+          </td>
+          <td>{{ question.questionText }}</td>
+<!--           <td> -->
+<!--             <a -->
+<!--               *ngIf="question.questionImage" -->
+<!--               (click)="openFile(question.questionImage, question.questionImageContentType)" -->
+<!--               jhiTranslate="entity.action.open" -->
+<!--               >open</a -->
+<!--             > -->
+<!--             <span *ngIf="question.questionImage">{{ question.questionImageContentType }}, {{ byteSize(question.questionImage) }}</span> -->
+<!--           </td> -->
+<!--           <td> -->
+<!--             <a -->
+<!--               *ngIf="question.answerImage" -->
+<!--               (click)="openFile(question.answerImage, question.answerImageContentType)" -->
+<!--               jhiTranslate="entity.action.open" -->
+<!--               >open</a -->
+<!--             > -->
+<!--             <span *ngIf="question.answerImage">{{ question.answerImageContentType }}, {{ byteSize(question.answerImage) }}</span> -->
+<!--           </td> -->
+<!--           <td>{{ question.imageSideBySide }}</td> -->
+<!--           <td>{{ question.option1 }}</td> -->
+<!--           <td>{{ question.option2 }}</td> -->
+<!--           <td>{{ question.option3 }}</td> -->
+<!--           <td>{{ question.option4 }}</td> -->
+<!--           <td>{{ question.option5 }}</td> -->
+<!--           <td jhiTranslate="{{ 'manageitApp.Status.' + question.status }}">{{ question.status }}</td> -->
+<!--           <td>{{ question.weightage }}</td> -->
+          <td jhiTranslate="{{ 'manageitApp.Difficulty.' + question.difficultyLevel }}">{{ question.difficultyLevel }}</td>
+<!--           <td>{{ question.createDate | formatMediumDate }}</td> -->
+<!--           <td>{{ question.lastModified | formatMediumDate }}</td> -->
+<!--           <td>{{ question.cancelDate | formatMediumDate }}</td> -->
+<!--           <td> -->
+<!--             <div *ngIf="question.tenant"> -->
+<!--               <a [routerLink]="['/tenant', question.tenant?.id, 'view']">{{ question.tenant?.id }}</a> -->
+<!--             </div> -->
+<!--           </td> -->
+<!--           <td> -->
+<!--             <div *ngIf="question.schoolClass"> -->
+<!--               <a [routerLink]="['/school-class', question.schoolClass?.id, 'view']">{{ question.schoolClass?.id }}</a> -->
+<!--             </div> -->
+<!--           </td> -->
+<!--           <td> -->
+<!--             <div *ngIf="question.classSubject"> -->
+<!--               <a [routerLink]="['/class-subject', question.classSubject?.id, 'view']">{{ question.classSubject?.id }}</a> -->
+<!--             </div> -->
+<!--           </td> -->
+          <td>
+            <div *ngIf="question.subjectChapter">
+              <a [routerLink]="['/subject-chapter', question.subjectChapter?.id, 'view']">{{ question.subjectChapter?.chapterName }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/question', question.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/question', question.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(question)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+              <!-- [ngClass]=" {'table-danger': isQuestionAdded(question),'table-warning': !isQuestionAdded(question)}" -->
+              <button type="submit" (click)="addToQuestionAdded(question)" [hidden]=isQuestionPaperSelected()||isQuestionAdded(question) class="btn btn-warning btn-sm" data-cy="entityAddToQuestionButton">
+                
+                 <span class="d-none d-md-inline" >Add</span>
+              </button>
+              <button type="submit" (click)="removeFromQuestionAdded(question)" [hidden]=isQuestionPaperSelected()||!isQuestionAdded(question) class="btn btn-info btn-sm" data-cy="entityAddToQuestionButton">
+                
+                 <span class="d-none d-md-inline" >Rem</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!--   <div *ngIf="questions && questions.length > 0"> -->
+<!--     <div class="row justify-content-center"> -->
+<!--       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count> -->
+<!--     </div> -->
+
+<!--     <div class="row justify-content-center"> -->
+<!--       <ngb-pagination -->
+<!--         [collectionSize]="totalItems" -->
+<!--         [(page)]="ngbPaginationPage" -->
+<!--         [pageSize]="itemsPerPage" -->
+<!--         [maxSize]="5" -->
+<!--         [rotate]="true" -->
+<!--         [boundaryLinks]="true" -->
+<!--         (pageChange)="loadPage($event)" -->
+<!--       ></ngb-pagination> -->
+<!--     </div> -->
+<!--   </div> -->
+</div>

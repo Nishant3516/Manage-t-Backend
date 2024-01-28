@@ -1,0 +1,31 @@
+{
+  "manageitApp": {
+    "sTRoute": {
+      "home": {
+        "title": "STRoutes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया ST Route बनाएँ",
+        "createOrEditLabel": "ST Route बनाएँ या संपादित करें",
+        "notFound": "No ST Routes found"
+      },
+      "created": "एक नया ST Route [identifier: {{ param }}] तैयार है",
+      "updated": "एक ST Route [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "ST Route [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "ST Route [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "ST Route"
+      },
+      "id": "ID",
+      "transportRouteName": "Transport Route Name",
+      "routeCharge": "Route Charge",
+      "transportRouteAddress": "Transport Route Address",
+      "contactNumber": "Contact Number",
+      "createDate": "Create Date",
+      "cancelDate": "Cancel Date",
+      "remarks": "Remarks",
+      "sTIncomeExpenses": "S T Income Expenses"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="studentAdditionalCharges">
+      <h2 data-cy="studentAdditionalChargesDetailsHeading">
+        <span jhiTranslate="manageitApp.studentAdditionalCharges.detail.title">Student Additional Charges</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.feeYear">Fee Year</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.FeeYear.' + studentAdditionalCharges.feeYear }}">{{ studentAdditionalCharges.feeYear }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.dueDate">Due Date</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.dueDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.janAddChrg">Jan Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.janAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.febAddChrgc">Feb Add Chrgc</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.febAddChrgc }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.marAddChrg">Mar Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.marAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.aprAddChrg">Apr Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.aprAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.mayAddChrg">May Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.mayAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.junAddChrg">Jun Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.junAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.julAddChrg">Jul Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.julAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.augAddChrg">Aug Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.augAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.sepAddChrg">Sep Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.sepAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.octAddChrg">Oct Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.octAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.novAddChrg">Nov Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.novAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.decAddChrg">Dec Add Chrg</span></dt>
+        <dd>
+          <span>{{ studentAdditionalCharges.decAddChrg }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.schoolLedgerHead">School Ledger Head</span></dt>
+        <dd>
+          <div *ngIf="studentAdditionalCharges.schoolLedgerHead">
+            <a [routerLink]="['/school-ledger-head', studentAdditionalCharges.schoolLedgerHead?.id, 'view']">{{
+              studentAdditionalCharges.schoolLedgerHead?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentAdditionalCharges.classStudent">Class Student</span></dt>
+        <dd>
+          <div *ngIf="studentAdditionalCharges.classStudent">
+            <a [routerLink]="['/class-student', studentAdditionalCharges.classStudent?.id, 'view']">{{
+              studentAdditionalCharges.classStudent?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/student-additional-charges', studentAdditionalCharges.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

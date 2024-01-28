@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity StudentChargesSummary.
+    -->
+    <changeSet id="20210504171354-1" author="jhipster">
+        <createTable tableName="student_charges_summary">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="summary_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fee_year" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="due_date" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="apr_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="may_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="jun_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="jul_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="aug_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="sep_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="oct_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="nov_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dec_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="jan_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="feb_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="mar_summary" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="additional_info_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="additional_info_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="create_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="cancel_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="school_ledger_head_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="class_student_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210504171354-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/student_charges_summary.csv"
+                  separator=";"
+                  tableName="student_charges_summary">
+            <column name="id" type="numeric"/>
+            <column name="summary_type" type="string"/>
+            <column name="fee_year" type="string"/>
+            <column name="due_date" type="numeric"/>
+            <column name="apr_summary" type="string"/>
+            <column name="may_summary" type="string"/>
+            <column name="jun_summary" type="string"/>
+            <column name="jul_summary" type="string"/>
+            <column name="aug_summary" type="string"/>
+            <column name="sep_summary" type="string"/>
+            <column name="oct_summary" type="string"/>
+            <column name="nov_summary" type="string"/>
+            <column name="dec_summary" type="string"/>
+            <column name="jan_summary" type="string"/>
+            <column name="feb_summary" type="string"/>
+            <column name="mar_summary" type="string"/>
+            <column name="additional_info_1" type="string"/>
+            <column name="additional_info_2" type="string"/>
+            <column name="create_date" type="date"/>
+            <column name="last_modified" type="date"/>
+            <column name="cancel_date" type="date"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

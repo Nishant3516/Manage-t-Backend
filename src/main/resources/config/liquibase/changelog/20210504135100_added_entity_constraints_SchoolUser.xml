@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity SchoolUser.
+    -->
+    <changeSet id="20210504135100-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="school_user_id"
+                                 baseTableName="rel_school_user__school_class"
+                                 constraintName="fk_rel_school_user__school_class__school_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="school_class_id"
+                                 baseTableName="rel_school_user__school_class"
+                                 constraintName="fk_rel_school_user__school_class__school_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_class"/>
+
+        <addForeignKeyConstraint baseColumnNames="school_user_id"
+                                 baseTableName="rel_school_user__class_subject"
+                                 constraintName="fk_rel_school_user__class_subject__school_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="class_subject_id"
+                                 baseTableName="rel_school_user__class_subject"
+                                 constraintName="fk_rel_school_user__class_subject__class_subject_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_subject"/>
+    </changeSet>
+</databaseChangeLog>

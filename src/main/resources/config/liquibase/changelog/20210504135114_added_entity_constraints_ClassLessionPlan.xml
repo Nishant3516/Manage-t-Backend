@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ClassLessionPlan.
+    -->
+    <changeSet id="20210504135114-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="chapter_section_id"
+                                 baseTableName="class_lession_plan"
+                                 constraintName="fk_class_lession_plan__chapter_section_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chapter_section"/>
+
+        <addForeignKeyConstraint baseColumnNames="school_class_id"
+                                 baseTableName="class_lession_plan"
+                                 constraintName="fk_class_lession_plan__school_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_class"/>
+
+        <addForeignKeyConstraint baseColumnNames="class_subject_id"
+                                 baseTableName="class_lession_plan"
+                                 constraintName="fk_class_lession_plan__class_subject_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_subject"/>
+
+        <addForeignKeyConstraint baseColumnNames="subject_chapter_id"
+                                 baseTableName="class_lession_plan"
+                                 constraintName="fk_class_lession_plan__subject_chapter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="subject_chapter"/>
+    </changeSet>
+</databaseChangeLog>

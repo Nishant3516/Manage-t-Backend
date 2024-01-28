@@ -1,0 +1,116 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-st-income-expenses-heading"
+        data-cy="STIncomeExpensesCreateUpdateHeading"
+        jhiTranslate="manageitApp.sTIncomeExpenses.home.createOrEditLabel"
+      >
+        Create or edit a ST Income Expenses
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+  <jhi-class-dropdown *jhiHasAnyAuthority="'ROLE_USER'"  [callbackFunction]="getClassIdCallBack"></jhi-class-dropdown>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTIncomeExpenses.classStudent" for="field_classStudent"
+            >Class Student</label
+          >
+          <select class="form-control" id="field_classStudent" data-cy="classStudent" name="classStudent" formControlName="classStudent">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                classStudentOption.id === editForm.get('classStudent')!.value?.id ? editForm.get('classStudent')!.value : classStudentOption
+              "
+              *ngFor="let classStudentOption of classStudentsSharedCollection; trackBy: trackClassStudentById"
+            >
+              {{ classStudentOption.id }} --  {{ classStudentOption.firstName }}  {{ classStudentOption.lastName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTIncomeExpenses.stRoute" for="field_stRoute">St Route</label>
+          <select class="form-control" id="field_stRoute" data-cy="stRoute" name="stRoute" formControlName="stRoute"  (change)="routeChanged()">
+<!--             <option [ngValue]="null"></option> -->
+            <option
+              [ngValue]="sTRouteOption.id === editForm.get('stRoute')!.value?.id ? editForm.get('stRoute')!.value : sTRouteOption"
+              *ngFor="let sTRouteOption of sTRoutesSharedCollection; trackBy: trackSTRouteById"
+            >
+              {{ sTRouteOption.transportRouteName }} 
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTIncomeExpenses.amountPaid" for="field_amountPaid"
+            >Amount Paid</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="amountPaid"
+            id="field_amountPaid"
+            data-cy="amountPaid"
+            formControlName="amountPaid"
+          />
+          <div *ngIf="editForm.get('amountPaid')!.invalid && (editForm.get('amountPaid')!.dirty || editForm.get('amountPaid')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('amountPaid')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('amountPaid')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTIncomeExpenses.noteNumbers" for="field_noteNumbers"
+            >Note Numbers</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="noteNumbers"
+            id="field_noteNumbers"
+            data-cy="noteNumbers"
+            formControlName="noteNumbers"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTIncomeExpenses.remarks" for="field_remarks">Remarks</label>
+          <input type="text" class="form-control" name="remarks" id="field_remarks" data-cy="remarks" formControlName="remarks" />
+        </div>
+
+ 
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "manageitApp": {
+    "schoolEvent": {
+      "home": {
+        "title": "SchoolEvents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया School Event बनाएँ",
+        "createOrEditLabel": "School Event बनाएँ या संपादित करें",
+        "notFound": "No School Events found"
+      },
+      "created": "एक नया School Event [identifier: {{ param }}] तैयार है",
+      "updated": "एक School Event [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "School Event [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "School Event [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "School Event"
+      },
+      "id": "ID",
+      "eventName": "Event Name",
+      "eventDetails": "Event Details",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "School Class"
+    }
+  }
+}

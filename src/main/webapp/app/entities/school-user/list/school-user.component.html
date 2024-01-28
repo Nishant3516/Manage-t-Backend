@@ -1,0 +1,130 @@
+<div>
+  <h2 id="page-heading" data-cy="SchoolUserHeading">
+    <span jhiTranslate="manageitApp.schoolUser.home.title">School Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolUser.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-school-user"
+        [routerLink]="['/school-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.schoolUser.home.createLabel"> Create a new School User </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="schoolUsers?.length === 0">
+    <span jhiTranslate="manageitApp.schoolUser.home.notFound">No schoolUsers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="schoolUsers && schoolUsers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="loginName">
+            <span jhiTranslate="manageitApp.schoolUser.loginName">Login Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="password">
+            <span jhiTranslate="manageitApp.schoolUser.password">Password</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userEmail">
+            <span jhiTranslate="manageitApp.schoolUser.userEmail">User Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="extraInfo">
+            <span jhiTranslate="manageitApp.schoolUser.extraInfo">Extra Info</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="activated">
+            <span jhiTranslate="manageitApp.schoolUser.activated">Activated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userType">
+            <span jhiTranslate="manageitApp.schoolUser.userType">User Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="manageitApp.schoolUser.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <span jhiTranslate="manageitApp.schoolUser.lastModified">Last Modified</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cancelDate">
+            <span jhiTranslate="manageitApp.schoolUser.cancelDate">Cancel Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schoolUser of schoolUsers; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/school-user', schoolUser.id, 'view']">{{ schoolUser.id }}</a>
+          </td>
+          <td>{{ schoolUser.loginName }}</td>
+          <td>{{ schoolUser.password }}</td>
+          <td>{{ schoolUser.userEmail }}</td>
+          <td>{{ schoolUser.extraInfo }}</td>
+          <td>{{ schoolUser.activated }}</td>
+          <td jhiTranslate="{{ 'manageitApp.UserType.' + schoolUser.userType }}">{{ schoolUser.userType }}</td>
+          <td>{{ schoolUser.createDate | formatMediumDate }}</td>
+          <td>{{ schoolUser.lastModified | formatMediumDate }}</td>
+          <td>{{ schoolUser.cancelDate | formatMediumDate }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/school-user', schoolUser.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/school-user', schoolUser.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(schoolUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="schoolUsers && schoolUsers.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

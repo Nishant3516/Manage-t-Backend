@@ -1,0 +1,420 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-question-heading" data-cy="QuestionCreateUpdateHeading" jhiTranslate="manageitApp.question.home.createOrEditLabel">
+        Create or edit a Question
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+<!--         <div class="form-group" [hidden]="editForm.get('id')!.value == null"> -->
+<!--           <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label> -->
+<!--           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" /> -->
+<!--         </div> -->
+
+       
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.question.schoolClass" for="field_schoolClass">School Class</label>
+          <select class="form-control" id="field_schoolClass" 
+          data-cy="schoolClass" name="schoolClass" 
+          formControlName="schoolClass"
+          (change)="loadAllSubjectsForSelectedClass()"
+          >
+             <option
+              [ngValue]="
+                schoolClassOption.id === editForm.get('schoolClass')!.value?.id ? editForm.get('schoolClass')!.value : schoolClassOption
+              "
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.question.classSubject" for="field_classSubject">Class Subject</label>
+          <select class="form-control" id="field_classSubject" data-cy="classSubject" name="classSubject" 
+          formControlName="classSubject" (change)="loadAllChaptersFroASelectedSubject()">
+            <option
+              [ngValue]="
+                classSubjectOption.id === editForm.get('classSubject')!.value?.id ? editForm.get('classSubject')!.value : classSubjectOption
+              "
+              *ngFor="let classSubjectOption of classSubjectsSharedCollection; trackBy: trackClassSubjectById"
+            >
+              {{ classSubjectOption.subjectName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.question.subjectChapter" for="field_subjectChapter"
+            >Subject Chapter</label
+          >
+          <select
+            class="form-control"
+            id="field_subjectChapter"
+            data-cy="subjectChapter"
+            name="subjectChapter"
+            formControlName="subjectChapter"
+            
+          >
+            <option
+              [ngValue]="
+                subjectChapterOption.id === editForm.get('subjectChapter')!.value?.id
+                  ? editForm.get('subjectChapter')!.value
+                  : subjectChapterOption
+              "
+              *ngFor="let subjectChapterOption of subjectChaptersSharedCollection; trackBy: trackSubjectChapterById"
+            >
+              {{ subjectChapterOption.chapterName }}
+            </option>
+          </select>
+        </div>
+       <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.question.questionType" for="field_questionType">Question Type</label>
+          <select class="form-control" id="field_questionType" data-cy="questionType" name="questionType" formControlName="questionType">
+            <option
+              [ngValue]="
+                questionTypeOption.id === editForm.get('questionType')!.value?.id ? editForm.get('questionType')!.value : questionTypeOption
+              "
+              *ngFor="let questionTypeOption of questionTypesSharedCollection; trackBy: trackQuestionTypeById"
+            >
+              {{ questionTypeOption.questionType }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.question.questionImportFile" for="field_questionImportFile"
+            >Question Import File</label
+          >
+          <div>
+            <div *ngIf="editForm.get('questionImportFile')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('questionImportFile')!.value, editForm.get('questionImportFileContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('questionImportFileContentType')!.value }}, {{ byteSize(editForm.get('questionImportFile')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ questionImportFile: null }); editForm.patchValue({ questionImportFileContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_questionImportFile"
+              data-cy="questionImportFile"
+              (change)="setFileData($event, 'questionImportFile', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="questionImportFile"
+            id="field_questionImportFile"
+            data-cy="questionImportFile"
+            formControlName="questionImportFile"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="questionImportFileContentType"
+            id="field_questionImportFileContentType"
+            formControlName="questionImportFileContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.question.questionText" for="field_questionText">Question Text</label>
+          <textarea
+            class="form-control"
+            name="questionText"
+            id="field_questionText"
+            data-cy="questionText"
+            formControlName="questionText"
+          ></textarea>
+        </div>
+         
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.question.difficultyLevel" for="field_difficultyLevel"
+            >Difficulty Level</label
+          >
+          <select
+            class="form-control"
+            name="difficultyLevel"
+            formControlName="difficultyLevel"
+            id="field_difficultyLevel"
+            data-cy="difficultyLevel"
+          >
+<!--             <option [ngValue]="null">{{ 'manageitApp.Difficulty.null' | translate }}</option> -->
+            <option *ngFor="let difficulty of difficultyValues" [value]="difficulty">
+              {{ 'manageitApp.Difficulty.' + difficulty | translate }}
+            </option>
+          </select>
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.option1" for="field_option1">Option 1</label> -->
+<!--           <input type="text" class="form-control" name="option1" id="field_option1" data-cy="option1" formControlName="option1" /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.option2" for="field_option2">Option 2</label> -->
+<!--           <input type="text" class="form-control" name="option2" id="field_option2" data-cy="option2" formControlName="option2" /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.option3" for="field_option3">Option 3</label> -->
+<!--           <input type="text" class="form-control" name="option3" id="field_option3" data-cy="option3" formControlName="option3" /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.option4" for="field_option4">Option 4</label> -->
+<!--           <input type="text" class="form-control" name="option4" id="field_option4" data-cy="option4" formControlName="option4" /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.option5" for="field_option5">Option 5</label> -->
+<!--           <input type="text" class="form-control" name="option5" id="field_option5" data-cy="option5" formControlName="option5" /> -->
+<!--         </div> -->
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.questionImage" for="field_questionImage" -->
+<!--             >Question Image</label -->
+<!--           > -->
+<!--           <div> -->
+<!--             <div *ngIf="editForm.get('questionImage')!.value" class="form-text text-danger clearfix"> -->
+<!--               <a -->
+<!--                 class="pull-left" -->
+<!--                 (click)="openFile(editForm.get('questionImage')!.value, editForm.get('questionImageContentType')!.value)" -->
+<!--                 jhiTranslate="entity.action.open" -->
+<!--                 >open</a -->
+<!--               ><br /> -->
+<!--               <span class="pull-left" -->
+<!--                 >{{ editForm.get('questionImageContentType')!.value }}, {{ byteSize(editForm.get('questionImage')!.value) }}</span -->
+<!--               > -->
+<!--               <button -->
+<!--                 type="button" -->
+<!--                 (click)="editForm.patchValue({ questionImage: null }); editForm.patchValue({ questionImageContentType: null })" -->
+<!--                 class="btn btn-secondary btn-xs pull-right" -->
+<!--               > -->
+<!--                 <fa-icon icon="times"></fa-icon> -->
+<!--               </button> -->
+<!--             </div> -->
+<!--             <input -->
+<!--               type="file" -->
+<!--               id="file_questionImage" -->
+<!--               data-cy="questionImage" -->
+<!--               (change)="setFileData($event, 'questionImage', false)" -->
+<!--               jhiTranslate="entity.action.addblob" -->
+<!--             /> -->
+<!--           </div> -->
+<!--           <input -->
+<!--             type="hidden" -->
+<!--             class="form-control" -->
+<!--             name="questionImage" -->
+<!--             id="field_questionImage" -->
+<!--             data-cy="questionImage" -->
+<!--             formControlName="questionImage" -->
+<!--           /> -->
+<!--           <input -->
+<!--             type="hidden" -->
+<!--             class="form-control" -->
+<!--             name="questionImageContentType" -->
+<!--             id="field_questionImageContentType" -->
+<!--             formControlName="questionImageContentType" -->
+<!--           /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.answerImage" for="field_answerImage">Answer Image</label> -->
+<!--           <div> -->
+<!--             <div *ngIf="editForm.get('answerImage')!.value" class="form-text text-danger clearfix"> -->
+<!--               <a -->
+<!--                 class="pull-left" -->
+<!--                 (click)="openFile(editForm.get('answerImage')!.value, editForm.get('answerImageContentType')!.value)" -->
+<!--                 jhiTranslate="entity.action.open" -->
+<!--                 >open</a -->
+<!--               ><br /> -->
+<!--               <span class="pull-left" -->
+<!--                 >{{ editForm.get('answerImageContentType')!.value }}, {{ byteSize(editForm.get('answerImage')!.value) }}</span -->
+<!--               > -->
+<!--               <button -->
+<!--                 type="button" -->
+<!--                 (click)="editForm.patchValue({ answerImage: null }); editForm.patchValue({ answerImageContentType: null })" -->
+<!--                 class="btn btn-secondary btn-xs pull-right" -->
+<!--               > -->
+<!--                 <fa-icon icon="times"></fa-icon> -->
+<!--               </button> -->
+<!--             </div> -->
+<!--             <input -->
+<!--               type="file" -->
+<!--               id="file_answerImage" -->
+<!--               data-cy="answerImage" -->
+<!--               (change)="setFileData($event, 'answerImage', false)" -->
+<!--               jhiTranslate="entity.action.addblob" -->
+<!--             /> -->
+<!--           </div> -->
+<!--           <input -->
+<!--             type="hidden" -->
+<!--             class="form-control" -->
+<!--             name="answerImage" -->
+<!--             id="field_answerImage" -->
+<!--             data-cy="answerImage" -->
+<!--             formControlName="answerImage" -->
+<!--           /> -->
+<!--           <input -->
+<!--             type="hidden" -->
+<!--             class="form-control" -->
+<!--             name="answerImageContentType" -->
+<!--             id="field_answerImageContentType" -->
+<!--             formControlName="answerImageContentType" -->
+<!--           /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.imageSideBySide" for="field_imageSideBySide" -->
+<!--             >Image Side By Side</label -->
+<!--           > -->
+<!--           <input -->
+<!--             type="checkbox" -->
+<!--             class="form-check" -->
+<!--             name="imageSideBySide" -->
+<!--             id="field_imageSideBySide" -->
+<!--             data-cy="imageSideBySide" -->
+<!--             formControlName="imageSideBySide" -->
+<!--           /> -->
+<!--         </div> -->
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.status" for="field_status">Status</label> -->
+<!--           <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status"> -->
+<!--             <option [ngValue]="null">{{ 'manageitApp.Status.null' | translate }}</option> -->
+<!--             <option *ngFor="let status of statusValues" [value]="status">{{ 'manageitApp.Status.' + status | translate }}</option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.weightage" for="field_weightage">Weightage</label> -->
+<!--           <input type="number" class="form-control" name="weightage" id="field_weightage" data-cy="weightage" formControlName="weightage" /> -->
+<!--         </div> -->
+
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.createDate" for="field_createDate">Create Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_createDate" -->
+<!--               data-cy="createDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="createDate" -->
+<!--               ngbDatepicker -->
+<!--               #createDateDp="ngbDatepicker" -->
+<!--               formControlName="createDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.lastModified" for="field_lastModified">Last Modified</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_lastModified" -->
+<!--               data-cy="lastModified" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="lastModified" -->
+<!--               ngbDatepicker -->
+<!--               #lastModifiedDp="ngbDatepicker" -->
+<!--               formControlName="lastModified" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.cancelDate" for="field_cancelDate">Cancel Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_cancelDate" -->
+<!--               data-cy="cancelDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="cancelDate" -->
+<!--               ngbDatepicker -->
+<!--               #cancelDateDp="ngbDatepicker" -->
+<!--               formControlName="cancelDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label jhiTranslate="manageitApp.question.tag" for="field_tags">Tag</label> -->
+<!--           <select class="form-control" id="field_tags" data-cy="tag" multiple name="tags" formControlName="tags"> -->
+<!--             <option -->
+<!--               [ngValue]="getSelectedTag(tagOption, editForm.get('tags')!.value)" -->
+<!--               *ngFor="let tagOption of tagsSharedCollection; trackBy: trackTagById" -->
+<!--             > -->
+<!--               {{ tagOption.tagText }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+ 
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.question.tenant" for="field_tenant">Tenant</label> -->
+<!--           <select class="form-control" id="field_tenant" data-cy="tenant" name="tenant" formControlName="tenant"> -->
+<!--             <option [ngValue]="null"></option> -->
+<!--             <option -->
+<!--               [ngValue]="tenantOption.id === editForm.get('tenant')!.value?.id ? editForm.get('tenant')!.value : tenantOption" -->
+<!--               *ngFor="let tenantOption of tenantsSharedCollection; trackBy: trackTenantById" -->
+<!--             > -->
+<!--               {{ tenantOption.id }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+
+        
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

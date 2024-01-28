@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chapterSection">
+      <h2 data-cy="chapterSectionDetailsHeading"><span jhiTranslate="manageitApp.chapterSection.detail.title">Chapter Section</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+<!--         <dt><span jhiTranslate="global.field.id">ID</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ chapterSection.id }}</span> -->
+<!--         </dd> -->
+        <dt><span jhiTranslate="manageitApp.chapterSection.sectionName">Section Name</span></dt>
+        <dd>
+          <span>{{ chapterSection.sectionName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.chapterSection.sectionNumber">Section Number</span></dt>
+        <dd>
+          <span>{{ chapterSection.sectionNumber }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.chapterSection.createDate">Create Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ chapterSection.createDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.chapterSection.lastModified">Last Modified</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ chapterSection.lastModified | formatMediumDate }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.chapterSection.cancelDate">Cancel Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ chapterSection.cancelDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+        <dt><span jhiTranslate="manageitApp.chapterSection.subjectChapter">Subject Chapter</span></dt>
+        <dd>
+          <div *ngIf="chapterSection.subjectChapter">
+            <a [routerLink]="['/subject-chapter', chapterSection.subjectChapter?.id, 'view']">{{ chapterSection.subjectChapter?.chapterName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/chapter-section', chapterSection.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

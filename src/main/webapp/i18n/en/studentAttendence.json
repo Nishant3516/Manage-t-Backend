@@ -1,0 +1,29 @@
+{
+  "manageitApp": {
+    "studentAttendence": {
+      "home": {
+        "title": "Student Attendences",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Student Attendence",
+        "createOrEditLabel": "Create or edit a Student Attendence",
+        "notFound": "No Student Attendences found"
+      },
+      "created": "A new Student Attendence is created with identifier {{ param }}",
+      "updated": "A Student Attendence is updated with identifier {{ param }}",
+      "deleted": "A Student Attendence is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Student Attendence {{ id }}?"
+      },
+      "detail": {
+        "title": "Student Attendence"
+      },
+      "id": "ID",
+      "schoolDate": "School Date",
+      "attendence": "Attendence",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classStudent": "Class Student"
+    }
+  }
+}

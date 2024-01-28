@@ -1,0 +1,120 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-st-route-heading" data-cy="STRouteCreateUpdateHeading" jhiTranslate="manageitApp.sTRoute.home.createOrEditLabel">
+        Create or edit a ST Route
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTRoute.transportRouteName" for="field_transportRouteName"
+            >Transport Route Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="transportRouteName"
+            id="field_transportRouteName"
+            data-cy="transportRouteName"
+            formControlName="transportRouteName"
+          />
+          <div
+            *ngIf="
+              editForm.get('transportRouteName')!.invalid &&
+              (editForm.get('transportRouteName')!.dirty || editForm.get('transportRouteName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('transportRouteName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTRoute.routeCharge" for="field_routeCharge">Route Charge</label>
+          <input
+            type="number"
+            class="form-control"
+            name="routeCharge"
+            id="field_routeCharge"
+            data-cy="routeCharge"
+            formControlName="routeCharge"
+          />
+          <div *ngIf="editForm.get('routeCharge')!.invalid && (editForm.get('routeCharge')!.dirty || editForm.get('routeCharge')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('routeCharge')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('routeCharge')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTRoute.transportRouteAddress" for="field_transportRouteAddress"
+            >Transport Route Address</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="transportRouteAddress"
+            id="field_transportRouteAddress"
+            data-cy="transportRouteAddress"
+            formControlName="transportRouteAddress"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTRoute.contactNumber" for="field_contactNumber"
+            >Contact Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contactNumber"
+            id="field_contactNumber"
+            data-cy="contactNumber"
+            formControlName="contactNumber"
+          />
+        </div>
+
+ 
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.sTRoute.remarks" for="field_remarks">Remarks</label>
+          <input type="text" class="form-control" name="remarks" id="field_remarks" data-cy="remarks" formControlName="remarks" />
+        </div>
+ 
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

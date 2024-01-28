@@ -1,0 +1,186 @@
+<div>
+  <h2 id="page-heading" data-cy="StudentClassWorkTrackHeading">
+    <span jhiTranslate="manageitApp.studentClassWorkTrack.home.title">Student Class Work Tracks</span>
+
+<!--     <div class="d-flex justify-content-end"> -->
+<!--       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.studentClassWorkTrack.home.refreshListLabel">Refresh List</span> -->
+<!--       </button> -->
+
+<!--       <button -->
+<!--         id="jh-create-entity" -->
+<!--         data-cy="entityCreateButton" -->
+<!--         class="btn btn-primary jh-create-entity create-student-class-work-track" -->
+<!--         [routerLink]="['/student-class-work-track/new']" -->
+<!--       > -->
+<!--         <fa-icon icon="plus"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.studentClassWorkTrack.home.createLabel"> Create a new Student Class Work Track </span> -->
+<!--       </button> -->
+<!--     </div> -->
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="form-group">
+          <label class="form-control-label">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_astartDate"
+              data-cy="astartDate"
+              type="text"
+              class="form-control"
+              name="astartDate"
+              ngbDatepicker
+              #astartDateDp="ngbDatepicker"
+              [(ngModel)]="startDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="astartDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        
+        </div>
+        
+           <label class="form-control-label" >End Date</label>
+          <div class="input-group">
+            <input
+              id="field_aendDate"
+              data-cy="aendDate"
+              type="text"
+              class="form-control"
+              name="aendDate"
+              ngbDatepicker
+              #aendDateDp="ngbDatepicker"
+              [(ngModel)]="endDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="aendDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+
+  <jhi-class-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [callbackFunction]="getClassIdCallBack"></jhi-class-dropdown>
+  <jhi-subject-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_STUDENT'"  [classId] = "selectedClassId" [callbackFunction]="getSubjectIdCallBack"></jhi-subject-dropdown>
+  <jhi-student-dropdown *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [selectedClassId] = "selectedClassId" [callbackFunction]="getStudentIdCallBack"></jhi-student-dropdown>
+ <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadStudentClassWorkTracks()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span >Fetch</span>
+      </button>
+
+    </div>
+   <div class="alert alert-warning" id="no-result" *ngIf="studentClassWorkTracks?.length === 0">
+    <span jhiTranslate="manageitApp.studentClassWorkTrack.home.notFound">No studentClassWorkTracks found</span>
+  </div>
+  <div class="table-responsive" id="entities" *ngIf="studentClassWorkTracks && studentClassWorkTracks.length > 0">
+
+  <div class="d-flex justify-content-end">
+    <button type="submit" (click)="saveAll()"  [disabled]="studentClassWorkMarked()" class="btn btn-warning btn-sm" data-cy="entityPresentButton">
+                <span class="d-none d-md-inline" >Final Submit</span>
+    </button>
+  </div>	
+
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" >
+          <th scope="col" jhiSortBy="workStatus">
+            <span jhiTranslate="manageitApp.studentClassWorkTrack.workStatus">Work Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="remarks">
+            <span jhiTranslate="manageitApp.studentClassWorkTrack.remarks">Remarks</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="manageitApp.studentClassWorkTrack.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+           <th scope="col" jhiSortBy="classStudent.id">
+            <span jhiTranslate="manageitApp.studentClassWorkTrack.classStudent">Class Student</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="classClassWork.id">
+            <span jhiTranslate="manageitApp.studentClassWorkTrack.classClassWork">Class Class Work</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let studentClassWorkTrack of studentClassWorkTracks; trackBy: trackId" data-cy="entityTable">
+          <td  [ngClass]="studentClassWorkTrack.workStatus==='Done'? 'table-success': 'table-warning' "    jhiTranslate="{{ 'manageitApp.WorkStatus.' + studentClassWorkTrack.workStatus }}">{{ studentClassWorkTrack.workStatus }}</td>
+          <td>{{ studentClassWorkTrack.remarks }}</td>
+          <td>{{ studentClassWorkTrack.createDate | formatMediumDate }}</td>
+           <td>
+            <div *ngIf="studentClassWorkTrack.classStudent">
+              <a [routerLink]="['/class-student', studentClassWorkTrack.classStudent?.id, 'view']">{{
+                studentClassWorkTrack.classStudent?.id
+              }}</a>--{{ studentClassWorkTrack.classStudent?.studentId}} --{{ studentClassWorkTrack.classStudent?.firstName}}
+            </div>
+          </td>
+          <td>
+            <div *ngIf="studentClassWorkTrack.classClassWork">
+              <a [routerLink]="['/class-class-work', studentClassWorkTrack.classClassWork?.id, 'view']">{{
+                studentClassWorkTrack.classClassWork?.id
+              }}</a> --{{studentClassWorkTrack.classClassWork?.classWorkText}}
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/student-class-work-track', studentClassWorkTrack.id, 'view']" -->
+<!--                 class="btn btn-info btn-sm" -->
+<!--                 data-cy="entityDetailsButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="eye"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span> -->
+<!--               </button> -->
+
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/student-class-work-track', studentClassWorkTrack.id, 'edit']" -->
+<!--                 class="btn btn-primary btn-sm" -->
+<!--                 data-cy="entityEditButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="pencil-alt"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span> -->
+<!--               </button> -->
+
+              <button *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'" [disabled]=studentClassWorkTrack.cancelDate?true:false   type="submit" (click)="save(studentClassWorkTrack,true)" class="btn btn-success btn-sm" data-cy="entityDeleteButton">
+                <span class="d-none d-md-inline" >Done</span>
+              </button>
+              <button *jhiHasAnyAuthority="'ROLE_SCHOOL_TEACHER'"  [disabled]=studentClassWorkTrack.cancelDate?true:false type="submit" (click)="save(studentClassWorkTrack,false)" class="btn btn-warning btn-sm" data-cy="entityDeleteButton">
+                <span class="d-none d-md-inline">Not Done</span>
+              </button>
+
+<!--               <button type="submit" (click)="delete(studentClassWorkTrack)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton"> -->
+<!--                 <fa-icon icon="times"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span> -->
+<!--               </button> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!--   <div *ngIf="studentClassWorkTracks && studentClassWorkTracks.length > 0"> -->
+<!--     <div class="row justify-content-center"> -->
+<!--       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count> -->
+<!--     </div> -->
+
+<!--     <div class="row justify-content-center"> -->
+<!--       <ngb-pagination -->
+<!--         [collectionSize]="totalItems" -->
+<!--         [(page)]="ngbPaginationPage" -->
+<!--         [pageSize]="itemsPerPage" -->
+<!--         [maxSize]="5" -->
+<!--         [rotate]="true" -->
+<!--         [boundaryLinks]="true" -->
+<!--         (pageChange)="loadPage($event)" -->
+<!--       ></ngb-pagination> -->
+<!--     </div> -->
+<!--   </div> -->
+</div>

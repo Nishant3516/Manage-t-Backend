@@ -1,0 +1,36 @@
+{
+  "manageitApp": {
+    "vendors": {
+      "home": {
+        "title": "Vendors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Vendors",
+        "createOrEditLabel": "Create or edit a Vendors",
+        "notFound": "No Vendors found"
+      },
+      "created": "A new Vendors is created with identifier {{ param }}",
+      "updated": "A Vendors is updated with identifier {{ param }}",
+      "deleted": "A Vendors is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Vendors {{ id }}?"
+      },
+      "detail": {
+        "title": "Vendors"
+      },
+      "id": "ID",
+      "vendorPhoto": "Vendor Photo",
+      "vendorPhotoLink": "Vendor Photo Link",
+      "vendorId": "Vendor Id",
+      "vendorName": "Vendor Name",
+      "phoneNumber": "Phone Number",
+      "dateOfBirth": "Date Of Birth",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "nickName": "Nick Name",
+      "email": "Email",
+      "createDate": "Create Date",
+      "cancelDate": "Cancel Date",
+      "vendorType": "Vendor Type"
+    }
+  }
+}

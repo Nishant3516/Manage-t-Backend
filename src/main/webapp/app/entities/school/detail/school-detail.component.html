@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="school">
+      <h2 data-cy="schoolDetailsHeading"><span jhiTranslate="manageitApp.school.detail.title">School</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ school.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.school.groupName">Group Name</span></dt>
+        <dd>
+          <span>{{ school.groupName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.school.schoolName">School Name</span></dt>
+        <dd>
+          <span>{{ school.schoolName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.school.address">Address</span></dt>
+        <dd>
+          <span>{{ school.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.school.afflNumber">Affl Number</span></dt>
+        <dd>
+          <span>{{ school.afflNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.school.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ school.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.school.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ school.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.school.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ school.cancelDate | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school', school.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+{
+  "manageitApp": {
+    "studentDiscount": {
+      "home": {
+        "title": "StudentDiscounts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Student Discount बनाएँ",
+        "createOrEditLabel": "Student Discount बनाएँ या संपादित करें",
+        "notFound": "No Student Discounts found"
+      },
+      "created": "एक नया Student Discount [identifier: {{ param }}] तैयार है",
+      "updated": "एक Student Discount [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Student Discount [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Student Discount [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Student Discount"
+      },
+      "id": "ID",
+      "feeYear": "Fee Year",
+      "dueDate": "Due Date",
+      "janFeeDisc": "Jan Fee Disc",
+      "febFeeDisc": "Feb Fee Disc",
+      "marFeeDisc": "Mar Fee Disc",
+      "aprFeeDisc": "Apr Fee Disc",
+      "mayFeeDisc": "May Fee Disc",
+      "junFeeDisc": "Jun Fee Disc",
+      "julFeeDisc": "Jul Fee Disc",
+      "augFeeDisc": "Aug Fee Disc",
+      "sepFeeDisc": "Sep Fee Disc",
+      "octFeeDisc": "Oct Fee Disc",
+      "novFeeDisc": "Nov Fee Disc",
+      "decFeeDisc": "Dec Fee Disc",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolLedgerHead": "School Ledger Head",
+      "classStudent": "Class Student"
+    }
+  }
+}

@@ -1,0 +1,239 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-school-picture-gallery-heading"
+        data-cy="SchoolPictureGalleryCreateUpdateHeading"
+        jhiTranslate="manageitApp.schoolPictureGallery.home.createOrEditLabel"
+      >
+        Create or edit a School Picture Gallery
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolPictureGallery.pictureTitle" for="field_pictureTitle"
+            >Picture Title</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="pictureTitle"
+            id="field_pictureTitle"
+            data-cy="pictureTitle"
+            formControlName="pictureTitle"
+          />
+          <div
+            *ngIf="editForm.get('pictureTitle')!.invalid && (editForm.get('pictureTitle')!.dirty || editForm.get('pictureTitle')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pictureTitle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="manageitApp.schoolPictureGallery.pictureDescription"
+            for="field_pictureDescription"
+            >Picture Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="pictureDescription"
+            id="field_pictureDescription"
+            data-cy="pictureDescription"
+            formControlName="pictureDescription"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolPictureGallery.pictureFile" for="field_pictureFile"
+            >Picture File</label
+          >
+          <div>
+            <div *ngIf="editForm.get('pictureFile')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('pictureFile')!.value, editForm.get('pictureFileContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('pictureFileContentType')!.value }}, {{ byteSize(editForm.get('pictureFile')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ pictureFile: null }); editForm.patchValue({ pictureFileContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_pictureFile"
+              data-cy="pictureFile"
+              (change)="setFileData($event, 'pictureFile', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="pictureFile"
+            id="field_pictureFile"
+            data-cy="pictureFile"
+            formControlName="pictureFile"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="pictureFileContentType"
+            id="field_pictureFileContentType"
+            formControlName="pictureFileContentType"
+          />
+          <div *ngIf="editForm.get('pictureFile')!.invalid && (editForm.get('pictureFile')!.dirty || editForm.get('pictureFile')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pictureFile')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolPictureGallery.pictureLink" for="field_pictureLink"
+            >Picture Link</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="pictureLink"
+            id="field_pictureLink"
+            data-cy="pictureLink"
+            formControlName="pictureLink"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolPictureGallery.createDate" for="field_createDate"
+            >Create Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="text"
+              class="form-control"
+              name="createDate"
+              ngbDatepicker
+              #createDateDp="ngbDatepicker"
+              formControlName="createDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolPictureGallery.lastModified" for="field_lastModified"
+            >Last Modified</label
+          >
+          <div class="input-group">
+            <input
+              id="field_lastModified"
+              data-cy="lastModified"
+              type="text"
+              class="form-control"
+              name="lastModified"
+              ngbDatepicker
+              #lastModifiedDp="ngbDatepicker"
+              formControlName="lastModified"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.schoolPictureGallery.cancelDate" for="field_cancelDate"
+            >Cancel Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_cancelDate"
+              data-cy="cancelDate"
+              type="text"
+              class="form-control"
+              name="cancelDate"
+              ngbDatepicker
+              #cancelDateDp="ngbDatepicker"
+              formControlName="cancelDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="manageitApp.schoolPictureGallery.schoolClass" for="field_schoolClasses">School Class</label>
+          <select
+            class="form-control"
+            id="field_schoolClasses"
+            data-cy="schoolClass"
+            multiple
+            name="schoolClasses"
+            formControlName="schoolClasses"
+          >
+            <option
+              [ngValue]="getSelectedSchoolClass(schoolClassOption, editForm.get('schoolClasses')!.value)"
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

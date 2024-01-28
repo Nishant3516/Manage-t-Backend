@@ -1,0 +1,199 @@
+<div>
+  <h2 id="page-heading" data-cy="QuestionPaperHeading">
+    <span jhiTranslate="manageitApp.questionPaper.home.title">Question Papers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.questionPaper.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-question-paper"
+        [routerLink]="['/question-paper/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.questionPaper.home.createLabel"> Create a new Question Paper </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-class-dropdown [callbackFunction]="getClassIdCallBack"></jhi-class-dropdown>
+  <jhi-subject-dropdown [classId] = "selectedClassId" [callbackFunction]="getSubjectIdCallBack"></jhi-subject-dropdown>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="questionPapers?.length === 0">
+    <span jhiTranslate="manageitApp.questionPaper.home.notFound">No questionPapers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="questionPapers && questionPapers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+<!--           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th> -->
+<!--           <th scope="col" jhiSortBy="tenatLogo"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.tenatLogo">Tenat Logo</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+          <th scope="col" jhiSortBy="questionPaperName">
+            <span jhiTranslate="manageitApp.questionPaper.questionPaperName">Question Paper Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="questionPaperFile">
+            <span jhiTranslate="manageitApp.questionPaper.questionPaperFile">Question Paper File</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mainTitle">
+            <span jhiTranslate="manageitApp.questionPaper.mainTitle">Main Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="subTitle">
+            <span jhiTranslate="manageitApp.questionPaper.subTitle">Sub Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="leftSubHeading1">
+            <span jhiTranslate="manageitApp.questionPaper.leftSubHeading1">Left Sub Heading 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+<!--           <th scope="col" jhiSortBy="leftSubHeading2"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.leftSubHeading2">Left Sub Heading 2</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="rightSubHeading1"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.rightSubHeading1">Right Sub Heading 1</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="rightSubHeading2"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.rightSubHeading2">Right Sub Heading 2</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="instructions"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.instructions">Instructions</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="footerText"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.footerText">Footer Text</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="totalMarks"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.totalMarks">Total Marks</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="createDate"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="lastModified"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.lastModified">Last Modified</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="cancelDate"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.cancelDate">Cancel Date</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+<!--           <th scope="col" jhiSortBy="tenant.id"> -->
+<!--             <span jhiTranslate="manageitApp.questionPaper.tenant">Tenant</span> <fa-icon icon="sort"></fa-icon> -->
+<!--           </th> -->
+          <th scope="col" jhiSortBy="schoolClass.id">
+            <span jhiTranslate="manageitApp.questionPaper.schoolClass">School Class</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="classSubject.id">
+            <span jhiTranslate="manageitApp.questionPaper.classSubject">Class Subject</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let questionPaper of questionPapers; trackBy: trackId" data-cy="entityTable">
+<!--           <td> -->
+<!--             <a [routerLink]="['/question-paper', questionPaper.id, 'view']">{{ questionPaper.id }}</a> -->
+<!--           </td> -->
+<!--           <td> -->
+<!--             <a -->
+<!--               *ngIf="questionPaper.tenatLogo" -->
+<!--               (click)="openFile(questionPaper.tenatLogo, questionPaper.tenatLogoContentType)" -->
+<!--               jhiTranslate="entity.action.open" -->
+<!--               >open</a -->
+<!--             > -->
+<!--             <span *ngIf="questionPaper.tenatLogo">{{ questionPaper.tenatLogoContentType }}, {{ byteSize(questionPaper.tenatLogo) }}</span> -->
+<!--           </td> -->
+          <td>{{ questionPaper.questionPaperName }}</td>
+          <td>
+            <a
+              *ngIf="questionPaper.questionPaperFile"
+              (click)="openFile(questionPaper.questionPaperFile, questionPaper.questionPaperFileContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="questionPaper.questionPaperFile"
+              >{{ questionPaper.questionPaperFileContentType }}, {{ byteSize(questionPaper.questionPaperFile) }}</span
+            >
+          </td>
+          <td>{{ questionPaper.mainTitle }}</td>
+          <td>{{ questionPaper.subTitle }}</td>
+          <td>{{ questionPaper.leftSubHeading1 }}</td>
+<!--           <td>{{ questionPaper.leftSubHeading2 }}</td> -->
+<!--           <td>{{ questionPaper.rightSubHeading1 }}</td> -->
+<!--           <td>{{ questionPaper.rightSubHeading2 }}</td> -->
+<!--           <td>{{ questionPaper.instructions }}</td> -->
+<!--           <td>{{ questionPaper.footerText }}</td> -->
+<!--           <td>{{ questionPaper.totalMarks }}</td> -->
+<!--           <td>{{ questionPaper.createDate | formatMediumDate }}</td> -->
+<!--           <td>{{ questionPaper.lastModified | formatMediumDate }}</td> -->
+<!--           <td>{{ questionPaper.cancelDate | formatMediumDate }}</td> -->
+<!--           <td> -->
+<!--             <div *ngIf="questionPaper.tenant"> -->
+<!--               <a [routerLink]="['/tenant', questionPaper.tenant?.id, 'view']">{{ questionPaper.tenant?.id }}</a> -->
+<!--             </div> -->
+<!--           </td> -->
+          <td>
+            <div *ngIf="questionPaper.schoolClass">
+              <a [routerLink]="['/school-class', questionPaper.schoolClass?.id, 'view']">{{ questionPaper.schoolClass?.className }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="questionPaper.classSubject">
+              <a [routerLink]="['/class-subject', questionPaper.classSubject?.id, 'view']">{{ questionPaper.classSubject?.subjectName }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/question-paper', questionPaper.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/question-paper', questionPaper.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(questionPaper)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!--   <div *ngIf="questionPapers && questionPapers.length > 0"> -->
+<!--     <div class="row justify-content-center"> -->
+<!--       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count> -->
+<!--     </div> -->
+
+<!--     <div class="row justify-content-center"> -->
+<!--       <ngb-pagination -->
+<!--         [collectionSize]="totalItems" -->
+<!--         [(page)]="ngbPaginationPage" -->
+<!--         [pageSize]="itemsPerPage" -->
+<!--         [maxSize]="5" -->
+<!--         [rotate]="true" -->
+<!--         [boundaryLinks]="true" -->
+<!--         (pageChange)="loadPage($event)" -->
+<!--       ></ngb-pagination> -->
+<!--     </div> -->
+<!--   </div> -->
+  
+</div>

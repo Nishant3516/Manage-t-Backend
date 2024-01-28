@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="classHomeWork">
+      <h2 data-cy="classHomeWorkDetailsHeading"><span jhiTranslate="manageitApp.classHomeWork.detail.title">Class Home Work</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ classHomeWork.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classHomeWork.schoolDate">School Date</span></dt>
+        <dd>
+          <span>{{ classHomeWork.schoolDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classHomeWork.studentAssignmentType">Student Assignment Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.StudentAssignmentType.' + classHomeWork.studentAssignmentType }}">{{
+            classHomeWork.studentAssignmentType
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classHomeWork.homeWorkText">Home Work Text</span></dt>
+        <dd>
+          <span>{{ classHomeWork.homeWorkText }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classHomeWork.homeWorkFile">Home Work File</span></dt>
+        <dd>
+          <div *ngIf="classHomeWork.homeWorkFile">
+            <a (click)="openFile(classHomeWork.homeWorkFile, classHomeWork.homeWorkFileContentType)" jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ classHomeWork.homeWorkFileContentType }}, {{ byteSize(classHomeWork.homeWorkFile) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classHomeWork.homeWorkFileLink">Home Work File Link</span></dt>
+        <dd>
+          <span>{{ classHomeWork.homeWorkFileLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classHomeWork.assign">Assign</span></dt>
+        <dd>
+          <span>{{ classHomeWork.assign }}</span>
+        </dd>
+<!--         <dt><span jhiTranslate="manageitApp.classHomeWork.createDate">Create Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ classHomeWork.createDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.classHomeWork.lastModified">Last Modified</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ classHomeWork.lastModified | formatMediumDate }}</span> -->
+<!--         </dd> -->
+<!--         <dt><span jhiTranslate="manageitApp.classHomeWork.cancelDate">Cancel Date</span></dt> -->
+<!--         <dd> -->
+<!--           <span>{{ classHomeWork.cancelDate | formatMediumDate }}</span> -->
+<!--         </dd> -->
+        <dt><span jhiTranslate="manageitApp.classHomeWork.chapterSection">Chapter Section</span></dt>
+        <dd>
+          <div *ngIf="classHomeWork.chapterSection">
+            <a [routerLink]="['/chapter-section', classHomeWork.chapterSection?.id, 'view']">{{ classHomeWork.chapterSection?.sectionName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/class-home-work', classHomeWork.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

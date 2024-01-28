@@ -1,0 +1,34 @@
+{
+  "manageitApp": {
+    "classClassWork": {
+      "home": {
+        "title": "ClassClassWorks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Class Class Work बनाएँ",
+        "createOrEditLabel": "Class Class Work बनाएँ या संपादित करें",
+        "notFound": "No Class Class Works found"
+      },
+      "created": "एक नया Class Class Work [identifier: {{ param }}] तैयार है",
+      "updated": "एक Class Class Work [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Class Class Work [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Class Class Work [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Class Class Work"
+      },
+      "id": "ID",
+      "schoolDate": "School Date",
+      "studentAssignmentType": "Student Assignment Type",
+      "classWorkText": "Class Work Text",
+      "classWorkFile": "Class Work File",
+      "classWorkFileLink": "Class Work File Link",
+      "assign": "Assign",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "studentClassWorkTrack": "Student Class Work Track",
+      "chapterSection": "Chapter Section"
+    }
+  }
+}

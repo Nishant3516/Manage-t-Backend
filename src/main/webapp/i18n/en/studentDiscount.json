@@ -1,0 +1,42 @@
+{
+  "manageitApp": {
+    "studentDiscount": {
+      "home": {
+        "title": "Student Discounts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Student Discount",
+        "createOrEditLabel": "Create or edit a Student Discount",
+        "notFound": "No Student Discounts found"
+      },
+      "created": "A new Student Discount is created with identifier {{ param }}",
+      "updated": "A Student Discount is updated with identifier {{ param }}",
+      "deleted": "A Student Discount is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Student Discount {{ id }}?"
+      },
+      "detail": {
+        "title": "Student Discount"
+      },
+      "id": "ID",
+      "feeYear": "Session",
+      "dueDate": "Due Date",
+      "janFeeDisc": "Jan",
+      "febFeeDisc": "Feb",
+      "marFeeDisc": "Mar",
+      "aprFeeDisc": "Apr",
+      "mayFeeDisc": "May",
+      "junFeeDisc": "Jun",
+      "julFeeDisc": "Jul",
+      "augFeeDisc": "Aug",
+      "sepFeeDisc": "Sep",
+      "octFeeDisc": "Oct",
+      "novFeeDisc": "Nov",
+      "decFeeDisc": "Dec",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolLedgerHead": "Ledger Head",
+      "classStudent": "Student"
+    }
+  }
+}

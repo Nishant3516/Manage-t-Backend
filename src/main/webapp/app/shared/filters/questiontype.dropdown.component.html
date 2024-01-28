@@ -1,0 +1,18 @@
+<div class="form-group">
+ <label class="form-control-label" >Select Question Type</label>
+  <select
+    class="form-control"
+    id="field_studentClass1"
+    data-cy="studentClass1"
+    [(ngModel)]="selectedQuestionTypeId"
+    (change)="callCallBackFunction()"
+    name="studentClassFilterCommon"
+  >
+    <option [ngValue]="null">Select Question Type</option>
+    <option *ngFor="let questionTypeOption of questionTypes trackBy: trackFilterQuestionTypeByIdCommon" [ngValue]="questionTypeOption.id">
+      {{ questionTypeOption.questionType }}
+    </option>
+  </select>
+  
+</div>
+

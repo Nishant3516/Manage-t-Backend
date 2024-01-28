@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tenant">
+      <h2 data-cy="tenantDetailsHeading"><span jhiTranslate="manageitApp.tenant.detail.title">Tenant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tenant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.tenant.tenantName">Tenant Name</span></dt>
+        <dd>
+          <span>{{ tenant.tenantName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.tenant.tenantLogo">Tenant Logo</span></dt>
+        <dd>
+          <div *ngIf="tenant.tenantLogo">
+            <a (click)="openFile(tenant.tenantLogo, tenant.tenantLogoContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ tenant.tenantLogoContentType }}, {{ byteSize(tenant.tenantLogo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.tenant.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ tenant.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.tenant.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ tenant.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.tenant.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ tenant.cancelDate | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tenant', tenant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

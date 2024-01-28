@@ -1,0 +1,32 @@
+{
+  "manageitApp": {
+    "schoolDaysOff": {
+      "home": {
+        "title": "SchoolDaysOffs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया School Days Off बनाएँ",
+        "createOrEditLabel": "School Days Off बनाएँ या संपादित करें",
+        "notFound": "No School Days Offs found"
+      },
+      "created": "एक नया School Days Off [identifier: {{ param }}] तैयार है",
+      "updated": "एक School Days Off [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "School Days Off [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "School Days Off [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "School Days Off"
+      },
+      "id": "ID",
+      "dayOffType": "Day Off Type",
+      "dayOffName": "Day Off Name",
+      "dayOffDetails": "Day Off Details",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "School Class"
+    }
+  }
+}

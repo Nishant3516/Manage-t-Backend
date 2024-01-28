@@ -1,0 +1,11 @@
+id;school_date;student_assignment_type;class_work_text;class_work_file;class_work_file_content_type;class_work_file_link;assign;create_date;last_modified;cancel_date
+1;2021-05-04;PROJECT;indexing Synchronised Greece;../fake-data/blob/hipster.png;image/png;Gateway applications Table;false;2021-05-03;2021-05-03;2021-05-03
+2;2021-05-04;READING_WRITING;Handmade Cambodia;../fake-data/blob/hipster.png;image/png;reciprocal Dynamic Plastic;true;2021-05-04;2021-05-04;2021-05-04
+3;2021-05-03;PROJECT;JSON platforms Towels;../fake-data/blob/hipster.png;image/png;Car;false;2021-05-03;2021-05-04;2021-05-03
+4;2021-05-04;READING_WRITING;Shoes;../fake-data/blob/hipster.png;image/png;indigo Account;false;2021-05-04;2021-05-03;2021-05-04
+5;2021-05-04;READING_WRITING;niches;../fake-data/blob/hipster.png;image/png;Specialist proactive;false;2021-05-04;2021-05-04;2021-05-03
+6;2021-05-04;READING_WRITING;Outdoors Open-source;../fake-data/blob/hipster.png;image/png;Soap matrix withdrawal;true;2021-05-03;2021-05-04;2021-05-03
+7;2021-05-03;PROJECT;Associate;../fake-data/blob/hipster.png;image/png;indigo AI;false;2021-05-04;2021-05-04;2021-05-04
+8;2021-05-03;READING_WRITING;Automotive Way River;../fake-data/blob/hipster.png;image/png;payment;true;2021-05-04;2021-05-04;2021-05-03
+9;2021-05-03;READING_WRITING;Malta digital Brand;../fake-data/blob/hipster.png;image/png;Shirt;true;2021-05-03;2021-05-04;2021-05-04
+10;2021-05-03;PROJECT;Jewelery intangible;../fake-data/blob/hipster.png;image/png;Outdoors Shoes;true;2021-05-04;2021-05-03;2021-05-04

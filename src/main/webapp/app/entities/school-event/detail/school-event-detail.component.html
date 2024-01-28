@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolEvent">
+      <h2 data-cy="schoolEventDetailsHeading"><span jhiTranslate="manageitApp.schoolEvent.detail.title">School Event</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolEvent.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.eventName">Event Name</span></dt>
+        <dd>
+          <span>{{ schoolEvent.eventName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.eventDetails">Event Details</span></dt>
+        <dd>
+          <span>{{ schoolEvent.eventDetails }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ schoolEvent.startDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ schoolEvent.endDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolEvent.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolEvent.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolEvent.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolEvent.schoolClass">School Class</span></dt>
+        <dd>
+          <span *ngFor="let schoolClass of schoolEvent.schoolClasses; let last = last">
+            <a [routerLink]="['/school-class', schoolClass?.id, 'view']">{{ schoolClass.className }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/school-event', schoolEvent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

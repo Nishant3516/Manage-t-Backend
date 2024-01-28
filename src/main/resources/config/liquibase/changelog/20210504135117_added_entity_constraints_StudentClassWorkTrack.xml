@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity StudentClassWorkTrack.
+    -->
+    <changeSet id="20210504135117-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="class_student_id"
+                                 baseTableName="student_class_work_track"
+                                 constraintName="fk_student_class_work_track__class_student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_student"/>
+
+        <addForeignKeyConstraint baseColumnNames="class_class_work_id"
+                                 baseTableName="student_class_work_track"
+                                 constraintName="fk_student_class_work_track__class_class_work_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_class_work"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolUser">
+      <h2 data-cy="schoolUserDetailsHeading"><span jhiTranslate="manageitApp.schoolUser.detail.title">School User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolUser.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.loginName">Login Name</span></dt>
+        <dd>
+          <span>{{ schoolUser.loginName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.password">Password</span></dt>
+        <dd>
+          <span>{{ schoolUser.password }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.userEmail">User Email</span></dt>
+        <dd>
+          <span>{{ schoolUser.userEmail }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.extraInfo">Extra Info</span></dt>
+        <dd>
+          <span>{{ schoolUser.extraInfo }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.activated">Activated</span></dt>
+        <dd>
+          <span>{{ schoolUser.activated }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.userType">User Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.UserType.' + schoolUser.userType }}">{{ schoolUser.userType }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolUser.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolUser.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolUser.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.schoolClass">School Class</span></dt>
+        <dd>
+          <span *ngFor="let schoolClass of schoolUser.schoolClasses; let last = last">
+            <a [routerLink]="['/school-class', schoolClass?.id, 'view']">{{ schoolClass.className }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolUser.classSubject">Class Subject</span></dt>
+        <dd>
+          <span *ngFor="let classSubject of schoolUser.classSubjects; let last = last">
+            <a [routerLink]="['/class-subject', classSubject?.id, 'view']">{{ classSubject.subjectName }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school-user', schoolUser.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

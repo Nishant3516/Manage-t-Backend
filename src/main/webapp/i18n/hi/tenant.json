@@ -1,0 +1,32 @@
+{
+  "manageitApp": {
+    "tenant": {
+      "home": {
+        "title": "Tenants",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Tenant बनाएँ",
+        "createOrEditLabel": "Tenant बनाएँ या संपादित करें",
+        "notFound": "No Tenants found"
+      },
+      "created": "एक नया Tenant [identifier: {{ param }}] तैयार है",
+      "updated": "एक Tenant [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Tenant [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Tenant [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Tenant"
+      },
+      "id": "ID",
+      "tenantName": "Tenant Name",
+      "tenantLogo": "Tenant Logo",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "question": "Question",
+      "questionType": "Question Type",
+      "questionPaper": "Question Paper",
+      "tag": "Tag"
+    }
+  }
+}

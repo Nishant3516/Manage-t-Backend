@@ -1,0 +1,36 @@
+{
+  "manageitApp": {
+    "vendors": {
+      "home": {
+        "title": "Vendors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Vendors बनाएँ",
+        "createOrEditLabel": "Vendors बनाएँ या संपादित करें",
+        "notFound": "No Vendors found"
+      },
+      "created": "एक नया Vendors [identifier: {{ param }}] तैयार है",
+      "updated": "एक Vendors [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Vendors [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Vendors [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Vendors"
+      },
+      "id": "ID",
+      "vendorPhoto": "Vendor Photo",
+      "vendorPhotoLink": "Vendor Photo Link",
+      "vendorId": "Vendor Id",
+      "vendorName": "Vendor Name",
+      "phoneNumber": "Phone Number",
+      "dateOfBirth": "Date Of Birth",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "nickName": "Nick Name",
+      "email": "Email",
+      "createDate": "Create Date",
+      "cancelDate": "Cancel Date",
+      "vendorType": "Vendor Type"
+    }
+  }
+}

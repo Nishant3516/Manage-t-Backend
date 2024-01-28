@@ -1,0 +1,397 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-question-paper-heading"
+        data-cy="QuestionPaperCreateUpdateHeading"
+        jhiTranslate="manageitApp.questionPaper.home.createOrEditLabel"
+      >
+        Create or edit a Question Paper
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+       <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.schoolClass" for="field_schoolClass"
+            >School Class</label
+          >
+          <select class="form-control" id="field_schoolClass" data-cy="schoolClass" 
+          name="schoolClass" formControlName="schoolClass" 
+           (change)="loadSubjects()">
+            <option
+              [ngValue]="
+                schoolClassOption.id === editForm.get('schoolClass')!.value?.id ? editForm.get('schoolClass')!.value : schoolClassOption
+              "
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.classSubject" for="field_classSubject"
+            >Class Subject</label
+          >
+          <select class="form-control" id="field_classSubject" data-cy="classSubject" 
+          name="classSubject" formControlName="classSubject" 
+          >
+            <option
+              [ngValue]="
+                classSubjectOption.id === editForm.get('classSubject')!.value?.id ? editForm.get('classSubject')!.value : classSubjectOption
+              "
+              *ngFor="let classSubjectOption of classSubjectsSharedCollection; trackBy: trackClassSubjectById"
+            >
+              {{ classSubjectOption.subjectName}}
+            </option>
+          </select>
+        </div>
+<!--  	 <jhi-chapter-dropdown [selectedSubjectId] = "selectedSubjectId" [callbackFunction]="getChapterIdCallBack"></jhi-chapter-dropdown> -->
+
+<!--         <div class="form-group" [hidden]="editForm.get('id')!.value == null"> -->
+<!--           <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label> -->
+<!--           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.tenatLogo" for="field_tenatLogo">Tenat Logo</label> -->
+<!--           <div> -->
+<!--             <div *ngIf="editForm.get('tenatLogo')!.value" class="form-text text-danger clearfix"> -->
+<!--               <a -->
+<!--                 class="pull-left" -->
+<!--                 (click)="openFile(editForm.get('tenatLogo')!.value, editForm.get('tenatLogoContentType')!.value)" -->
+<!--                 jhiTranslate="entity.action.open" -->
+<!--                 >open</a -->
+<!--               ><br /> -->
+<!--               <span class="pull-left" -->
+<!--                 >{{ editForm.get('tenatLogoContentType')!.value }}, {{ byteSize(editForm.get('tenatLogo')!.value) }}</span -->
+<!--               > -->
+<!--               <button -->
+<!--                 type="button" -->
+<!--                 (click)="editForm.patchValue({ tenatLogo: null }); editForm.patchValue({ tenatLogoContentType: null })" -->
+<!--                 class="btn btn-secondary btn-xs pull-right" -->
+<!--               > -->
+<!--                 <fa-icon icon="times"></fa-icon> -->
+<!--               </button> -->
+<!--             </div> -->
+<!--             <input -->
+<!--               type="file" -->
+<!--               id="file_tenatLogo" -->
+<!--               data-cy="tenatLogo" -->
+<!--               (change)="setFileData($event, 'tenatLogo', false)" -->
+<!--               jhiTranslate="entity.action.addblob" -->
+<!--             /> -->
+<!--           </div> -->
+<!--           <input type="hidden" class="form-control" name="tenatLogo" id="field_tenatLogo" data-cy="tenatLogo" formControlName="tenatLogo" /> -->
+<!--           <input -->
+<!--             type="hidden" -->
+<!--             class="form-control" -->
+<!--             name="tenatLogoContentType" -->
+<!--             id="field_tenatLogoContentType" -->
+<!--             formControlName="tenatLogoContentType" -->
+<!--           /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.questionPaperFile" for="field_questionPaperFile" -->
+<!--             >Question Paper File</label -->
+<!--           > -->
+<!--           <div> -->
+<!--             <div *ngIf="editForm.get('questionPaperFile')!.value" class="form-text text-danger clearfix"> -->
+<!--               <a -->
+<!--                 class="pull-left" -->
+<!--                 (click)="openFile(editForm.get('questionPaperFile')!.value, editForm.get('questionPaperFileContentType')!.value)" -->
+<!--                 jhiTranslate="entity.action.open" -->
+<!--                 >open</a -->
+<!--               ><br /> -->
+<!--               <span class="pull-left" -->
+<!--                 >{{ editForm.get('questionPaperFileContentType')!.value }}, {{ byteSize(editForm.get('questionPaperFile')!.value) }}</span -->
+<!--               > -->
+<!--               <button -->
+<!--                 type="button" -->
+<!--                 (click)="editForm.patchValue({ questionPaperFile: null }); editForm.patchValue({ questionPaperFileContentType: null })" -->
+<!--                 class="btn btn-secondary btn-xs pull-right" -->
+<!--               > -->
+<!--                 <fa-icon icon="times"></fa-icon> -->
+<!--               </button> -->
+<!--             </div> -->
+<!--             <input -->
+<!--               type="file" -->
+<!--               id="file_questionPaperFile" -->
+<!--               data-cy="questionPaperFile" -->
+<!--               (change)="setFileData($event, 'questionPaperFile', false)" -->
+<!--               jhiTranslate="entity.action.addblob" -->
+<!--             /> -->
+<!--           </div> -->
+<!--           <input -->
+<!--             type="hidden" -->
+<!--             class="form-control" -->
+<!--             name="questionPaperFile" -->
+<!--             id="field_questionPaperFile" -->
+<!--             data-cy="questionPaperFile" -->
+<!--             formControlName="questionPaperFile" -->
+<!--           /> -->
+<!--           <input -->
+<!--             type="hidden" -->
+<!--             class="form-control" -->
+<!--             name="questionPaperFileContentType" -->
+<!--             id="field_questionPaperFileContentType" -->
+<!--             formControlName="questionPaperFileContentType" -->
+<!--           /> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.questionPaperName" for="field_questionPaperName"
+            >Question Paper Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="questionPaperName"
+            id="field_questionPaperName"
+            data-cy="questionPaperName"
+            formControlName="questionPaperName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.mainTitle" for="field_mainTitle">Main Title</label>
+          <input type="text" class="form-control" name="mainTitle" id="field_mainTitle" data-cy="mainTitle" formControlName="mainTitle" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.subTitle" for="field_subTitle">Sub Title</label>
+          <input type="text" class="form-control" name="subTitle" id="field_subTitle" data-cy="subTitle" formControlName="subTitle" />
+        </div>
+       <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.instructions" for="field_instructions"
+            >Instructions</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="instructions"
+            id="field_instructions"
+            data-cy="instructions"
+            formControlName="instructions"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.leftSubHeading1" for="field_leftSubHeading1"
+            >Left Sub Heading 1</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="leftSubHeading1"
+            id="field_leftSubHeading1"
+            data-cy="leftSubHeading1"
+            formControlName="leftSubHeading1"
+          />
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.leftSubHeading2" for="field_leftSubHeading2" -->
+<!--             >Left Sub Heading 2</label -->
+<!--           > -->
+<!--           <input -->
+<!--             type="text" -->
+<!--             class="form-control" -->
+<!--             name="leftSubHeading2" -->
+<!--             id="field_leftSubHeading2" -->
+<!--             data-cy="leftSubHeading2" -->
+<!--             formControlName="leftSubHeading2" -->
+<!--           /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.rightSubHeading1" for="field_rightSubHeading1" -->
+<!--             >Right Sub Heading 1</label -->
+<!--           > -->
+<!--           <input -->
+<!--             type="text" -->
+<!--             class="form-control" -->
+<!--             name="rightSubHeading1" -->
+<!--             id="field_rightSubHeading1" -->
+<!--             data-cy="rightSubHeading1" -->
+<!--             formControlName="rightSubHeading1" -->
+<!--           /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.rightSubHeading2" for="field_rightSubHeading2" -->
+<!--             >Right Sub Heading 2</label -->
+<!--           > -->
+<!--           <input -->
+<!--             type="text" -->
+<!--             class="form-control" -->
+<!--             name="rightSubHeading2" -->
+<!--             id="field_rightSubHeading2" -->
+<!--             data-cy="rightSubHeading2" -->
+<!--             formControlName="rightSubHeading2" -->
+<!--           /> -->
+<!--         </div> -->
+
+ 
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.footerText" for="field_footerText">Footer Text</label> -->
+<!--           <input -->
+<!--             type="text" -->
+<!--             class="form-control" -->
+<!--             name="footerText" -->
+<!--             id="field_footerText" -->
+<!--             data-cy="footerText" -->
+<!--             formControlName="footerText" -->
+<!--           /> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.totalMarks" for="field_totalMarks">Total Marks</label>
+          <input
+            type="number"
+            class="form-control"
+            name="totalMarks"
+            id="field_totalMarks"
+            data-cy="totalMarks"
+            formControlName="totalMarks"
+          />
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.createDate" for="field_createDate">Create Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_createDate" -->
+<!--               data-cy="createDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="createDate" -->
+<!--               ngbDatepicker -->
+<!--               #createDateDp="ngbDatepicker" -->
+<!--               formControlName="createDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.lastModified" for="field_lastModified" -->
+<!--             >Last Modified</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_lastModified" -->
+<!--               data-cy="lastModified" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="lastModified" -->
+<!--               ngbDatepicker -->
+<!--               #lastModifiedDp="ngbDatepicker" -->
+<!--               formControlName="lastModified" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.cancelDate" for="field_cancelDate">Cancel Date</label> -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_cancelDate" -->
+<!--               data-cy="cancelDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="cancelDate" -->
+<!--               ngbDatepicker -->
+<!--               #cancelDateDp="ngbDatepicker" -->
+<!--               formControlName="cancelDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label jhiTranslate="manageitApp.questionPaper.question" for="field_questions">Question</label> -->
+<!--           <select class="form-control" id="field_questions" data-cy="question"  -->
+<!--           multiple name="questions" formControlName="questions" > -->
+<!--             <option -->
+<!--               [ngValue]="getSelectedQuestion(questionOption, editForm.get('questions')!.value)" -->
+<!--               *ngFor="let questionOption of questionsSharedCollection; trackBy: trackQuestionById" -->
+<!--             > -->
+<!--               {{ questionOption.questionText }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+<!--        <div class="form-group"> -->
+<!--           <label  for="field_questions1">Question Added to question Paper</label> -->
+<!--           <select class="form-control" id="field_questionsInQuestionPaper" data-cy="questionsInQuestionPaper"  -->
+<!--            multiple name="questionsInQuestionPaper" -->
+<!--            formControlName="questionsInQuestionPaper"> -->
+<!--             <option -->
+              
+<!--               *ngFor="let questionInQuestionPaperOption of questionsInQuestionPaper; trackBy: trackQuestionById" -->
+<!--             > -->
+<!--               {{ questionInQuestionPaperOption.questionText }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label jhiTranslate="manageitApp.questionPaper.tag" for="field_tags">Tag</label> -->
+<!--           <select class="form-control" id="field_tags" data-cy="tag" multiple name="tags" formControlName="tags"> -->
+<!--             <option -->
+<!--               [ngValue]="getSelectedTag(tagOption, editForm.get('tags')!.value)" -->
+<!--               *ngFor="let tagOption of tagsSharedCollection; trackBy: trackTagById" -->
+<!--             > -->
+<!--               {{ tagOption.tagText }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.questionPaper.tenant" for="field_tenant">Tenant</label> -->
+<!--           <select class="form-control" id="field_tenant" data-cy="tenant" name="tenant" formControlName="tenant"> -->
+<!--             <option [ngValue]="null"></option> -->
+<!--             <option -->
+<!--               [ngValue]="tenantOption.id === editForm.get('tenant')!.value?.id ? editForm.get('tenant')!.value : tenantOption" -->
+<!--               *ngFor="let tenantOption of tenantsSharedCollection; trackBy: trackTenantById" -->
+<!--             > -->
+<!--               {{ tenantOption.id }} -->
+<!--             </option> -->
+<!--           </select> -->
+<!--         </div> -->
+
+       </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

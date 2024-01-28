@@ -1,0 +1,31 @@
+{
+  "manageitApp": {
+    "classSubject": {
+      "home": {
+        "title": "Class Subjects",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Class Subject",
+        "createOrEditLabel": "Create or edit a Class Subject",
+        "notFound": "No Class Subjects found"
+      },
+      "created": "A new Class Subject is created with identifier {{ param }}",
+      "updated": "A Class Subject is updated with identifier {{ param }}",
+      "deleted": "A Class Subject is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Class Subject {{ id }}?"
+      },
+      "detail": {
+        "title": "Class Subject"
+      },
+      "id": "ID",
+      "subjectName": "Subject Name",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "subjectChapter": "Subject Chapter",
+      "classLessionPlan": "Class Lession Plan",
+      "schoolClass": "Class",
+      "schoolUser": "User"
+    }
+  }
+}

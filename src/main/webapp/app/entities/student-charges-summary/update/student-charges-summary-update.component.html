@@ -1,0 +1,369 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-student-charges-summary-heading"
+        data-cy="StudentChargesSummaryCreateUpdateHeading"
+        jhiTranslate="manageitApp.studentChargesSummary.home.createOrEditLabel"
+      >
+        Create or edit a Student Charges Summary
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.summaryType" for="field_summaryType"
+            >Summary Type</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="summaryType"
+            id="field_summaryType"
+            data-cy="summaryType"
+            formControlName="summaryType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.feeYear" for="field_feeYear">Fee Year</label>
+          <input type="text" class="form-control" name="feeYear" id="field_feeYear" data-cy="feeYear" formControlName="feeYear" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.dueDate" for="field_dueDate">Due Date</label>
+          <input type="number" class="form-control" name="dueDate" id="field_dueDate" data-cy="dueDate" formControlName="dueDate" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.aprSummary" for="field_aprSummary"
+            >Apr Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="aprSummary"
+            id="field_aprSummary"
+            data-cy="aprSummary"
+            formControlName="aprSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.maySummary" for="field_maySummary"
+            >May Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="maySummary"
+            id="field_maySummary"
+            data-cy="maySummary"
+            formControlName="maySummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.junSummary" for="field_junSummary"
+            >Jun Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="junSummary"
+            id="field_junSummary"
+            data-cy="junSummary"
+            formControlName="junSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.julSummary" for="field_julSummary"
+            >Jul Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="julSummary"
+            id="field_julSummary"
+            data-cy="julSummary"
+            formControlName="julSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.augSummary" for="field_augSummary"
+            >Aug Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="augSummary"
+            id="field_augSummary"
+            data-cy="augSummary"
+            formControlName="augSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.sepSummary" for="field_sepSummary"
+            >Sep Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sepSummary"
+            id="field_sepSummary"
+            data-cy="sepSummary"
+            formControlName="sepSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.octSummary" for="field_octSummary"
+            >Oct Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="octSummary"
+            id="field_octSummary"
+            data-cy="octSummary"
+            formControlName="octSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.novSummary" for="field_novSummary"
+            >Nov Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="novSummary"
+            id="field_novSummary"
+            data-cy="novSummary"
+            formControlName="novSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.decSummary" for="field_decSummary"
+            >Dec Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="decSummary"
+            id="field_decSummary"
+            data-cy="decSummary"
+            formControlName="decSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.janSummary" for="field_janSummary"
+            >Jan Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="janSummary"
+            id="field_janSummary"
+            data-cy="janSummary"
+            formControlName="janSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.febSummary" for="field_febSummary"
+            >Feb Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="febSummary"
+            id="field_febSummary"
+            data-cy="febSummary"
+            formControlName="febSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.marSummary" for="field_marSummary"
+            >Mar Summary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="marSummary"
+            id="field_marSummary"
+            data-cy="marSummary"
+            formControlName="marSummary"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.additionalInfo1" for="field_additionalInfo1"
+            >Additional Info 1</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="additionalInfo1"
+            id="field_additionalInfo1"
+            data-cy="additionalInfo1"
+            formControlName="additionalInfo1"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.additionalInfo2" for="field_additionalInfo2"
+            >Additional Info 2</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="additionalInfo2"
+            id="field_additionalInfo2"
+            data-cy="additionalInfo2"
+            formControlName="additionalInfo2"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.createDate" for="field_createDate"
+            >Create Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_createDate"
+              data-cy="createDate"
+              type="text"
+              class="form-control"
+              name="createDate"
+              ngbDatepicker
+              #createDateDp="ngbDatepicker"
+              formControlName="createDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.lastModified" for="field_lastModified"
+            >Last Modified</label
+          >
+          <div class="input-group">
+            <input
+              id="field_lastModified"
+              data-cy="lastModified"
+              type="text"
+              class="form-control"
+              name="lastModified"
+              ngbDatepicker
+              #lastModifiedDp="ngbDatepicker"
+              formControlName="lastModified"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.cancelDate" for="field_cancelDate"
+            >Cancel Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_cancelDate"
+              data-cy="cancelDate"
+              type="text"
+              class="form-control"
+              name="cancelDate"
+              ngbDatepicker
+              #cancelDateDp="ngbDatepicker"
+              formControlName="cancelDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.schoolLedgerHead" for="field_schoolLedgerHead"
+            >School Ledger Head</label
+          >
+          <select
+            class="form-control"
+            id="field_schoolLedgerHead"
+            data-cy="schoolLedgerHead"
+            name="schoolLedgerHead"
+            formControlName="schoolLedgerHead"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                schoolLedgerHeadOption.id === editForm.get('schoolLedgerHead')!.value?.id
+                  ? editForm.get('schoolLedgerHead')!.value
+                  : schoolLedgerHeadOption
+              "
+              *ngFor="let schoolLedgerHeadOption of schoolLedgerHeadsSharedCollection; trackBy: trackSchoolLedgerHeadById"
+            >
+              {{ schoolLedgerHeadOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.studentChargesSummary.classStudent" for="field_classStudent"
+            >Class Student</label
+          >
+          <select class="form-control" id="field_classStudent" data-cy="classStudent" name="classStudent" formControlName="classStudent">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                classStudentOption.id === editForm.get('classStudent')!.value?.id ? editForm.get('classStudent')!.value : classStudentOption
+              "
+              *ngFor="let classStudentOption of classStudentsSharedCollection; trackBy: trackClassStudentById"
+            >
+              {{ classStudentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

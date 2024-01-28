@@ -1,0 +1,37 @@
+{
+  "manageitApp": {
+    "sTIncomeExpenses": {
+      "home": {
+        "title": "STIncomeExpenses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया ST Income Expenses बनाएँ",
+        "createOrEditLabel": "ST Income Expenses बनाएँ या संपादित करें",
+        "notFound": "No ST Income Expenses found"
+      },
+      "created": "एक नया ST Income Expenses [identifier: {{ param }}] तैयार है",
+      "updated": "एक ST Income Expenses [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "ST Income Expenses [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "ST Income Expenses [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "ST Income Expenses"
+      },
+      "id": "ID",
+      "amountPaid": "Amount Paid",
+      "modeOfPay": "Mode Of Pay",
+      "noteNumbers": "Note Numbers",
+      "upiId": "Upi Id",
+      "remarks": "Remarks",
+      "paymentDate": "Payment Date",
+      "receiptId": "Receipt Id",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "transactionType": "Transaction Type",
+      "classStudent": "Class Student",
+      "stRoute": "St Route",
+      "operatedBy": "Operated By"
+    }
+  }
+}

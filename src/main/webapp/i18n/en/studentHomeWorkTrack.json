@@ -1,0 +1,30 @@
+{
+  "manageitApp": {
+    "studentHomeWorkTrack": {
+      "home": {
+        "title": "Track Student Home Work",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Student Home Work Track",
+        "createOrEditLabel": "Create or edit a Student Home Work Track",
+        "notFound": "No Student Home Work Tracks found"
+      },
+      "created": "A new Student Home Work Track is created with identifier {{ param }}",
+      "updated": "A Student Home Work Track is updated with identifier {{ param }}",
+      "deleted": "A Student Home Work Track is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Student Home Work Track {{ id }}?"
+      },
+      "detail": {
+        "title": "Track Student Home Work"
+      },
+      "id": "ID",
+      "workStatus": "Work Status",
+      "remarks": "Remarks",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classStudent": "Student",
+      "classHomeWork": "Home Work"
+    }
+  }
+}

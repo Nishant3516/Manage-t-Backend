@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="classStudent">
+      <h2 data-cy="classStudentDetailsHeading"><span jhiTranslate="manageitApp.classStudent.detail.title">Class Student</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ classStudent.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.studentPhoto">Student Photo</span></dt>
+        <dd>
+          <div *ngIf="classStudent.studentPhoto">
+            <a (click)="openFile(classStudent.studentPhoto, classStudent.studentPhotoContentType)" jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ classStudent.studentPhotoContentType }}, {{ byteSize(classStudent.studentPhoto) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.studentPhotoLink">Student Photo Link</span></dt>
+        <dd>
+          <span>{{ classStudent.studentPhotoLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.studentId">Student Id</span></dt>
+        <dd>
+          <span>{{ classStudent.studentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ classStudent.firstName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.gender">Gender</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.Gender.' + classStudent.gender }}">{{ classStudent.gender }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ classStudent.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.rollNumber">Roll Number</span></dt>
+        <dd>
+          <span>{{ classStudent.rollNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ classStudent.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.bloodGroup">Blood Group</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.BloodGroup.' + classStudent.bloodGroup }}">{{ classStudent.bloodGroup }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.dateOfBirth">Date Of Birth</span></dt>
+        <dd>
+          <span>{{ classStudent.dateOfBirth | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ classStudent.startDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.addressLine1">Address Line 1</span></dt>
+        <dd>
+          <span>{{ classStudent.addressLine1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.addressLine2">Address Line 2</span></dt>
+        <dd>
+          <span>{{ classStudent.addressLine2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.nickName">Nick Name</span></dt>
+        <dd>
+          <span>{{ classStudent.nickName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.fatherName">Father Name</span></dt>
+        <dd>
+          <span>{{ classStudent.fatherName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.motherName">Mother Name</span></dt>
+        <dd>
+          <span>{{ classStudent.motherName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.email">Email</span></dt>
+        <dd>
+          <span>{{ classStudent.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.admissionDate">Admission Date</span></dt>
+        <dd>
+          <span>{{ classStudent.admissionDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.regNumber">Reg Number</span></dt>
+        <dd>
+          <span>{{ classStudent.regNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.classStudent.schoolClass">School Class</span></dt>
+        <dd>
+          <div *ngIf="classStudent.schoolClass">
+            <a [routerLink]="['/school-class', classStudent.schoolClass?.id, 'view']">{{ classStudent.schoolClass?.className }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/class-student', classStudent.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

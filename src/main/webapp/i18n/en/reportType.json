@@ -1,0 +1,14 @@
+{
+  "manageitApp": {
+    "ReportType": {
+      "null": "",
+      "FEE_COLLECTION": "FEE_COLLECTION",
+      "FEE_DUE": "FEE_DUE",
+      "INCOME_EXPENSE": "INCOME_EXPENSE",
+      "TRANSPORT": "TRANSPORT",
+      "APPLY_FEE_DUE": "APPLY_FEE_DUE",
+      "SESSION_TRANSITION": "SESSION_TRANSITION",
+      "STUDENT_DETAILS":"STUDENT_DETAILS"
+    }
+  }
+}

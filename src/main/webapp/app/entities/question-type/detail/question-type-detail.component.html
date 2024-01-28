@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="questionType">
+      <h2 data-cy="questionTypeDetailsHeading"><span jhiTranslate="manageitApp.questionType.detail.title">Question Type</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="manageitApp.questionType.questionType">Question Type</span></dt>
+        <dd>
+          <span>{{ questionType.questionType }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.questionType.marks">Marks</span></dt>
+        <dd>
+          <span>{{ questionType.marks }}</span>
+        </dd>
+
+       </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/question-type', questionType.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

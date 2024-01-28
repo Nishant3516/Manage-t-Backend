@@ -1,0 +1,34 @@
+{
+  "manageitApp": {
+    "studentPayments": {
+      "home": {
+        "title": "Student Payments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Student Payments",
+        "createOrEditLabel": "Create or edit a Student Payments",
+        "notFound": "No Student Payments found"
+      },
+      "created": "A new Student Payments is created with identifier {{ param }}",
+      "updated": "A Student Payments is updated with identifier {{ param }}",
+      "deleted": "A Student Payments is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Student Payments {{ id }}?"
+      },
+      "detail": {
+        "title": "Student Payments"
+      },
+      "id": "ID",
+      "amountPaid": "Amount Paid",
+      "modeOfPay": "Mode Of Pay",
+      "noteNumbers": "Note Numbers",
+      "upiId": "Upi Id",
+      "remarks": "Remarks",
+      "paymentDate": "Payment Date",
+      "receiptId": "Receipt Id",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "classStudent": "Class Student"
+    }
+  }
+}

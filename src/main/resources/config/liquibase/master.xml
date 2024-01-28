@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
+    <property name="clobType" value="longvarchar" dbms="h2"/>
+    <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
+    <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
+    <property name="datetimeType" value="datetime(6)" dbms="mysql, mariadb"/>
+    <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135054_added_entity_AuditLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135055_added_entity_SchoolReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135056_added_entity_SchoolDaysOff.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135057_added_entity_SchoolEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135058_added_entity_SchoolPictureGallery.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135059_added_entity_SchoolVideoGallery.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135100_added_entity_SchoolUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135101_added_entity_School.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135102_added_entity_SchoolClass.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135103_added_entity_IdStore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135104_added_entity_SchoolNotifications.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135105_added_entity_ClassStudent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135106_added_entity_SchoolLedgerHead.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135107_added_entity_ClassFee.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135108_added_entity_StudentDiscount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135109_added_entity_StudentAdditionalCharges.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135110_added_entity_StudentPayments.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135111_added_entity_StudentAttendence.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135112_added_entity_ClassHomeWork.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135113_added_entity_ClassClassWork.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135114_added_entity_ClassLessionPlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135115_added_entity_ClassLessionPlanTrack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135116_added_entity_StudentHomeWorkTrack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135117_added_entity_StudentClassWorkTrack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135118_added_entity_ClassSubject.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135119_added_entity_SubjectChapter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135120_added_entity_ChapterSection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504171354_added_entity_StudentChargesSummary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220315091530_added_entity_Vendors.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220315124058_added_entity_IncomeExpenses.xml" relativeToChangelogFile="false"/>
+<!-- These two need to be enabled on a new data base, this was manually created -on existing one this will be dsabled -->
+<!--     <include file="config/liquibase/changelog/20220407120705_added_entity_STIncomeExpenses.xml" relativeToChangelogFile="false"/> -->
+<!--     <include file="config/liquibase/changelog/20220407120704_added_entity_STRoute.xml" relativeToChangelogFile="false"/> -->
+    <include file="config/liquibase/changelog/20220426124047_added_entity_Tag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220426124045_added_entity_QuestionType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220426124043_added_entity_Question.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220426124044_added_entity_QuestionPaper.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220426124046_added_entity_Tenant.xml" relativeToChangelogFile="false"/>
+<!--     <include file="config/liquibase/changelog/20220505091011_add_school_tenant_to_income_expense.sql" relativeToChangelogFile="false"/> -->
+<!--     <include file="config/liquibase/changelog/20220505091411_add_tenat_constraint_to_income_expense.sql" relativeToChangelogFile="false"/> -->
+<!--     <include file="config/liquibase/changelog/20220505101011_add_school_constraint_to_income_expense.sql" relativeToChangelogFile="false"/> -->
+    <include file="config/liquibase/changelog/20220505111011_alter_add_school_tenant_all.sql" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220511111011_alter_vendors_correct_constraint.sql" relativeToChangelogFile="false"/>
+    
+
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210504135054_added_entity_constraints_AuditLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135055_added_entity_constraints_SchoolReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135056_added_entity_constraints_SchoolDaysOff.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135057_added_entity_constraints_SchoolEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135058_added_entity_constraints_SchoolPictureGallery.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135059_added_entity_constraints_SchoolVideoGallery.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135100_added_entity_constraints_SchoolUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135102_added_entity_constraints_SchoolClass.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135103_added_entity_constraints_IdStore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135104_added_entity_constraints_SchoolNotifications.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135105_added_entity_constraints_ClassStudent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135106_added_entity_constraints_SchoolLedgerHead.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135107_added_entity_constraints_ClassFee.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135108_added_entity_constraints_StudentDiscount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135109_added_entity_constraints_StudentAdditionalCharges.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135110_added_entity_constraints_StudentPayments.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135111_added_entity_constraints_StudentAttendence.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135112_added_entity_constraints_ClassHomeWork.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135113_added_entity_constraints_ClassClassWork.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135114_added_entity_constraints_ClassLessionPlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135115_added_entity_constraints_ClassLessionPlanTrack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135116_added_entity_constraints_StudentHomeWorkTrack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135117_added_entity_constraints_StudentClassWorkTrack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135118_added_entity_constraints_ClassSubject.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135119_added_entity_constraints_SubjectChapter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504135120_added_entity_constraints_ChapterSection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210504171354_added_entity_constraints_StudentChargesSummary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220315124058_added_entity_constraints_IncomeExpenses.xml" relativeToChangelogFile="false"/>
+<!-- This need to be enabled on a new data base, this was manually created -on existing one this will be dsabled -->
+<!--     <include file="config/liquibase/changelog/20220407120705_added_entity_constraints_STIncomeExpenses.xml" relativeToChangelogFile="false"/> -->
+    <include file="config/liquibase/changelog/20220426124047_added_entity_constraints_Tag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220426124045_added_entity_QuestionType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220426124043_added_entity_constraints_Question.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220426124044_added_entity_constraints_QuestionPaper.xml" relativeToChangelogFile="false"/>
+ 
+
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

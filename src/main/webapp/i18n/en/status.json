@@ -1,0 +1,11 @@
+{
+  "manageitApp": {
+    "Status": {
+      "null": "",
+      "DRAFT": "DRAFT",
+      "INPROGRESS": "INPROGRESS",
+      "PUBLISHED": "PUBLISHED",
+      "ONLINE": "ONLINE"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "manageitApp": {
+    "schoolEvent": {
+      "home": {
+        "title": "School Events",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School Event",
+        "createOrEditLabel": "Create or edit a School Event",
+        "notFound": "No School Events found"
+      },
+      "created": "A new School Event is created with identifier {{ param }}",
+      "updated": "A School Event is updated with identifier {{ param }}",
+      "deleted": "A School Event is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School Event {{ id }}?"
+      },
+      "detail": {
+        "title": "School Event"
+      },
+      "id": "ID",
+      "eventName": "Event Name",
+      "eventDetails": "Event Details",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolClass": "School Class"
+    }
+  }
+}

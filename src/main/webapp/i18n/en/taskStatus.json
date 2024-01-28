@@ -1,0 +1,11 @@
+{
+  "manageitApp": {
+    "TaskStatus": {
+      "null": "",
+      "NotStarted": "NotStarted",
+      "InProgress": "InProgress",
+      "OnTrack": "OnTrack",
+      "OffTrack": "OffTrack"
+    }
+  }
+}

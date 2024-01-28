@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sTIncomeExpenses">
+      <h2 data-cy="sTIncomeExpensesDetailsHeading">
+        <span jhiTranslate="manageitApp.sTIncomeExpenses.detail.title">ST Income Expenses</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.amountPaid">Amount Paid</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.amountPaid }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.modeOfPay">Mode Of Pay</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.ModeOfPayment.' + sTIncomeExpenses.modeOfPay }}">{{ sTIncomeExpenses.modeOfPay }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.noteNumbers">Note Numbers</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.noteNumbers }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.upiId">Upi Id</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.upiId }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.remarks">Remarks</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.remarks }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.paymentDate">Payment Date</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.paymentDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.receiptId">Receipt Id</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.receiptId }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ sTIncomeExpenses.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.transactionType">Transaction Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.TransactionType.' + sTIncomeExpenses.transactionType }}">{{
+            sTIncomeExpenses.transactionType
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.classStudent">Class Student</span></dt>
+        <dd>
+          <div *ngIf="sTIncomeExpenses.classStudent">
+            <a [routerLink]="['/class-student', sTIncomeExpenses.classStudent?.id, 'view']">{{ sTIncomeExpenses.classStudent?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.stRoute">St Route</span></dt>
+        <dd>
+          <div *ngIf="sTIncomeExpenses.stRoute">
+            <a [routerLink]="['/st-route', sTIncomeExpenses.stRoute?.id, 'view']">{{ sTIncomeExpenses.stRoute?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.sTIncomeExpenses.operatedBy">Operated By</span></dt>
+        <dd>
+          <div *ngIf="sTIncomeExpenses.operatedBy">
+            <a [routerLink]="['/vendors', sTIncomeExpenses.operatedBy?.id, 'view']">{{ sTIncomeExpenses.operatedBy?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/st-income-expenses', sTIncomeExpenses.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

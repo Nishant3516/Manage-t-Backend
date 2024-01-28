@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity QuestionPaper.
+    -->
+    <changeSet id="20220426124044-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="question_paper_id"
+                                 baseTableName="rel_question_paper__question"
+                                 constraintName="fk_rel_question_paper__question__question_paper_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="question_paper"/>
+
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="rel_question_paper__question"
+                                 constraintName="fk_rel_question_paper__question__question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="question"/>
+
+        <addForeignKeyConstraint baseColumnNames="question_paper_id"
+                                 baseTableName="rel_question_paper__tag"
+                                 constraintName="fk_rel_question_paper__tag__question_paper_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="question_paper"/>
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="rel_question_paper__tag"
+                                 constraintName="fk_rel_question_paper__tag__tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="question_paper"
+                                 constraintName="fk_question_paper__tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+
+        <addForeignKeyConstraint baseColumnNames="school_class_id"
+                                 baseTableName="question_paper"
+                                 constraintName="fk_question_paper__school_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="school_class"/>
+
+        <addForeignKeyConstraint baseColumnNames="class_subject_id"
+                                 baseTableName="question_paper"
+                                 constraintName="fk_question_paper__class_subject_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_subject"/>
+    </changeSet>
+</databaseChangeLog>

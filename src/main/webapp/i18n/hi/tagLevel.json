@@ -1,0 +1,12 @@
+{
+  "manageitApp": {
+    "TagLevel": {
+      "null": "",
+      "FIRST": "FIRST",
+      "SECOND": "SECOND",
+      "THIRD": "THIRD",
+      "FOURTH": "FOURTH",
+      "FIFTH": "FIFTH"
+    }
+  }
+}

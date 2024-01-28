@@ -1,0 +1,131 @@
+<div>
+  <h2 id="page-heading" data-cy="ClassFeeHeading">
+    <div class="d-flex flex-row">
+      <select
+        class="form-control"
+        id="field_studentClass"
+        data-cy="studentClass"
+        [(ngModel)]="selectedClassId"
+        (change)="loadAllStudentsForAClass()"
+        name="studentClass"
+      >
+        <option [ngValue]="undefined" hidden>Select Class</option>
+        <option *ngFor="let studentClassOption of schoolClasses; trackBy: trackFilterClassById" [ngValue]="studentClassOption.id">
+          {{ studentClassOption.className }}
+        </option>
+      </select>
+    </div>
+    <span jhiTranslate="manageitApp.classFee.home.title">Class Fees</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manageitApp.classFee.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-class-fee"
+        [routerLink]="['/class-fee/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manageitApp.classFee.home.createLabel"> Create a new Class Fee </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="classFees?.length === 0">
+    <span jhiTranslate="manageitApp.classFee.home.notFound">No classFees found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="classFees && classFees.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.schoolClass">School Class</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.feeYear">Fee Year</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.dueDate">Due Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.schoolLedgerHead">School Ledger Head</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.aprFee">Apr Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.mayFee">May Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.junFee">Jun Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.julFee">Jul Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.augFee">Aug Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.sepFee">Sep Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.octFee">Oct Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.novFee">Nov Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.decFee">Dec Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.janFee">Jan Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.febFee">Feb Fee</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.classFee.marFee">Mar Fee</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let classFee of classFees; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <span *ngFor="let schoolClass of classFee.schoolClasses; let last = last">
+              <a class="form-control-static" [routerLink]="['/school-class', schoolClass.id, 'view']">{{ schoolClass.className }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td jhiTranslate="{{ 'manageitApp.FeeYear.' + classFee.feeYear }}">{{ classFee.feeYear }}</td>
+          <td>{{ classFee.dueDate }}</td>
+          <td>
+            <div *ngIf="classFee.schoolLedgerHead">
+              <a [routerLink]="['/school-ledger-head', classFee.schoolLedgerHead?.id, 'view']">{{
+                classFee.schoolLedgerHead?.ledgerHeadName
+              }}</a>
+            </div>
+          </td>
+
+          <td>{{ classFee.aprFee }}</td>
+          <td>{{ classFee.mayFee }}</td>
+          <td>{{ classFee.junFee }}</td>
+          <td>{{ classFee.julFee }}</td>
+          <td>{{ classFee.augFee }}</td>
+          <td>{{ classFee.sepFee }}</td>
+          <td>{{ classFee.octFee }}</td>
+          <td>{{ classFee.novFee }}</td>
+          <td>{{ classFee.decFee }}</td>
+          <td>{{ classFee.janFee }}</td>
+          <td>{{ classFee.febFee }}</td>
+          <td>{{ classFee.marFee }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/class-fee', classFee.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/class-fee', classFee.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(classFee)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

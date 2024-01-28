@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolLedgerHead">
+      <h2 data-cy="schoolLedgerHeadDetailsHeading">
+        <span jhiTranslate="manageitApp.schoolLedgerHead.detail.title">School Ledger Head</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolLedgerHead.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolLedgerHead.studentLedgerHeadType">Student Ledger Head Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.SchoolLedgerHeadType.' + schoolLedgerHead.studentLedgerHeadType }}">{{
+            schoolLedgerHead.studentLedgerHeadType
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolLedgerHead.ledgerHeadName">Ledger Head Name</span></dt>
+        <dd>
+          <span>{{ schoolLedgerHead.ledgerHeadName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolLedgerHead.ledgerHeadLongName">Ledger Head Long Name</span></dt>
+        <dd>
+          <span>{{ schoolLedgerHead.ledgerHeadLongName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolLedgerHead.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolLedgerHead.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolLedgerHead.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolLedgerHead.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolLedgerHead.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolLedgerHead.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolLedgerHead.school">School</span></dt>
+        <dd>
+          <div *ngIf="schoolLedgerHead.school">
+            <a [routerLink]="['/school', schoolLedgerHead.school?.id, 'view']">{{ schoolLedgerHead.school?.schoolName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school-ledger-head', schoolLedgerHead.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

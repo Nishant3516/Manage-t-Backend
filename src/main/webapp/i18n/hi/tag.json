@@ -1,0 +1,31 @@
+{
+  "manageitApp": {
+    "tag": {
+      "home": {
+        "title": "Tags",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Tag बनाएँ",
+        "createOrEditLabel": "Tag बनाएँ या संपादित करें",
+        "notFound": "No Tags found"
+      },
+      "created": "एक नया Tag [identifier: {{ param }}] तैयार है",
+      "updated": "एक Tag [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Tag [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Tag [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Tag"
+      },
+      "id": "ID",
+      "tagText": "Tag Text",
+      "tagLevel": "Tag Level",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "tenant": "Tenant",
+      "questionPaper": "Question Paper",
+      "question": "Question"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "manageitApp": {
+    "ReportType": {
+      "null": "",
+      "FEE_COLLECTION": "FEE_COLLECTION",
+      "FEE_DUE": "FEE_DUE",
+      "STUDENT_DETAILS":"STUDENT_DETAILS"
+    }
+  }
+}

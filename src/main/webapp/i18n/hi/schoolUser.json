@@ -1,0 +1,35 @@
+{
+  "manageitApp": {
+    "schoolUser": {
+      "home": {
+        "title": "SchoolUsers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया School User बनाएँ",
+        "createOrEditLabel": "School User बनाएँ या संपादित करें",
+        "notFound": "No School Users found"
+      },
+      "created": "एक नया School User [identifier: {{ param }}] तैयार है",
+      "updated": "एक School User [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "School User [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "School User [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "School User"
+      },
+      "id": "ID",
+      "loginName": "Login Name",
+      "password": "Password",
+      "userEmail": "User Email",
+      "extraInfo": "Extra Info",
+      "activated": "Activated",
+      "userType": "User Type",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "auditLog": "Audit Log",
+      "schoolClass": "School Class",
+      "classSubject": "Class Subject"
+    }
+  }
+}

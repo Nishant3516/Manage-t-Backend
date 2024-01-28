@@ -1,0 +1,392 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-class-lession-plan-heading"
+        data-cy="ClassLessionPlanCreateUpdateHeading"
+        jhiTranslate="manageitApp.classLessionPlan.home.createOrEditLabel"
+      >
+        Create or edit a Class Lession Plan
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.schoolClass" for="field_schoolClass"
+            >School Class</label
+          >
+          <select class="form-control" id="field_schoolClass" data-cy="schoolClass" 
+          name="schoolClass" formControlName="schoolClass"
+          (change)="loadAllSubjects()"
+          
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                schoolClassOption.id === editForm.get('schoolClass')!.value?.id ? editForm.get('schoolClass')!.value : schoolClassOption
+              "
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.classSubject" for="field_classSubject"
+            >Class Subject</label
+          >
+          <select class="form-control" id="field_classSubject" data-cy="classSubject" 
+          name="classSubject" formControlName="classSubject"
+          (change)="loadAllChaptersForASubject()"
+          
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                classSubjectOption.id === editForm.get('classSubject')!.value?.id ? editForm.get('classSubject')!.value : classSubjectOption
+              "
+              *ngFor="let classSubjectOption of classSubjectsSharedCollection; trackBy: trackClassSubjectById"
+            >
+              {{ classSubjectOption.subjectName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.subjectChapter" for="field_subjectChapter"
+            >Subject Chapter</label
+          >
+          <select
+            class="form-control"
+            id="field_subjectChapter"
+            data-cy="subjectChapter"
+            name="subjectChapter"
+            formControlName="subjectChapter"
+            (change)="loadAllSectionForAChapter()"
+            
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                subjectChapterOption.id === editForm.get('subjectChapter')!.value?.id
+                  ? editForm.get('subjectChapter')!.value
+                  : subjectChapterOption
+              "
+              *ngFor="let subjectChapterOption of subjectChaptersSharedCollection; trackBy: trackSubjectChapterById"
+            >
+              {{ subjectChapterOption.chapterName }}
+            </option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.chapterSection" for="field_chapterSection"
+            >Chapter Section</label
+          >
+          <select
+            class="form-control"
+            id="field_chapterSection"
+            data-cy="chapterSection"
+            name="chapterSection"
+            formControlName="chapterSection"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                chapterSectionOption.id === editForm.get('chapterSection')!.value?.id
+                  ? editForm.get('chapterSection')!.value
+                  : chapterSectionOption
+              "
+              *ngFor="let chapterSectionOption of chapterSectionsSharedCollection; trackBy: trackChapterSectionById"
+            >
+              {{ chapterSectionOption.sectionName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.schoolDate" for="field_schoolDate"
+            >School Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_schoolDate"
+              data-cy="schoolDate"
+              type="text"
+              class="form-control"
+              name="schoolDate"
+              ngbDatepicker
+              #schoolDateDp="ngbDatepicker"
+              formControlName="schoolDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="schoolDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('schoolDate')!.invalid && (editForm.get('schoolDate')!.dirty || editForm.get('schoolDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('schoolDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.classWorkText" for="field_classWorkText"
+            >Class Work Text</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="classWorkText"
+            id="field_classWorkText"
+            data-cy="classWorkText"
+            formControlName="classWorkText"
+          />
+          <div
+            *ngIf="
+              editForm.get('classWorkText')!.invalid && (editForm.get('classWorkText')!.dirty || editForm.get('classWorkText')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('classWorkText')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('classWorkText')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.homeWorkText" for="field_homeWorkText"
+            >Home Work Text</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="homeWorkText"
+            id="field_homeWorkText"
+            data-cy="homeWorkText"
+            formControlName="homeWorkText"
+          />
+          <div
+            *ngIf="editForm.get('homeWorkText')!.invalid && (editForm.get('homeWorkText')!.dirty || editForm.get('homeWorkText')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('homeWorkText')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('homeWorkText')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 1000 }"
+            >
+              This field cannot be longer than 1000 characters.
+            </small>
+          </div>
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.workStatus" for="field_workStatus" -->
+<!--             >Work Status</label -->
+<!--           > -->
+<!--           <select class="form-control" name="workStatus" formControlName="workStatus" id="field_workStatus" data-cy="workStatus"> -->
+<!--             <option [ngValue]="null">{{ 'manageitApp.TaskStatus.null' | translate }}</option> -->
+<!--             <option value="NotStarted">{{ 'manageitApp.TaskStatus.NotStarted' | translate }}</option> -->
+<!--             <option value="InProgress">{{ 'manageitApp.TaskStatus.InProgress' | translate }}</option> -->
+<!--             <option value="OnTrack">{{ 'manageitApp.TaskStatus.OnTrack' | translate }}</option> -->
+<!--             <option value="OffTrack">{{ 'manageitApp.TaskStatus.OffTrack' | translate }}</option> -->
+<!--           </select> -->
+<!--           <div *ngIf="editForm.get('workStatus')!.invalid && (editForm.get('workStatus')!.dirty || editForm.get('workStatus')!.touched)"> -->
+<!--             <small -->
+<!--               class="form-text text-danger" -->
+<!--               *ngIf="editForm.get('workStatus')?.errors?.required" -->
+<!--               jhiTranslate="entity.validation.required" -->
+<!--             > -->
+<!--               This field is required. -->
+<!--             </small> -->
+<!--           </div> -->
+<!--         </div> -->
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.lesionPlanFile" for="field_lesionPlanFile"
+            >Lesion Plan File</label
+          >
+          <div>
+            <div *ngIf="editForm.get('lesionPlanFile')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('lesionPlanFile')!.value, editForm.get('lesionPlanFileContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('lesionPlanFileContentType')!.value }}, {{ byteSize(editForm.get('lesionPlanFile')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ lesionPlanFile: null }); editForm.patchValue({ lesionPlanFileContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_lesionPlanFile"
+              data-cy="lesionPlanFile"
+              (change)="setFileData($event, 'lesionPlanFile', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="lesionPlanFile"
+            id="field_lesionPlanFile"
+            data-cy="lesionPlanFile"
+            formControlName="lesionPlanFile"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="lesionPlanFileContentType"
+            id="field_lesionPlanFileContentType"
+            formControlName="lesionPlanFileContentType"
+          />
+        </div>
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.lessionPlanFileLink" for="field_lessionPlanFileLink" -->
+<!--             >Lession Plan File Link</label -->
+<!--           > -->
+<!--           <input -->
+<!--             type="text" -->
+<!--             class="form-control" -->
+<!--             name="lessionPlanFileLink" -->
+<!--             id="field_lessionPlanFileLink" -->
+<!--             data-cy="lessionPlanFileLink" -->
+<!--             formControlName="lessionPlanFileLink" -->
+<!--           /> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.createDate" for="field_createDate" -->
+<!--             >Create Date</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_createDate" -->
+<!--               data-cy="createDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="createDate" -->
+<!--               ngbDatepicker -->
+<!--               #createDateDp="ngbDatepicker" -->
+<!--               formControlName="createDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="createDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.lastModified" for="field_lastModified" -->
+<!--             >Last Modified</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_lastModified" -->
+<!--               data-cy="lastModified" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="lastModified" -->
+<!--               ngbDatepicker -->
+<!--               #lastModifiedDp="ngbDatepicker" -->
+<!--               formControlName="lastModified" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="lastModifiedDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+<!--         <div class="form-group"> -->
+<!--           <label class="form-control-label" jhiTranslate="manageitApp.classLessionPlan.cancelDate" for="field_cancelDate" -->
+<!--             >Cancel Date</label -->
+<!--           > -->
+<!--           <div class="input-group"> -->
+<!--             <input -->
+<!--               id="field_cancelDate" -->
+<!--               data-cy="cancelDate" -->
+<!--               type="text" -->
+<!--               class="form-control" -->
+<!--               name="cancelDate" -->
+<!--               ngbDatepicker -->
+<!--               #cancelDateDp="ngbDatepicker" -->
+<!--               formControlName="cancelDate" -->
+<!--             /> -->
+<!--             <span class="input-group-append"> -->
+<!--               <button type="button" class="btn btn-secondary" (click)="cancelDateDp.toggle()"> -->
+<!--                 <fa-icon icon="calendar-alt"></fa-icon> -->
+<!--               </button> -->
+<!--             </span> -->
+<!--           </div> -->
+<!--         </div> -->
+
+
+
+        
+        
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

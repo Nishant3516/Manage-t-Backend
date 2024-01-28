@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="schoolClass">
+      <h2 data-cy="schoolClassDetailsHeading"><span jhiTranslate="manageitApp.schoolClass.detail.title">School Class</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ schoolClass.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolClass.className">Class Name</span></dt>
+        <dd>
+          <span>{{ schoolClass.className }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolClass.classLongName">Class Long Name</span></dt>
+        <dd>
+          <span>{{ schoolClass.classLongName }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolClass.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ schoolClass.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolClass.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ schoolClass.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolClass.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ schoolClass.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.schoolClass.school">School</span></dt>
+        <dd>
+          <div *ngIf="schoolClass.school">
+            <a [routerLink]="['/school', schoolClass.school?.id, 'view']">{{ schoolClass.school?.schoolName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+<!--       <button type="button" [routerLink]="['/school-class', schoolClass.id, 'edit']" class="btn btn-primary"> -->
+<!--         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

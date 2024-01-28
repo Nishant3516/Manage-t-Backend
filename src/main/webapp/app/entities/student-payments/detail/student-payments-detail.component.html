@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="studentPayments">
+      <h2 data-cy="studentPaymentsDetailsHeading"><span jhiTranslate="manageitApp.studentPayments.detail.title">Student Payments</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ studentPayments.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.amountPaid">Amount Paid</span></dt>
+        <dd>
+          <span>{{ studentPayments.amountPaid }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.modeOfPay">Mode Of Pay</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manageitApp.ModeOfPayment.' + studentPayments.modeOfPay }}">{{ studentPayments.modeOfPay }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.noteNumbers">Note Numbers</span></dt>
+        <dd>
+          <span>{{ studentPayments.noteNumbers }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.upiId">Upi Id</span></dt>
+        <dd>
+          <span>{{ studentPayments.upiId }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.remarks">Remarks</span></dt>
+        <dd>
+          <span>{{ studentPayments.remarks }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.paymentDate">Payment Date</span></dt>
+        <dd>
+          <span>{{ studentPayments.paymentDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.receiptId">Receipt Id</span></dt>
+        <dd>
+          <span>{{ studentPayments.receiptId }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ studentPayments.createDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ studentPayments.lastModified | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.cancelDate">Cancel Date</span></dt>
+        <dd>
+          <span>{{ studentPayments.cancelDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="manageitApp.studentPayments.classStudent">Class Student</span></dt>
+        <dd>
+          <div *ngIf="studentPayments.classStudent">
+            <a [routerLink]="['/class-student', studentPayments.classStudent?.id, 'view']">{{ studentPayments.classStudent?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+<!--       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton"> -->
+<!--         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span> -->
+<!--       </button> -->
+    </div>
+  </div>
+</div>

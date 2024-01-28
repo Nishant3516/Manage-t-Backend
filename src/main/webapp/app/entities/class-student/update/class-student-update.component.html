@@ -1,0 +1,288 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-class-student-heading"
+        data-cy="ClassStudentCreateUpdateHeading"
+        jhiTranslate="manageitApp.classStudent.home.createOrEditLabel"
+      >
+        Create or edit a Class Student
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="manageitApp.classStudent.schoolClass" for="field_schoolClass">School Class</label>
+          <select class="form-control" id="field_schoolClass" data-cy="schoolClass" name="schoolClass" formControlName="schoolClass">
+            <option [ngValue]="undefined" hidden>Select Class</option>
+            <option
+              [ngValue]="
+                schoolClassOption.id === editForm.get('schoolClass')!.value?.id ? editForm.get('schoolClass')!.value : schoolClassOption
+              "
+              *ngFor="let schoolClassOption of schoolClassesSharedCollection; trackBy: trackSchoolClassById"
+            >
+              {{ schoolClassOption.className }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.firstName" for="field_firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        <div *ngIf="editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('firstName')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.lastName" for="field_lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.phoneNumber" for="field_phoneNumber">Phone Number</label>
+        <input
+          type="text"
+          class="form-control"
+          name="phoneNumber"
+          id="field_phoneNumber"
+          data-cy="phoneNumber"
+          formControlName="phoneNumber"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.gender" for="field_gender">Gender</label>
+        <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+          <option [ngValue]="undefined" hidden>Gender</option>
+          <option value="FEMALE">{{ 'manageitApp.Gender.FEMALE' | translate }}</option>
+          <option value="MALE">{{ 'manageitApp.Gender.MALE' | translate }}</option>
+          <option value="OTHER">{{ 'manageitApp.Gender.OTHER' | translate }}</option>
+          <option value="WONT_DECLARE">{{ 'manageitApp.Gender.WONT_DECLARE' | translate }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.rollNumber" for="field_rollNumber">Roll Number</label>
+        <input type="text" class="form-control" name="rollNumber" id="field_rollNumber" data-cy="rollNumber" formControlName="rollNumber" />
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.bloodGroup" for="field_bloodGroup">Blood Group</label>
+        <select class="form-control" name="bloodGroup" formControlName="bloodGroup" id="field_bloodGroup" data-cy="bloodGroup">
+          <option [ngValue]="undefined" hidden>Blood Group</option>
+          <option value="A_Pos">{{ 'manageitApp.BloodGroup.A_Pos' | translate }}</option>
+          <option value="A_Neg">{{ 'manageitApp.BloodGroup.A_Neg' | translate }}</option>
+          <option value="B_Pos">{{ 'manageitApp.BloodGroup.B_Pos' | translate }}</option>
+          <option value="B_Neg">{{ 'manageitApp.BloodGroup.B_Neg' | translate }}</option>
+          <option value="AB_Pos">{{ 'manageitApp.BloodGroup.AB_Pos' | translate }}</option>
+          <option value="AB_Neg">{{ 'manageitApp.BloodGroup.AB_Neg' | translate }}</option>
+          <option value="O_Pos">{{ 'manageitApp.BloodGroup.O_Pos' | translate }}</option>
+          <option value="O_Neg">{{ 'manageitApp.BloodGroup.O_Neg' | translate }}</option>
+          <option value="DO_NOT_KNOW">{{ 'manageitApp.BloodGroup.DO_NOT_KNOW' | translate }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.startDate" for="field_startDate">Start Date</label>
+        <div class="input-group">
+          <input
+            id="field_startDate"
+            data-cy="startDate"
+            type="text"
+            class="form-control"
+            name="startDate"
+            ngbDatepicker
+            #startDateDp="ngbDatepicker"
+            formControlName="startDate"
+          />
+          <span class="input-group-append">
+            <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.addressLine1" for="field_addressLine1"
+          >Address Line 1</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="addressLine1"
+          id="field_addressLine1"
+          data-cy="addressLine1"
+          formControlName="addressLine1"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.addressLine2" for="field_addressLine2"
+          >Address Line 2</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="addressLine2"
+          id="field_addressLine2"
+          data-cy="addressLine2"
+          formControlName="addressLine2"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.nickName" for="field_nickName">Nick Name</label>
+        <input type="text" class="form-control" name="nickName" id="field_nickName" data-cy="nickName" formControlName="nickName" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.fatherName" for="field_fatherName">Father Name</label>
+        <input type="text" class="form-control" name="fatherName" id="field_fatherName" data-cy="fatherName" formControlName="fatherName" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.motherName" for="field_motherName">Mother Name</label>
+        <input type="text" class="form-control" name="motherName" id="field_motherName" data-cy="motherName" formControlName="motherName" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.email" for="field_email">Email</label>
+        <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.admissionDate" for="field_admissionDate"
+          >Admission Date</label
+        >
+        <div class="input-group">
+          <input
+            id="field_admissionDate"
+            data-cy="admissionDate"
+            type="text"
+            class="form-control"
+            name="admissionDate"
+            ngbDatepicker
+            #admissionDateDp="ngbDatepicker"
+            formControlName="admissionDate"
+          />
+          <span class="input-group-append">
+            <button type="button" class="btn btn-secondary" (click)="admissionDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.regNumber" for="field_regNumber">Reg Number</label>
+        <input type="text" class="form-control" name="regNumber" id="field_regNumber" data-cy="regNumber" formControlName="regNumber" />
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.dateOfBirth" for="field_dateOfBirth">Date Of Birth</label>
+        <div class="d-flex">
+          <input
+            id="field_dateOfBirth"
+            data-cy="dateOfBirth"
+            type="datetime-local"
+            class="form-control"
+            name="dateOfBirth"
+            formControlName="dateOfBirth"
+            placeholder="YYYY-MM-DD HH:mm"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.cancelDate" for="field_cancelDate">Date Of Birth</label>
+        <div class="d-flex">
+          <input
+            id="field_cancelDate"
+            data-cy="cancelDate"
+            type="datetime-local"
+            class="form-control"
+            name="cancelDate"
+            formControlName="cancelDate"
+            placeholder="YYYY-MM-DD HH:mm"
+          />
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="form-control-label" jhiTranslate="manageitApp.classStudent.studentPhoto" for="field_studentPhoto"
+          >Student Photo</label
+        >
+        <div>
+          <div *ngIf="editForm.get('studentPhoto')!.value" class="form-text text-danger clearfix">
+            <a
+              class="pull-left"
+              (click)="openFile(editForm.get('studentPhoto')!.value, editForm.get('studentPhotoContentType')!.value)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            ><br />
+            <span class="pull-left"
+              >{{ editForm.get('studentPhotoContentType')!.value }}, {{ byteSize(editForm.get('studentPhoto')!.value) }}</span
+            >
+            <button
+              type="button"
+              (click)="editForm.patchValue({ studentPhoto: null }); editForm.patchValue({ studentPhotoContentType: null })"
+              class="btn btn-secondary btn-xs pull-right"
+            >
+              <fa-icon icon="times"></fa-icon>
+            </button>
+          </div>
+          <input
+            type="file"
+            id="file_studentPhoto"
+            data-cy="studentPhoto"
+            (change)="setFileData($event, 'studentPhoto', false)"
+            jhiTranslate="entity.action.addblob"
+          />
+        </div>
+        <input
+          type="hidden"
+          class="form-control"
+          name="studentPhoto"
+          id="field_studentPhoto"
+          data-cy="studentPhoto"
+          formControlName="studentPhoto"
+        />
+        <input
+          type="hidden"
+          class="form-control"
+          name="studentPhotoContentType"
+          id="field_studentPhotoContentType"
+          formControlName="studentPhotoContentType"
+        />
+      </div>
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

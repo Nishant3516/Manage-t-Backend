@@ -1,0 +1,45 @@
+{
+  "manageitApp": {
+    "studentChargesSummary": {
+      "home": {
+        "title": "StudentChargesSummaries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Student Charges Summary बनाएँ",
+        "createOrEditLabel": "Student Charges Summary बनाएँ या संपादित करें",
+        "notFound": "No Student Charges Summaries found"
+      },
+      "created": "एक नया Student Charges Summary [identifier: {{ param }}] तैयार है",
+      "updated": "एक Student Charges Summary [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Student Charges Summary [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Student Charges Summary [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Student Charges Summary"
+      },
+      "id": "ID",
+      "summaryType": "Summary Type",
+      "feeYear": "Fee Year",
+      "dueDate": "Due Date",
+      "aprSummary": "Apr Summary",
+      "maySummary": "May Summary",
+      "junSummary": "Jun Summary",
+      "julSummary": "Jul Summary",
+      "augSummary": "Aug Summary",
+      "sepSummary": "Sep Summary",
+      "octSummary": "Oct Summary",
+      "novSummary": "Nov Summary",
+      "decSummary": "Dec Summary",
+      "janSummary": "Jan Summary",
+      "febSummary": "Feb Summary",
+      "marSummary": "Mar Summary",
+      "additionalInfo1": "Additional Info 1",
+      "additionalInfo2": "Additional Info 2",
+      "createDate": "Create Date",
+      "lastModified": "Last Modified",
+      "cancelDate": "Cancel Date",
+      "schoolLedgerHead": "School Ledger Head",
+      "classStudent": "Class Student"
+    }
+  }
+}

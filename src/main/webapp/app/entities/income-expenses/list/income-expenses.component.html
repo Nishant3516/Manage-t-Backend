@@ -1,0 +1,156 @@
+<div>
+  <h2 id="page-heading" data-cy="IncomeExpensesHeading">
+    <span jhiTranslate="manageitApp.incomeExpenses.home.title">Income Expenses</span>
+
+    <div class="d-flex justify-content-end">
+<!--       <button class="btn btn-info mr-2" [disabled]="isLoading"> -->
+<!--         <fa-icon icon="sync" [spin]="isLoading"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.incomeExpenses.home.refreshListLabel">Refresh List</span> -->
+<!--       </button> -->
+
+<!--       <button -->
+<!--         id="jh-create-entity" -->
+<!--         data-cy="entityCreateButton" -->
+<!--         class="btn btn-primary jh-create-entity create-income-expenses" -->
+<!--         [routerLink]="['/income-expenses/new']" -->
+<!--       > -->
+<!--         <fa-icon icon="plus"></fa-icon> -->
+<!--         <span jhiTranslate="manageitApp.incomeExpenses.home.createLabel"> Create a new Income Expenses </span> -->
+<!--       </button> -->
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+ <div class="form-group">
+          <label class="form-control-label">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_astartDate"
+              data-cy="astartDate"
+              type="text"
+              class="form-control"
+              name="astartDate"
+              ngbDatepicker
+              #astartDateDp="ngbDatepicker"
+              [(ngModel)]="startDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="astartDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        
+        </div>
+        
+           <label class="form-control-label" >End Date</label>
+          <div class="input-group">
+            <input
+              id="field_aendDate"
+              data-cy="aendDate"
+              type="text"
+              class="form-control"
+              name="aendDate"
+              ngbDatepicker
+              #aendDateDp="ngbDatepicker"
+              [(ngModel)]="endDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="aendDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          
+          <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="fetchIncomeExpenses()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span >Fetch</span>
+      </button>
+      </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="incomeExpenses?.length === 0">
+    <span jhiTranslate="manageitApp.incomeExpenses.home.notFound">No incomeExpenses found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="incomeExpenses && incomeExpenses.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.vendor">Vendor</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.ledgerHead">Ledger Head</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.amountPaid">Amount Paid</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.modeOfPay">Mode Of Pay</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.noteNumbers">Note Numbers</span></th>
+<!--           <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.upiId">Upi Id</span></th> -->
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.remarks">Remarks</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.paymentDate">Payment Date</span></th>
+          <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.receiptId">Receipt Id</span></th>
+<!--           <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.createDate">Create Date</span></th> -->
+<!--           <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.lastModified">Last Modified</span></th> -->
+<!--           <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.cancelDate">Cancel Date</span></th> -->
+<!--           <th scope="col"><span jhiTranslate="manageitApp.incomeExpenses.transactionType">Transaction Type</span></th> -->
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let incomeExpenses of incomeExpenses; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/income-expenses', incomeExpenses.id, 'view']">{{ incomeExpenses.id }}</a>
+          </td>
+          <td>
+            <div *ngIf="incomeExpenses.vendor">
+              <a [routerLink]="['/vendors', incomeExpenses.vendor?.id, 'view']">{{ incomeExpenses.vendor?.id }}</a>
+            </div>
+          </td>
+         <td>
+            <div *ngIf="incomeExpenses.ledgerHead">
+              <a [routerLink]="['/school-ledger-head', incomeExpenses.ledgerHead?.id, 'view']">{{ incomeExpenses.ledgerHead?.id }}</a>
+            </div>
+          </td>
+          <td>{{ incomeExpenses.amountPaid }}</td>
+          <td jhiTranslate="{{ 'manageitApp.ModeOfPayment.' + incomeExpenses.modeOfPay }}">{{ incomeExpenses.modeOfPay }}</td>
+          <td>{{ incomeExpenses.noteNumbers }}</td>
+<!--           <td>{{ incomeExpenses.upiId }}</td> -->
+          <td>{{ incomeExpenses.remarks }}</td>
+          <td>{{ incomeExpenses.paymentDate | formatMediumDate }}</td>
+          <td>{{ incomeExpenses.receiptId }}</td>
+<!--           <td>{{ incomeExpenses.createDate | formatMediumDate }}</td> -->
+<!--           <td>{{ incomeExpenses.lastModified | formatMediumDate }}</td> -->
+<!--           <td>{{ incomeExpenses.cancelDate | formatMediumDate }}</td> -->
+<!--           <td jhiTranslate="{{ 'manageitApp.TransactionType.' + incomeExpenses.transactionType }}">{{ incomeExpenses.transactionType }}</td> -->
+           <td class="text-right">
+            <div class="btn-group">
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/income-expenses', incomeExpenses.id, 'view']" -->
+<!--                 class="btn btn-info btn-sm" -->
+<!--                 data-cy="entityDetailsButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="eye"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span> -->
+<!--               </button> -->
+
+<!--               <button -->
+<!--                 type="submit" -->
+<!--                 [routerLink]="['/income-expenses', incomeExpenses.id, 'edit']" -->
+<!--                 class="btn btn-primary btn-sm" -->
+<!--                 data-cy="entityEditButton" -->
+<!--               > -->
+<!--                 <fa-icon icon="pencil-alt"></fa-icon> -->
+<!--                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span> -->
+<!--               </button> -->
+
+              <button type="submit" (click)="delete(incomeExpenses)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
